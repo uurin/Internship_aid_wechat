@@ -1,0 +1,22 @@
+{
+  "name": "internship_aid",
+  "version": "1.0.0",
+  "description": "Internship aid. WeChat Mini Program",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uurin/Internship_aid_wechat.git"
+  },
+  "author": "uurin",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/uurin/Internship_aid_wechat/issues"
+  },
+  "homepage": "https://github.com/uurin/Internship_aid_wechat#readme",
+  "dependencies": {
+    "@vant/weapp": "^1.0.5"
+  }
+}
