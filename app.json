@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/home/index/index",
+    "pages/logs/logs",
+    "pages/discuss/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -9,6 +10,35 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
   },
-  //"style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#ababab",
+    "selectedColor": "#3f81c1",
+    "list": [
+      {
+        "pagePath": "pages/home/index/index",
+        "text": "首页",
+        "iconPath": "images/tabbar/home-o.png",
+        "selectedIconPath": "images/tabbar/home.png"
+      },
+      {
+        "pagePath": "pages/discuss/index/index",
+        "text": "讨论",
+        "iconPath": "images/tabbar/discuss-o.png",
+        "selectedIconPath": "images/tabbar/discuss.png"
+      },
+      {
+        "pagePath": "pages/home/index/index",
+        "text": "我的",
+        "iconPath": "images/tabbar/mine-o.png",
+        "selectedIconPath": "images/tabbar/mine.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button",
+    "van-tabbar": "/@vant/weapp/tabbar",
+    "van-tabbar-item": "/@vant/weapp/tabbar-item",
+    "van-search": "/@vant/weapp/search"
+  }
 }

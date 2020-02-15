@@ -1,0 +1,4 @@
+<!--pages/discuss/index/index.wxml-->
+<view class="">
+  <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+</view>

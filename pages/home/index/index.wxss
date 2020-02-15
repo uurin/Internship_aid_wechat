@@ -1,4 +1,13 @@
 /**index.wxss**/
+.swiper-index {
+  width: 100%;
+  height: 200px;
+}
+
+.swiper-index image{
+  width: 100%;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
