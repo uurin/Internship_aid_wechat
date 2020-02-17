@@ -8,12 +8,32 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    active: 'home'
+    active: 'home',
+    gridBtnList: [
+      {
+        text: "签到",
+        backgroundColor: "#87c38f",
+        src: "/images/icons/check_in_light.png",
+        url: "../checkIn/checkIn"
+      },
+      {
+        text: "日记",
+        backgroundColor: "#8aa4c7",
+        src: "/images/icons/check_in_light.png",
+        url: "/pages/discuss/index/index"
+      },
+      {
+        text: "更多",
+        backgroundColor: "#c78a8a",
+        src: "/images/icons/check_in_light.png",
+        url: "/pages/discuss/index/index"
+      }
+    ]
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../../logs/logs'
     })
   },
   onLoad: function () {
@@ -54,5 +74,15 @@ Page({
   },
   onChange(event) {
     this.setData({ active: event.detail });
-  }
+  },
+
+  //........
+
+  //网格按钮点击事件
+  bindGridBtnTap: function(event) {
+    wx.navigateTo({
+      // url: '../checkIn/checkIn'
+      url: event.currentTarget.dataset.url
+    })
+  },
 })

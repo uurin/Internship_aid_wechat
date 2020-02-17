@@ -8,23 +8,16 @@
   width: 100%;
 }
 
-.userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.grid-icon {
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  background-color: #87c38f;
+  border-radius: 50px;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
+.grid-text {
+  color: #373737;
+  font-size: 14px;
+  margin: 4px 0 0;
 }

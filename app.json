@@ -2,7 +2,9 @@
   "pages": [
     "pages/home/index/index",
     "pages/logs/logs",
-    "pages/discuss/index/index"
+    "pages/discuss/index/index",
+    "pages/mine/index/index",
+    "pages/home/checkIn/checkIn"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,7 +30,7 @@
         "selectedIconPath": "images/tabbar/discuss.png"
       },
       {
-        "pagePath": "pages/home/index/index",
+        "pagePath": "pages/mine/index/index",
         "text": "我的",
         "iconPath": "images/tabbar/mine-o.png",
         "selectedIconPath": "images/tabbar/mine.png"
@@ -39,6 +41,10 @@
     "van-button": "@vant/weapp/button",
     "van-tabbar": "/@vant/weapp/tabbar",
     "van-tabbar-item": "/@vant/weapp/tabbar-item",
-    "van-search": "/@vant/weapp/search"
+    "van-search": "/@vant/weapp/search",
+    "van-grid": "/@vant/weapp/grid",
+    "van-grid-item": "/@vant/weapp/grid-item",
+    "van-icon": "/@vant/weapp/icon",
+    "van-image": "/@vant/weapp/image"
   }
 }
