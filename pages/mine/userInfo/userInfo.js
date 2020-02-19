@@ -1,4 +1,4 @@
-// pages/mine/index/index.js
+// pages/mine/userInfo/userInfo.js
 Page({
 
   /**
@@ -62,12 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  //进入用户信息页
-  toUserInfo: function () {
-    wx.navigateTo({
-      url: '../userInfo/userInfo'
-    })
   }
 })

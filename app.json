@@ -5,7 +5,8 @@
     "pages/discuss/index/index",
     "pages/mine/index/index",
     "pages/home/checkIn/checkIn",
-    "pages/discuss/editNewThread/editNewThread"
+    "pages/discuss/editNewThread/editNewThread",
+    "pages/mine/userInfo/userInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",

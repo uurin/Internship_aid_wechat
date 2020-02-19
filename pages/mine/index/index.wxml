@@ -1,2 +1,11 @@
 <!--pages/mine/index/index.wxml-->
-<text>pages/mine/index/index.wxml</text>
+<view class="user-panel" hover-class="user-panel-hover" bindtap="toUserInfo">
+  <image src="../../../images/aa.jpg"/>
+  <view>
+    <view class="text">
+      <text class="title">某某用户</text>
+      <text class="">23213123</text>
+    </view>
+  </view>
+  <van-icon class="arrow" name="arrow" />
+</view>
