@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "pages/discuss/index/index",
     "pages/mine/index/index",
-    "pages/home/checkIn/checkIn"
+    "pages/home/checkIn/checkIn",
+    "pages/discuss/editNewThread/editNewThread"
   ],
   "window": {
     "backgroundTextStyle": "light",

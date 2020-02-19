@@ -1,11 +1,11 @@
-// pages/discuss/index/index.js
+// pages/discuss/editNewThread/editNewThread.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    value: ''
+
   },
 
   /**
@@ -62,13 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  //编辑新主题
-  editNewThread: function () {
-    wx.navigateTo({
-      // url: '../checkIn/checkIn'
-      url: '../editNewThread/editNewThread'
-    })
   }
 })

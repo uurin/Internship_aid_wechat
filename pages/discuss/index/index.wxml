@@ -1,4 +1,12 @@
 <!--pages/discuss/index/index.wxml-->
 <view class="">
   <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+
+  <van-grid column-num="4" clickable>
+    <van-grid-item icon="photo-o" text="文字" wx:for="{{ 4 }}" />
+  </van-grid>
+
+  <view class="float-btn" bindtap="editNewThread">
+    <image src="../../../images/icons/edit_quill.png" />
+  </view>
 </view>
