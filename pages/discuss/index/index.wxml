@@ -6,6 +6,20 @@
     <van-grid-item icon="photo-o" text="文字" wx:for="{{ 4 }}" />
   </van-grid>
 
+  <threadCard
+          wx:for="{{threadsData}}"
+          wx:for-item="item"
+          my-class="my-class"
+          userName="{{item.userName}}"
+          headiconUrl="{{item.headiconUrl}}"
+          time="{{item.time}}"
+          thumbsUps="{{item.thumbsUps}}"
+          comments="{{item.comments}}"
+          title="{{item.title}}"
+          content="{{item.content}}"
+          images="{{item.images}}"
+  ></threadCard>
+
   <view class="float-btn" bindtap="editNewThread">
     <image src="../../../images/icons/edit_quill.png" />
   </view>
