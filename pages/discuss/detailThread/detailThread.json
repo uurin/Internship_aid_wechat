@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "commentBox": "/components/commentBox/commentBox"
+  }
+}

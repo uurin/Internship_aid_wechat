@@ -51,6 +51,24 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    //卡片点击事件
+    bindThreadCardTap: function () {
+      wx.navigateTo({
+        url: '/pages/discuss/detailThread/detailThread'
+      })
+    },
+    //图片预览
+    previewImg:function(e){
+      var imgUrl = e.currentTarget.dataset.src; //获取当前点击的图片
+      var imgArr = this.data.images;
+      wx.previewImage({
+        current: imgUrl, //当前图片地址
+        urls: imgArr,  //所有图片集合
+        // urls: [imgUrl], //单张图
+        success: function(res) {},
+        fail: function(res) {},
+        complete: function(res) {},
+      })
+    }
   }
 })

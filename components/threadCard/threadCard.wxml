@@ -1,2 +1,23 @@
 <!--components/threadCard/threadCard.wxml-->
-<text>components/threadCard/threadCard.wxml</text>
+<view class="threadCard my-class" bindtap="bindThreadCardTap">
+  <view class="info">
+    <image class="headicon" src="{{headiconUrl}}" />
+    <view>
+      <text class="name">{{userName}}</text>
+      <view style="display: block">
+        <text class="time">{{time}}</text>
+        <view class="other">
+          <van-icon class="icon" size="16px" name="good-job-o" />
+            <text>{{thumbsUps}}</text>
+          <van-icon class="icon" size="16px" name="comment-o" />
+            <text>{{comments}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <text class="title">{{title}}</text>
+  <text class="content">{{content}}</text>
+  <view class="images">
+    <image wx:for="{{images}}" src="{{item}}" mode="aspectFill" catchtap="previewImg"/>
+  </view>
+</view>

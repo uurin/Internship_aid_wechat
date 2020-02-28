@@ -1,0 +1,15 @@
+/* components/commentBox/commentBox.wxss */
+.commentBox {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 6px rgb(205, 205, 205);
+}
+.commentBox .input {
+    font-size: 16px;
+}
+.commentBox .btn-send {
+    box-shadow: none;
+    border: none;
+}

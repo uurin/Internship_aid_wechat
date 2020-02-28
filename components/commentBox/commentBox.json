@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-field": "/@vant/weapp/field",
+    "van-row": "/@vant/weapp/row",
+    "van-col": "/@vant/weapp/col",
+    "van-button": "/@vant/weapp/button"
+  }
+}

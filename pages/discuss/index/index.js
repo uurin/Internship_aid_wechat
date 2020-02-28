@@ -14,7 +14,7 @@ Page({
         thumbsUps: 0,
         comments: 2,
         title: '谁能帮我整一个内推？',
-        content: '先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。...',
+        content: '先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。',
         images: ['https://recomi.site/logo.png','https://recomi.site/logo.png','https://recomi.site/logo.png']
       },
       {

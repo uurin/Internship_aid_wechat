@@ -1,0 +1,27 @@
+<!--pages/discuss/detailThread/detailThread.wxml-->
+<view>
+    <view class="threadContent">
+        <view class="info">
+            <image class="headicon" src="../../../images/aa.jpg" />
+            <view>
+                <text class="name">{{ threadDetailData.userName }}</text>
+                <view style="display: block">
+                    <text class="time">{{ threadDetailData.time }}</text>
+                    <view class="other">
+                        <van-icon class="icon" size="16px" name="good-job-o" />
+                        <text>{{ threadDetailData.thumbsUps }}</text>
+                        <van-icon class="icon" size="16px" name="comment-o" />
+                        <text>{{ threadDetailData.comments }}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <text class="title">{{ threadDetailData.title }}</text>
+        <text class="content">{{ threadDetailData.content }}</text>
+        <view class="images">
+            <image wx:for="{{ threadDetailData.images }}" src="{{ item }}" mode="aspectFill" catchtap="previewImg"/>
+        </view>
+    </view>
+
+    <commentBox></commentBox>
+</view>
