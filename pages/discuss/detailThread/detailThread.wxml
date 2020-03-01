@@ -1,16 +1,16 @@
 <!--pages/discuss/detailThread/detailThread.wxml-->
 <view>
     <view class="threadContent">
-        <view class="info">
-            <image class="headicon" src="../../../images/aa.jpg" />
+        <view class="thread-info">
+            <image class="headicon" src="../../../images/aa.jpg"/>
             <view>
                 <text class="name">{{ threadDetailData.userName }}</text>
                 <view style="display: block">
                     <text class="time">{{ threadDetailData.time }}</text>
                     <view class="other">
-                        <van-icon class="icon" size="16px" name="good-job-o" />
+                        <van-icon class="icon" size="16px" name="good-job-o"/>
                         <text>{{ threadDetailData.thumbsUps }}</text>
-                        <van-icon class="icon" size="16px" name="comment-o" />
+                        <van-icon class="icon" size="16px" name="comment-o"/>
                         <text>{{ threadDetailData.comments }}</text>
                     </view>
                 </view>
@@ -20,6 +20,28 @@
         <text class="content">{{ threadDetailData.content }}</text>
         <view class="images">
             <image wx:for="{{ threadDetailData.images }}" src="{{ item }}" mode="aspectFill" catchtap="previewImg"/>
+        </view>
+    </view>
+
+    <view class="separateBar">
+        <text>回复</text>
+        <van-icon name="arrow-down" />
+    </view>
+
+    <view class="commentCard">
+        <image class="headicon" src="../../../images/aa.jpg"/>
+        <view>
+            <text class="name">某用户A</text>
+            <text class="content">我这里有，我可以帮你。我这里有，我可以帮你。我这里有，我可以帮你。</text>
+            <image src="https://recomi.site/files/images/headicon1.jpg" mode="aspectFill"/>
+            <text class="time">2020-01-01 11:33:42</text>
+<!--            评论中的回复-->
+            <view class="reply-in-comment" hover-class="reply-in-comment-hover">
+                <view style="display: block;">
+                    <text class="reply-name">路过的清洁工：</text>
+                    <text class="reply-content">多谢帮助！</text>
+                </view>
+            </view>
         </view>
     </view>
 

@@ -1,11 +1,11 @@
 /* components/threadCard/threadCard.wxss */
 .threadCard {
-    padding: 10px 10px;
+    padding: 16px;
     background-color: #fff;
 }
 .info {
     width: 100%;
-    padding: 8px 8px 4px;
+    margin-bottom: 4px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -13,6 +13,8 @@
 .info .headicon {
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     margin-right: 8px;
     border-radius: 50px;
 }

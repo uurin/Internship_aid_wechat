@@ -19,7 +19,7 @@ Page({
       },
       {
         userName: '虚鲲蔡蔡子',
-        headiconUrl: 'https://recomi.site/logo.png',
+        headiconUrl: 'https://recomi.site/files/images/headicon1.jpg',
         time: '2020-02-06 09:11',
         thumbsUps: 16,
         comments: 23,

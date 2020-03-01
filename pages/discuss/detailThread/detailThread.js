@@ -10,7 +10,7 @@ Page({
       //用户名
       userName: '莫有感情的菜鸟',
       //头像链接
-      headiconUrl: 'https://recomi.site/logo.png',
+      headiconUrl: 'https://recomi.site/files/images/headicon1.jpg',
       //时间
       time: '2020-02-02 09:11:23',
       //点赞数
