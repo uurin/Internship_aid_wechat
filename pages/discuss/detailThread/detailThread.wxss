@@ -1,6 +1,7 @@
 /* pages/discuss/detailThread/detailThread.wxss */
 page{
-    background: #f5f5f5
+    background: #f5f5f5;
+    padding-bottom: 45px;
 }
 .threadContent {
     padding: 16px;
