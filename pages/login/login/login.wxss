@@ -1,0 +1,8 @@
+/* pages/login/login/login.wxss */
+.buttons {
+    padding: 10px 4%;
+}
+
+.buttons .button {
+    margin: 10px 0;
+}

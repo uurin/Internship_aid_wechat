@@ -67,7 +67,8 @@ Page({
   //进入用户信息页
   toUserInfo: function () {
     wx.navigateTo({
-      url: '../userInfo/userInfo'
+      // url: '../userInfo/userInfo'
+      url: '/pages/login/login/login'
     })
   }
 })

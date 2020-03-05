@@ -7,7 +7,8 @@
     "pages/home/checkIn/checkIn",
     "pages/discuss/editNewThread/editNewThread",
     "pages/mine/userInfo/userInfo",
-    "pages/discuss/detailThread/detailThread"
+    "pages/discuss/detailThread/detailThread",
+    "pages/login/login/login"
   ],
   "window": {
     "backgroundTextStyle": "light",
