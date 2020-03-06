@@ -4,7 +4,7 @@ page{
     padding-bottom: 45px;
 }
 .threadContent {
-    padding: 16px;
+    padding: 16px 16px 20px;
     background-color: #fff;
 }
 .thread-info {
@@ -81,15 +81,17 @@ page{
 
 
 .separateBar {
-    padding: 8px 16px;
-    color: #919191;
+    margin-top: 8px;
+    padding: 16px 16px 0;
+    color: #373737;
+    background: #fff;
 }
 
 
 .commentCard {
     display: flex;
-    margin: 6px 0;
-    padding: 16px;
+    /*margin: 6px 0;*/
+    padding: 14px 16px;
     background: #fff;
 }
 .commentCard .headicon {
@@ -103,12 +105,12 @@ page{
 .commentCard .name {
   font-size: 16px;
   display: block;
-  margin-bottom: 8px;
 }
 .commentCard .content {
   color: #696969;
   font-size: 16px;
   display: block;
+  margin-top: 6px;
 }
 .commentCard .time {
     color: #9b9b9b;
@@ -117,7 +119,7 @@ page{
     margin-top: 2px;
     margin-bottom: 2px;
 }
-.commentCard image {
+.commentCard .image {
     width: 40%;
     height: 80px;
     object-fit: cover;

@@ -84,6 +84,13 @@ Page({
 
   },
 
+  //前往查看评论详情的页面
+  goDetailComment: function(event) {
+    wx.navigateTo({
+      url: '../detailComment/detailComment',
+    })
+  },
+
   //图片预览
   previewImg:function(e){
     var imgUrl = e.currentTarget.dataset.src; //获取当前点击的图片
