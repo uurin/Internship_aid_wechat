@@ -18,7 +18,8 @@ export function unionLogin(data) {
 //用户登陆接口
 export function login(data) {
     // return api._post('loginNoVerify', data)
-    return api._post('login', data)
+    // return api._post('login', data)
+    return api._post('loginToken', data)
 }
 
 //获取验证码图片的链接

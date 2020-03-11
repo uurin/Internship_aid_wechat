@@ -1,5 +1,6 @@
 // pages/login/login/login.js
-import { login, getVerifyCodeSrc } from '../../../api/login.js'
+import { login, getVerifyCodeSrc } from '../../../api/login.js';
+let util = require('../../../utils/util.js');
 
 Page({
 
@@ -128,6 +129,8 @@ Page({
     login(data).then(res => {
       console.log(res)
       if (res.code == 1) {
+        //保存token
+        util.setCache('token', res.result);
         wx.showToast({
           title: '登陆成功',
           icon: 'success',

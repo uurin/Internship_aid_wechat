@@ -10,12 +10,12 @@ Component({
       type: String
     },
     //头像链接
-    headiconUrl:{
+    avatar:{
       type: String,
       value: '',
     },
     //时间
-    time: {
+    date: {
       type: String
     },
     //点赞数

@@ -1,11 +1,11 @@
 <!--components/threadCard/threadCard.wxml-->
 <view class="threadCard my-class" bindtap="bindThreadCardTap">
   <view class="info">
-    <image class="headicon" src="{{headiconUrl}}" />
+    <image class="headicon" src="{{ avatar }}" />
     <view>
       <text class="name">{{userName}}</text>
       <view style="display: block">
-        <text class="time">{{time}}</text>
+        <text class="time">{{date}}</text>
         <view class="other">
           <van-icon class="icon" size="16px" name="good-job-o" />
             <text>{{thumbsUps}}</text>

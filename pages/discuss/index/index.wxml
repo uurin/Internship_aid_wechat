@@ -7,17 +7,17 @@
   </van-grid>
 
   <threadCard
-          wx:for="{{threadsData}}"
+          wx:for="{{ threadsData }}"
           wx:for-item="item"
           my-class="my-class"
-          userName="{{item.userName}}"
-          headiconUrl="{{item.headiconUrl}}"
-          time="{{item.time}}"
-          thumbsUps="{{item.thumbsUps}}"
-          comments="{{item.comments}}"
-          title="{{item.title}}"
-          content="{{item.content}}"
-          images="{{item.images}}"
+          userName="{{ item.nameString }}"
+          avatar="{{ item.headPortrait }}"
+          time="{{ item.date }}"
+          thumbsUps="{{ item.top }}"
+          comments="{{ item.comment }}"
+          title="{{ item.title }}"
+          content="{{ item.content }}"
+          images="{{ item.realFile }}"
   ></threadCard>
 
   <view class="float-btn" bindtap="editNewThread">
