@@ -1,2 +1,37 @@
 <!--pages/discuss/detailComment/detailComment.wxml-->
-<text>pages/discuss/detailComment/detailComment.wxml</text>
+<view>
+    <view class="commentCard comment">
+        <image class="headicon" src="../../../images/aa.jpg"/>
+        <view>
+            <text class="name">某用户A</text>
+            <text class="content">我这里有，我可以帮你。我这里有，我可以帮你。我这里有，我可以帮你。</text>
+            <image src="https://recomi.site/files/images/headicon1.jpg" mode="aspectFill"/>
+            <text class="time">2020-01-01 11:33:42</text>
+        </view>
+    </view>
+
+    <view class="belongThread">
+        <text >原帖：</text>
+        <text class="title">谁能帮我整一个内推？</text>
+    </view>
+
+    <view class="separateBar">
+        <text>回复</text>
+        <van-icon name="arrow-down" />
+        <van-divider customStyle="margin: 12px 0 0" ></van-divider>
+    </view>
+
+    <view wx:for="{{ 3 }}" style="background: #fff">
+        <view class="replyCard comment">
+            <image class="headicon" src="../../../images/aa.jpg"/>
+            <view>
+                <text class="name">某用户A</text>
+                <text class="content">我这里有，我可以帮你。我这里有，我可以帮你。我这里有，我可以帮你。</text>
+                <text class="time">2020-01-01 11:33:42</text>
+            </view>
+        </view>
+        <van-divider customStyle="margin: 0 16px" ></van-divider>
+    </view>
+
+    <commentBox></commentBox>
+</view>
