@@ -100,16 +100,16 @@ Page({
   //提交
   submitForm: function (e) {
     wx.uploadFile({
-      url: "接口地址",
-      filePath: tempFilePaths[0],//chooseImage上传的图片
-      name: 'file',//需要传给后台的图片字段名称
-      formData: data,//需要传给后台的其他表单数据
+      url: getPostThreadUrl(),
+      filePath: tempFilePaths[0], //上传的图片
+      name: 'file', //传给后台的图片字段名称
+      formData: data, //传给后台的其他表单数据
       header: {
         "Content-Type": "multipart/form-data", //form-data格式
         'Accept': 'application/json',
       },
       success(res) {
-        var jsonObj = JSON.parse(res.data);//返回的数据需要转为json格式
+        var jsonObj = JSON.parse(res.data);
         if (jsonObj.code == 200) {
           //接口请求成功后在这一块处理
           //utils.navigateto("orderconfirm?orderId="+jsonObj.data.order_id);
