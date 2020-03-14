@@ -1,1 +1,32 @@
 /* pages/discuss/editNewThread/editNewThread.wxss */
+page{
+    background: #f5f5f5;
+}
+
+
+.title, .content {
+  margin: 8px 0;
+  background: #fff;
+}
+
+
+.content textarea{
+  height: calc( 100vh / 3);
+  padding: 12px;
+}
+.content .markTextSize {
+  display: block;
+  text-align: right;
+  margin: 0 8px 4px;
+}
+
+
+.imagesUpload {
+  width: 100%;
+  background: #fff;
+}
+
+
+.btn-submit {
+  padding: 24px 16px;
+}

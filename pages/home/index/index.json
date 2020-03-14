@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "gridBtn": "/components/gridBtn/gridBtn",
+    "van-divider": "/@vant/weapp/divider"
+  }
 }

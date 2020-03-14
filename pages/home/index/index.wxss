@@ -1,13 +1,21 @@
 /**index.wxss**/
+page{
+  background: #f5f5f5;
+  padding-bottom: 45px;
+}
 .swiper-index {
   width: 100%;
   height: 200px;
 }
-
 .swiper-index image{
   width: 100%;
 }
 
+.gridBtn {
+  background: #fff;
+  width: 100%;
+  margin-bottom: 8px;
+}
 .grid-icon {
   width: 24px;
   height: 24px;
@@ -15,9 +23,29 @@
   background-color: #87c38f;
   border-radius: 50px;
 }
-
 .grid-text {
   color: #373737;
   font-size: 14px;
   margin: 4px 0 0;
+}
+
+
+.popularCard {
+  background: #fff;
+  padding: 16px;
+}
+.popularCard .cardHeader {
+  margin-bottom: 16px;
+}
+.popularCard .title{
+  font-size: 16px;
+  display: block;
+}
+.popularCard .time{
+  color: #9b9b9b;
+  font-size: 14px;
+  display: block;
+}
+.popularCard .item {
+  margin: 8px 0;
 }

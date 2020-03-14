@@ -8,3 +8,7 @@ const api = require("./request.js")
 export function allThreads(data) {
     return api._post('forum/allPost', data)
 }
+
+export function getPostThreadUrl() {
+  return baseUrl + "/forum/createPost";
+}

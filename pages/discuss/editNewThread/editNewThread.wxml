@@ -1,2 +1,37 @@
 <!--pages/discuss/editNewThread/editNewThread.wxml-->
-<text>pages/discuss/editNewThread/editNewThread.wxml</text>
+<view>
+    <view class="title">
+        <van-field
+                value="{{ formData.title }}"
+                placeholder="请输入标题"
+                title="标题"
+                maxlength="50"
+                size="large"
+                required
+                bind:change="onChangeTitle"
+        />
+    </view>
+    <view class="content">
+        <textarea
+                value="{{ formData.content }}"
+                placeholder="请输入内容"
+                title="内容"
+                type="textarea"
+                maxlength="400"
+                bindinput="onChangeContent"
+        />
+        <text class="markTextSize">{{ markContentSize }}</text>
+    </view>
+    <view class="imagesUpload">
+      <van-uploader 
+                file-list="{{ fileList }}" 
+                max-count="2"
+                bind:after-read="afterReadImage" 
+                bind:delete="deleteImage">
+      </van-uploader>
+    </view>
+
+    <view class="btn-submit">
+      <van-button bindtap="submitForm" type="info" block>提交</van-button>
+    </view>
+</view>
