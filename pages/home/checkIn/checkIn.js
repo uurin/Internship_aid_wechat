@@ -8,8 +8,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ak: "nRTQOASQB9MQ2eGWVnCuRDXIIkwg4DOH",
-    location: "未知"
+    isCheckedIn: null,  //是否今天已经签到过
+    ak: "nRTQOASQB9MQ2eGWVnCuRDXIIkwg4DOH", 
+    location: "未知"  //位置信息
   },
 
   /**
@@ -179,9 +180,13 @@ Page({
   isCheckedIn: function() {
     isCheckedIn().then(res => {
       if(res.result == 'true') {
-        //
-      }else if (res.result == 'false') {
-        //
+        this.setData({
+          isCheckedIn: true
+        });
+      } else if (res.result == 'false') {
+        this.setData({
+          isCheckedIn: false
+        });
       }else {
         console.log("获取今天的签到情况失败," + res.describe);
       }
@@ -192,7 +197,9 @@ Page({
 
   //按下签到
   tapCheckIn: function(e) {
-    console.log("按下签到按钮.");
+    if(this.data.isCheckedIn) {
+      return;
+    }
     let data = {
       location: this.data.location
     };
