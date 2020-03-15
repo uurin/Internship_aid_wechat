@@ -1,0 +1,10 @@
+<!--pages/home/checkInRecord/checkInRecord.wxml-->
+<view>
+  <van-cell-group title="全部签到记录">
+  <view wx:for="{{ recordData }}" wx:key="id"  >
+    <van-cell title="{{ item.location }}" 
+              value="{{ item.date }}" 
+              icon="location-o" />
+  </view>
+  </van-cell-group>
+</view>

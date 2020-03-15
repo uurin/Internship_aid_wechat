@@ -1,2 +1,31 @@
 <!--pages/home/checkIn/checkIn.wxml-->
-<text>pages/home/checkIn/checkIn.wxml</text>
+<view>
+  <van-cell-group title="操作">
+    <van-cell value="{{ location }}">
+      <view slot="title">
+        <view class="van-cell-text">
+          <text>当前位置</text>
+          <van-icon size="16px" name="location-o" />
+        </view>
+      </view>
+    </van-cell>
+    <van-cell title="刷新定位" bind:click="refreshLocation" clickable />
+    <!-- <van-cell title="手动选择位置" bind:click="chooseLocation" is-link /> -->
+  </van-cell-group>
+  
+  <van-cell-group title="最近三天签到记录">
+    <van-cell
+      is-link
+      title="查看全部签到记录"
+      link-type="navigateTo"
+      url="/pages/home/checkInRecord/checkInRecord"
+    />
+  </van-cell-group>
+
+  <view class="container-checkIn">
+    <view class="btn-checkIn" bindtap="tapCheckIn">
+      <text>签到</text>
+    </view>
+  </view>
+
+</view>

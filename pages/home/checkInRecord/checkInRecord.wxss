@@ -1,0 +1,4 @@
+/* pages/home/checkInRecord/checkInRecord.wxss */
+page{
+  background: #f7f7f7;
+}

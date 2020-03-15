@@ -9,8 +9,14 @@
     "pages/mine/userInfo/userInfo",
     "pages/discuss/detailThread/detailThread",
     "pages/login/login/login",
-    "pages/discuss/detailComment/detailComment"
+    "pages/discuss/detailComment/detailComment",
+    "pages/home/checkInRecord/checkInRecord"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于签到的位置记录"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
