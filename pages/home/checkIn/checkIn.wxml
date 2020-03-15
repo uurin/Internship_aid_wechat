@@ -3,7 +3,7 @@
   <van-cell-group >
     <van-cell title="今天签到状况" 
               size="large"
-              value="{{ isCheckIn ? '已签到' : '未签到' }}" />
+              value="{{ isCheckedIn ? '已签到' : '未签到' }}" />
     <!-- <van-cell title="手动选择位置" bind:click="chooseLocation" is-link /> -->
   </van-cell-group>
 

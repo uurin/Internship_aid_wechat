@@ -18,7 +18,7 @@ Page({
    */
   onLoad: function (options) {
     this.checkPermissions();
-    this.isCheckedIn();
+    this.getIsCheckedIn();
   },
 
   /**
@@ -177,7 +177,7 @@ Page({
   },
 
   //判断今天是否已经签到过
-  isCheckedIn: function() {
+  getIsCheckedIn: function() {
     isCheckedIn().then(res => {
       if(res.result == 'true') {
         this.setData({
