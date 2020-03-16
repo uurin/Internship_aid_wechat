@@ -43,4 +43,5 @@
         <van-button custom-class="button" type="info" block bindtap="login">登陆</van-button>
         <van-button custom-class="button" type="default" block plain>注册</van-button>
     </view>
+
 </view>
