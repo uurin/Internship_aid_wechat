@@ -1,4 +1,3 @@
-// let util = require('../utils/util.js');
 let util = require('../utils/util.js');
 
 const baseUrl = 'http://118.89.203.30:9090/'
@@ -25,7 +24,7 @@ const http = ({ url = '', param = {}, loading=true, ...other } = {}) => {
                 if (loading) {
                     wx.hideLoading();
                 }
-                if (res.data.code === 401) {
+                if (res.data.code == 401) {
                     // reLogin();
                     clearTimeout(apiData.timeout);
                     apiData.timeout=setTimeout(()=>{
@@ -36,7 +35,7 @@ const http = ({ url = '', param = {}, loading=true, ...other } = {}) => {
                         icon:"none"
                     })
                     util.setCache("token",null);
-                } else if (res.data.code === 403) {
+                } else if (res.data.code == 403) {
                     resolve(res)
                 } else if (res.statusCode >= 200 && res.statusCode < 300) {
                     resolve(res.data)
@@ -66,28 +65,31 @@ const _get = (url, param = {}, loading=true) => {
     return http(apiData)
 }
 
-const _post = (url, param = {}) => {
+const _post = (url, param = {}, loading = true) => {
     apiData = {
         url,
         param,
+        loading,
         method: 'post'
     }
     return http(apiData)
 }
 
-const _put = (url, param = {}) => {
+const _put = (url, param = {}, loading = true) => {
     apiData = {
         url,
         param,
+        loading,
         method: 'put'
     }
     return http(apiData)
 }
 
-const _delete = (url, param = {}) => {
+const _delete = (url, param = {}, loading = true) => {
     apiData = {
         url,
         param,
+        loading,
         method: 'delete'
     }
     return http(apiData)
