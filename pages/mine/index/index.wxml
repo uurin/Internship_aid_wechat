@@ -1,11 +1,27 @@
 <!--pages/mine/index/index.wxml-->
-<view class="user-panel" hover-class="user-panel-hover" bindtap="toUserInfo">
-  <image src="../../../images/aa.jpg"/>
-  <view>
-    <view class="text">
-      <text class="title">某某用户</text>
-      <text class="">23213123</text>
+<view>
+  <view class="user-panel" hover-class="user-panel-hover" bindtap="bindTapUserPanel">
+    <image src="../../../images/aa.jpg"/>
+    <view>
+      <view class="text">
+        <text class="title">{{ userName }}</text>
+        <text class="">{{ id }}</text>
+      </view>
     </view>
+    <van-icon class="arrow" name="arrow" />
   </view>
-  <van-icon class="arrow" name="arrow" />
+
+  <view>
+    <van-cell-group title=" ">
+      <van-cell size="large" title="我发出的讨论帖" is-link />
+      <van-cell size="large" title="我的收藏帖" is-link />
+      <van-cell size="large" title="签到记录" is-link />
+    </van-cell-group>
+  </view>
+
+  <view>
+    <van-cell-group title=" ">
+      <van-cell size="large" title="投诉建议" is-link />
+    </van-cell-group>
+  </view>
 </view>

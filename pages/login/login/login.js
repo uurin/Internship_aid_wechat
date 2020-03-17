@@ -134,7 +134,14 @@ Page({
         wx.showToast({
           title: '登陆成功',
           icon: 'success',
-          duration: 2000
+          duration: 2000, 
+          success: function () {
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }, 1000);
+          }
         })
       } else if (res.code == -1) {
         wx.showToast({

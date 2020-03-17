@@ -3,7 +3,6 @@
     "van-field": "/@vant/weapp/field",
     "van-cell-group": "/@vant/weapp/cell-group",
     "van-button": "/@vant/weapp/button",
-    "van-image": "/@vant/weapp/image",
-    "van-toast": "/@vant/weapp/toast"
+    "van-image": "/@vant/weapp/image"
   }
 }

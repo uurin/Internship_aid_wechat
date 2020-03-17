@@ -1,4 +1,7 @@
 // pages/mine/userInfo/userInfo.js
+let util = require('../../../utils/util.js');
+import Dialog from '/@vant/weapp/dialog/dialog';
+
 Page({
 
   /**
@@ -62,5 +65,31 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  //退出登录
+  bindTapLogout: function() {
+    Dialog.confirm({
+      title: '提示',
+      message: '是否退出并重新登录？'
+    }).then(() => {
+      util.setCache("token", null);
+      wx.showToast({
+        title: '已退出登录',
+        icon: 'none',
+        duration: 1500,
+        success: function() {
+          setTimeout(() => {
+            //直接关闭当前页面,跳转到新页面
+            wx.redirectTo({
+              url: '/pages/login/login/login',
+            })
+          }, 1000);
+        }
+      });
+
+    }).catch(() => {
+      // on cancel
+    });
   }
 })

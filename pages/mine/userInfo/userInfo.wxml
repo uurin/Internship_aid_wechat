@@ -1,2 +1,18 @@
 <!--pages/mine/userInfo/userInfo.wxml-->
-<text>pages/mine/userInfo/userInfo.wxml</text>
+<view>
+
+  <view>
+    <van-cell-group title=" ">
+      <van-cell size="large" title="用户名" is-link />
+      <van-cell size="large" title="性别" is-link />
+      <van-cell size="large" title="学号" is-link />
+    </van-cell-group>
+
+    <van-cell-group title=" ">
+      <van-cell size="large" title="退出登录" bind:click="bindTapLogout" is-link />
+    </van-cell-group>
+  </view>
+
+  <van-dialog id="van-dialog" />
+
+</view>
