@@ -7,6 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    listQuery: {
+      page: 1,
+      row: 100
+    },
     recordData: null
   },
 
@@ -68,7 +72,7 @@ Page({
 
   //获取签到记录
   getCheckInRecord: function() {
-    checkInRecord().then(res => {
+    checkInRecord(this.data.listQuery).then(res => {
       if(res.code == 1) {
         this.setData({
           recordData: res.result
