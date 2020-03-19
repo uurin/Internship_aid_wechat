@@ -143,3 +143,11 @@ page{
     color: #737373;
     display: inline-block;
 }
+
+.text-withoutComment {
+  font-size: 16px;
+  color: #8d8d8d;
+  display: block;
+  text-align: center;
+  margin: 4rem 0
+}

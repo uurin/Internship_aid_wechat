@@ -7,13 +7,15 @@
   </van-grid>
 
   <threadCard
-          wx:for="{{ threadsData }}"
+          wx:for="{{ threadListData }}"
           wx:for-item="item"
+          wx:key="id"
           my-class="my-class"
+          threadId="{{ item.id }}"
           userName="{{ item.nameString }}"
           avatar="{{ item.headPortrait }}"
           time="{{ item.date }}"
-          thumbsUps="{{ item.top }}"
+          thumbsUps="{{ item.likeNum }}"
           comments="{{ item.comment }}"
           title="{{ item.title }}"
           content="{{ item.content }}"

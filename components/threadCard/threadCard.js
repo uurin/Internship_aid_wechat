@@ -5,6 +5,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    threadId: {
+      type: Number
+    },
     //用户名
     userName: {
       type: String
@@ -52,11 +55,14 @@ Component({
    */
   methods: {
     //卡片点击事件
-    bindThreadCardTap: function () {
+    bindThreadCardTap: function (e) {
+      // let id = e.currentTarget.dataset.id
+      let threadId = this.data.threadId;
       wx.navigateTo({
-        url: '/pages/discuss/detailThread/detailThread'
+        url: '/pages/discuss/detailThread/detailThread?threadId=' + threadId
       })
     },
+
     //图片预览
     previewImg:function(e){
       var imgUrl = e.currentTarget.dataset.src; //获取当前点击的图片

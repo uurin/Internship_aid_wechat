@@ -2,24 +2,24 @@
 <view>
     <view class="threadContent">
         <view class="thread-info">
-            <image class="headicon" src="../../../images/aa.jpg"/>
+            <image class="headicon" src="{{ mainData.headPortrait }}"/>
             <view>
-                <text class="name">{{ threadDetailData.userName }}</text>
+                <text class="name">{{ mainData.nameString }}</text>
                 <view style="display: block">
-                    <text class="time">{{ threadDetailData.time }}</text>
+                    <text class="time">{{ mainData.date }}</text>
                     <view class="other">
                         <van-icon class="icon" size="16px" name="good-job-o"/>
-                        <text>{{ threadDetailData.thumbsUps }}</text>
+                        <text>{{ mainData.likeNum }}</text>
                         <van-icon class="icon" size="16px" name="comment-o"/>
-                        <text>{{ threadDetailData.comments }}</text>
+                        <text>{{ mainData.comment }}</text>
                     </view>
                 </view>
             </view>
         </view>
-        <text class="title">{{ threadDetailData.title }}</text>
-        <text class="content">{{ threadDetailData.content }}</text>
+        <text class="title">{{ mainData.title }}</text>
+        <text class="content">{{ mainData.content }}</text>
         <view class="images">
-            <image wx:for="{{ threadDetailData.images }}" src="{{ item }}" mode="aspectFill" catchtap="previewImg"/>
+            <image wx:for="{{ mainData.realFile }}" wx:key="this" src="{{ item }}" mode="aspectFill" catchtap="previewMainImg"/>
         </view>
     </view>
 
@@ -30,7 +30,7 @@
     </view>
 
     <!--    评论的卡片-->
-    <view wx:for="{{ 3 }}" style="background: #fff">
+    <view wx:for="{{ commentData }}" style="background: #fff">
         <view class="commentCard">
             <image class="headicon" src="../../../images/aa.jpg"/>
             <view style="padding-top: 2px">
@@ -51,4 +51,8 @@
     </view>
 
     <commentBox></commentBox>
+
+    <view wx:if="{{ commentData.length == 0 }}">
+      <text class="text-withoutComment">暂无评论</text>
+    </view>
 </view>

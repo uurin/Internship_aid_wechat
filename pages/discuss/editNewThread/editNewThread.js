@@ -1,5 +1,5 @@
 // pages/discuss/editNewThread/editNewThread.js
-import { getPostThreadUrl } from '../../../api/discuss.js';
+import { createThread, uploadImage} from '../../../api/discuss.js';
 
 Page({
 
@@ -11,7 +11,7 @@ Page({
       title: '',
       content: '',
       category: 1,
-      files: null
+      files: []
     },
     //标记内容长度
     markContentSize: '0/400',
@@ -74,6 +74,13 @@ Page({
 
   },
 
+  //监听输入标题
+  onChangeTitle: function (e) {
+    this.setData({
+      "formData.title": e.detail.value
+    });
+  },
+
   //监听输入内容
   onChangeContent: function(e) {
     this.setData({
@@ -88,6 +95,7 @@ Page({
     let fileList = this.data.fileList;
     fileList.push(e.detail.file);
     this.setData({ fileList });
+    this.uploadPic(e.detail.file.path);
   },
 
   //删除图片
@@ -97,27 +105,30 @@ Page({
     this.setData({ fileList });
   },
 
+  //上传图片
+  uploadPic: function(filePath) {
+    uploadImage(filePath).then(res => {
+      if(res.code == 1) {
+        let url = res.result;
+        //将获得的图片链接丢进表单里
+        let formFiles = this.data.formData.files;
+        formFiles.push(url);
+        this.setData({ formFiles });
+      }
+    }).catch(error => {
+      console.error('上传文件或图片出现异常,', error);
+    })
+  },
+
   //提交
   submitForm: function (e) {
-    wx.uploadFile({
-      url: getPostThreadUrl(),
-      filePath: tempFilePaths[0], //上传的图片
-      name: 'file', //传给后台的图片字段名称
-      formData: data, //传给后台的其他表单数据
-      header: {
-        "Content-Type": "multipart/form-data", //form-data格式
-        'Accept': 'application/json',
-      },
-      success(res) {
-        var jsonObj = JSON.parse(res.data);
-        if (jsonObj.code == 200) {
-          //接口请求成功后在这一块处理
-          //utils.navigateto("orderconfirm?orderId="+jsonObj.data.order_id);
-        } else {
-          utils.toast(jsonObj.message);
-        }
-      }
+    let data = this.data.formData;
+    console.log(data)
+    createThread(data).then(res => {
+      //
+      console.log(res);
+    }).catch(error => {
+      console.error('提交新帖出现异常,', error);
     })
-
   }
 })

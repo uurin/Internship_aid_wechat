@@ -1,38 +1,33 @@
 // pages/discuss/detailThread/detailThread.js
+import { threadDetail } from '../../../api/discuss.js';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //帖子详细数据
-    threadDetailData: {
-      //用户名
-      userName: '莫有感情的菜鸟',
-      //头像链接
-      headiconUrl: 'https://recomi.site/files/images/headicon1.jpg',
-      //时间
-      time: '2020-02-02 09:11:23',
-      //点赞数
-      thumbsUps: 6,
-      //评论数
-      comments: 2,
-      //标题
-      title: '谁能帮我整一个内推？',
-      //简要内容
-      content: '先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。',
-      //图片列表
-      images: [
-          'https://recomi.site/logo.png', 'https://recomi.site/logo.png', 'https://recomi.site/logo.png'
-      ]
-    }
+    listQuery: {
+      id: 1,
+      pageSize: 20,
+      pageIndex: 1
+    },
+    //帖主的数据
+    mainData: {},
+    //评论的数据
+    commentData: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let threadId = options.threadId;
+    console.log('threadId='+threadId)
+    this.setData({
+      'listQuery.id': threadId
+    });
+    this.getData();
   },
 
   /**
@@ -84,6 +79,22 @@ Page({
 
   },
 
+  //获取或刷新数据
+  getData: function() {
+    threadDetail(this.data.listQuery).then(res => {
+      if(res.code == 1) {
+        this.setData({
+          mainData: res.result.post,
+          commentData: res.result.reply
+        })
+      }else{
+        console.error('获取帖子详情失败，' + res.describe);
+      }
+    }).catch(err => {
+      console.error(err);
+    })
+  },
+
   //前往查看评论详情的页面
   goDetailComment: function(event) {
     wx.navigateTo({
@@ -91,10 +102,10 @@ Page({
     })
   },
 
-  //图片预览
-  previewImg:function(e){
+  //帖主的图片预览
+  previewMainImg:function(e){
     var imgUrl = e.currentTarget.dataset.src; //获取当前点击的图片
-    var imgArr = this.data.threadDetailData.images;
+    var imgArr = this.data.mainData.realFile;
     wx.previewImage({
       current: imgUrl, //当前图片地址
       urls: imgArr,  //所有图片集合

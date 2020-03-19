@@ -1,5 +1,5 @@
 <!--components/threadCard/threadCard.wxml-->
-<view class="threadCard my-class" bindtap="bindThreadCardTap">
+<view class="threadCard my-class"  bindtap="bindThreadCardTap">
   <view class="info">
     <image class="headicon" src="{{ avatar }}" />
     <view>
@@ -18,6 +18,6 @@
   <text class="title">{{title}}</text>
   <text class="content">{{content}}</text>
   <view class="images">
-    <image wx:for="{{images}}" src="{{item}}" mode="aspectFill" catchtap="previewImg"/>
+    <image wx:for="{{images}}" wx:key="this" src="{{item}}" mode="aspectFill" catchtap="previewImg"/>
   </view>
 </view>

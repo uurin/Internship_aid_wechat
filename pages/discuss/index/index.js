@@ -8,29 +8,8 @@ Page({
    */
   data: {
     value: '',
-    threadsData: [
-      {
-        userName: '莫有感情的菜鸟',
-        avatar: 'https://recomi.site/logo.png',
-        time: '2020-02-13 13:22',
-        thumbsUps: 0,
-        comments: 2,
-        title: '谁能帮我整一个内推？',
-        content: '先帝创业未半而中道崩殂，今天下三分，益州疲弊，此诚危急存亡之秋也。然侍卫之臣不懈于内，忠志之士忘身于外者，盖追先帝之殊遇，欲报之于陛下也。',
-        images: ['https://recomi.site/logo.png','https://recomi.site/logo.png','https://recomi.site/logo.png']
-      },
-      {
-        userName: '虚鲲蔡蔡子',
-        avatar: 'https://recomi.site/files/images/headicon1.jpg',
-        time: '2020-02-06 09:11',
-        thumbsUps: 16,
-        comments: 23,
-        title: '今儿天气甚好',
-        content: '八月湖水平，涵虚混太清。气蒸云梦泽，波撼岳阳城。' +
-            '欲济无舟楫，端居耻圣明。坐观垂钓者，空有羡鱼情',
-        images: ['https://recomi.site/logo.png','https://recomi.site/logo.png','https://recomi.site/logo.png']
-      }
-    ],
+    //帖子列表数据
+    threadListData: [],
     listQuery: {
       pageIndex: 0,
       pageSize: 10,
@@ -56,7 +35,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //当帖子列表数据为空时重新获取数据
+    if (this.data.threadListData.length == 0) {
+      this.getThreads();
+    }
   },
 
   /**
@@ -108,7 +90,7 @@ Page({
     allThreads(data).then(res => {
       if(res.code == 1) {
         this.setData({
-          threadsData: res.result
+          threadListData: res.result
         });
       } else {
         //

@@ -21,6 +21,7 @@ const http = ({ url = '', param = {}, loading=true, ...other } = {}) => {
             },
             ...other,
             complete: (res) => {
+                console.log(res.data);
                 if (loading) {
                     wx.hideLoading();
                 }
@@ -197,10 +198,52 @@ const toLoginPage=()=>{
     })
 }
 
+//上传文件的函数
+const uploadFile = (filePath='') => {
+  console.log("上传图片的信息：", filePath);
+  const token = util.getCache('token')
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      url: baseUrl + 'tool/pic',
+      filePath: filePath, //上传的文件路径
+      name: 'file', //传给后台的图片字段名称
+      header: {
+        "Content-Type": "multipart/form-data",
+        'Accept': 'application/json',
+        'token': token
+      },
+      success(res) {
+        if (res.data.code == 401) {
+          // reLogin();
+          clearTimeout(apiData.timeout);
+          apiData.timeout = setTimeout(() => {
+            toLoginPage();
+          }, 1000);
+          wx.showToast({
+            title: '请先登录后再操作哦！',
+            icon: "none"
+          })
+          util.setCache("token", null);
+        } else if (res.data.code == 403) {
+          resolve(res)
+        } else if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(res.data)
+        } else {
+          reject(res);
+        }
+      },
+      fail(res) {
+        reject(res);
+      }
+    })
+  })
+}
+
 module.exports = {
     baseUrl,
     _get,
     _post,
     _put,
-    _delete
+    _delete,
+    uploadFile
 }
