@@ -1,5 +1,6 @@
 <!--pages/discuss/detailThread/detailThread.wxml-->
 <view>
+    <!-- 帖子主体 -->
     <view class="threadContent">
         <view class="thread-info">
             <image class="headicon" src="{{ mainData.headPortrait }}"/>
@@ -23,21 +24,23 @@
         </view>
     </view>
 
+    <!-- 分隔条 -->
     <view class="separateBar">
         <text>评论</text>
         <van-icon name="arrow-down" />
         <van-divider customStyle="margin: 12px 0 0" ></van-divider>
     </view>
 
-    <!--    评论的卡片-->
-    <view wx:for="{{ commentData }}" style="background: #fff">
-        <view class="commentCard">
+    <!-- 评论的卡片 -->
+    <view wx:for="{{ commentData }}" wx:key="id" style="background: #fff">
+        <view class="commentCard" data-commentid="{{ item.id }}" data-username="{{ item.nameString }}" bindtap="bindTapComment" >
             <image class="headicon" src="../../../images/aa.jpg"/>
             <view style="padding-top: 2px">
                 <text class="name">某用户A</text>
                 <text class="content">我这里有，我可以帮你。我这里有，我可以帮你。我这里有，我可以帮你。</text>
                 <image class="image" src="https://recomi.site/files/images/headicon1.jpg" mode="aspectFill"/>
                 <text class="time">2020-01-01 11:33:42</text>
+                
                 <!--    评论中的回复-->
                 <view class="reply-in-comment" hover-class="reply-in-comment-hover" bindtap="goDetailComment">
                     <view style="display: block;">
@@ -50,9 +53,20 @@
         <van-divider customStyle="margin: 0 16px" ></van-divider>
     </view>
 
-    <commentBox></commentBox>
+    <!-- 输入框 -->
+    <commentBox value="{{ inputValue }}" 
+                placeholder="{{ placeholder }}" 
+                bindtapSend="send"></commentBox>
 
     <view wx:if="{{ commentData.length == 0 }}">
       <text class="text-withoutComment">暂无评论</text>
     </view>
+
+    <!-- 评论的操作菜单 -->
+    <van-action-sheet
+      show="{{ showCommentMenu }}"
+      actions="{{ menuActions }}"
+      bind:close="onCloseCommentMenu"
+      bind:select="onSelectCommentMenu"
+    />
 </view>

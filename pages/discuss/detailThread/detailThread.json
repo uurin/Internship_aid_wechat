@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "commentBox": "/components/commentBox/commentBox",
-    "van-divider": "/@vant/weapp/divider"
+    "van-divider": "/@vant/weapp/divider",
+    "van-action-sheet": "/@vant/weapp/action-sheet"
   }
 }

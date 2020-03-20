@@ -2,14 +2,22 @@
 <view>
 
   <view>
-    <van-cell-group title=" ">
-      <van-cell size="large" title="用户名" is-link />
-      <van-cell size="large" title="性别" is-link />
-      <van-cell size="large" title="学号" is-link />
+    <van-cell-group title="基本信息">
+      <van-cell value="{{ userInfo.nameString }}" size="large" title="用户名" is-link />
+      <van-cell value="{{ userInfo.sexString }}" size="large" title="性别" is-link />
+      <van-cell value="{{ userInfo.username }}" size="large" title="学号" is-link />
+      <van-cell value="{{ userInfo.majorString }}" size="large" title="所学专业" is-link />
+      <van-cell value="{{ userInfo.gradeString }}" size="large" title="年级" is-link />
+      <van-cell value="{{ userInfo.personality }}" size="large" title="个性签名" is-link />
+    </van-cell-group>
+
+    <van-cell-group title="就职信息">
+      <van-cell value="{{ userInfo.company }}" size="large" title="就职公司" is-link />
+      <van-cell value="{{ userInfo.companyPosition }}" size="large" title="公司地址" is-link />
     </van-cell-group>
 
     <van-cell-group title=" ">
-      <van-cell size="large" title="退出登录" bind:click="bindTapLogout" is-link />
+      <van-cell custom-class="btn-logout" size="large" title="退出登录" bind:click="bindTapLogout" is-link />
     </van-cell-group>
   </view>
 

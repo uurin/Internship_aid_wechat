@@ -1,7 +1,7 @@
 <!--components/commentBox/commentBox.wxml-->
 <view class="commentBox">
     <view class="input">
-        <van-field value="{{ commentValue }}" placeholder="写回复..."></van-field>
+        <van-field value="{{ value }}" placeholder="{{ placeholder }}"></van-field>
     </view>
     <van-button custom-class="btn-send" bindtap="bindSendTap">发送</van-button>
 </view>

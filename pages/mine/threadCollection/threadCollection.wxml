@@ -1,0 +1,17 @@
+<!--pages/mine/threadCollection/threadCollection.wxml-->
+<view>
+  <view class="threadCard" 
+        wx:for="{{ collectionsData }}" 
+        wx:key="id" 
+        data-threadid="{{ item.id }}"
+        bindtap="bindTapCard">
+    <view class="info">
+      <text class="name">{{ item.username }}</text>
+      <text class="time">{{ item.date }}</text>
+    </view>
+    <text class="title">{{ item.title }}</text>
+  </view>
+
+  <view wx:if="{{ collectionsData.length == 0 }}" class="text-without">暂无</view>
+
+</view>

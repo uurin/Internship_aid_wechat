@@ -1,5 +1,5 @@
 // pages/discuss/detailThread/detailThread.js
-import { threadDetail } from '../../../api/discuss.js';
+import { threadDetail, commentThread} from '../../../api/discuss.js';
 
 Page({
 
@@ -15,7 +15,26 @@ Page({
     //帖主的数据
     mainData: {},
     //评论的数据
-    commentData: {}
+    commentData: {},
+    //输入框待发送的内容，和占位内容
+    inputValue: '',
+    placeholder: '写评论...',
+    //是否显示评论菜单
+    showCommentMenu: false,
+    //评论的操作菜单
+    menuActions: [
+      {
+        name: '回复'
+      },
+      {
+        name: '点赞'
+      },
+      {
+        name: '查看详情'
+      }
+    ],
+    //1.操作菜单的标识；2.输入框回复的标识；3.当值为null时标识为评论帖主；
+    commentId: null
   },
 
   /**
@@ -95,11 +114,66 @@ Page({
     })
   },
 
+  //点击评论弹出操作菜单
+  bindTapComment: function(e) {
+    let id = e.currentTarget.dataset.commentid;
+    this.setData({
+      commentId: id,
+      showCommentMenu: true
+    })
+  },
+
+  //关闭评论菜单
+  onCloseCommentMenu: function (e) {
+    this.setData({
+      commentId: null
+    })
+  },
+
+  //选择评论菜单
+  onSelectCommentMenu: function (e) {
+    this.setData({
+      commentId: ''
+    });
+    switch (e.detail) {
+      case '回复':
+        break;
+      case '点赞':
+        break;
+      case '查看详情':
+        break;
+    }
+    this.setData({
+      showCommentMenu: false
+    })
+  },
+
   //前往查看评论详情的页面
   goDetailComment: function(event) {
     wx.navigateTo({
       url: '../detailComment/detailComment',
     })
+  },
+
+  //发送评论或回复
+  send: function() {
+    if (this.data.commentId == null) {
+      //评论帖主
+      let data = {
+        id: this.data.listQuery.id,
+        content: this.data.inputValue
+      }
+      commentThread(data).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.error(err);
+      })
+    } else {
+      //回复某条评论
+    }
+    // this.setData({
+    //   commentId: null
+    // })
   },
 
   //帖主的图片预览

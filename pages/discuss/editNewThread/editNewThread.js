@@ -7,15 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //提交的表单
     formData: {
       title: '',
       content: '',
       category: 1,
-      files: []
+      files: ''
     },
     //标记内容长度
     markContentSize: '0/400',
-    fileList: []
+    //完整信息的图片列表
+    fileList: [],
+    //用于中转图片列表，array形式，之后要转字符串的形式给表单
+    formFiles: []
   },
 
   /**
@@ -77,7 +81,7 @@ Page({
   //监听输入标题
   onChangeTitle: function (e) {
     this.setData({
-      "formData.title": e.detail.value
+      "formData.title": e.detail
     });
   },
 
@@ -92,10 +96,10 @@ Page({
   //读取图片后
   afterReadImage: function(e) {
     console.log(e.detail.file);
-    let fileList = this.data.fileList;
-    fileList.push(e.detail.file);
-    this.setData({ fileList });
-    this.uploadPic(e.detail.file.path);
+    // let fileList = this.data.fileList;
+    // fileList.push(e.detail.file);
+    // this.setData({ fileList });
+    this.uploadPic(e.detail.file);
   },
 
   //删除图片
@@ -106,14 +110,19 @@ Page({
   },
 
   //上传图片
-  uploadPic: function(filePath) {
-    uploadImage(filePath).then(res => {
+  uploadPic: function(file) {
+    let that = this;
+    uploadImage(file.path).then(res => {
       if(res.code == 1) {
         let url = res.result;
-        //将获得的图片链接丢进表单里
-        let formFiles = this.data.formData.files;
+        //将获得的图片链接丢进中转array里
+        let formFiles = that.data.formFiles;
         formFiles.push(url);
-        this.setData({ formFiles });
+        that.setData({ formFiles });
+        //
+        let fileList = that.data.fileList;
+        fileList.push({path: url});
+        that.setData({ fileList });
       }
     }).catch(error => {
       console.error('上传文件或图片出现异常,', error);
@@ -122,6 +131,9 @@ Page({
 
   //提交
   submitForm: function (e) {
+    this.setData({
+      'formData.files': JSON.stringify(this.data.formFiles)
+    });
     let data = this.data.formData;
     console.log(data)
     createThread(data).then(res => {

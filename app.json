@@ -10,7 +10,9 @@
     "pages/discuss/detailThread/detailThread",
     "pages/login/login/login",
     "pages/discuss/detailComment/detailComment",
-    "pages/home/checkInRecord/checkInRecord"
+    "pages/home/checkInRecord/checkInRecord",
+    "pages/mine/threadCollection/threadCollection",
+    "pages/mine/myThreadsSent/myThreadsSent"
   ],
   "permission": {
     "scope.userLocation": {
