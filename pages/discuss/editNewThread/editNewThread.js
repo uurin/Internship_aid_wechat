@@ -1,5 +1,5 @@
 // pages/discuss/editNewThread/editNewThread.js
-import { createThread, uploadImage} from '../../../api/discuss.js';
+import { createThread, uploadImage, threadTypes} from '../../../api/discuss.js';
 
 Page({
 
@@ -18,15 +18,17 @@ Page({
     markContentSize: '0/400',
     //完整信息的图片列表
     fileList: [],
-    //用于中转图片列表，array形式，之后要转字符串的形式给表单
-    formFiles: []
+    //下拉菜单配置
+    menuOption: [],
+    //下拉菜单选中值
+    menuValue: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getThreadTypes();
   },
 
   /**
@@ -40,7 +42,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (this.data.menuOption.length == 0) {
+      this.getThreadTypes();
+    }
   },
 
   /**
@@ -78,6 +82,31 @@ Page({
 
   },
 
+  //获取帖子类型列表
+  getThreadTypes: function () {
+    threadTypes().then(res => {
+      if (res.code == 1) {
+        let options = res.result;
+        options.forEach((item, index) => {
+          item.value = item.id
+          item.text = item.type
+        });
+        this.setData({
+          menuOption: options,
+          'formData.category': options[0].value,
+          menuValue: options[0].value
+        })
+      }
+    })
+  },
+
+  //切换分类时调用
+  onChangeType: function ({ detail }) {
+    this.setData({
+      'formData.category': detail
+    })
+  },
+
   //监听输入标题
   onChangeTitle: function (e) {
     this.setData({
@@ -112,14 +141,12 @@ Page({
   //上传图片
   uploadPic: function(file) {
     let that = this;
-    uploadImage(file.path).then(res => {
+    uploadImage(file.path).then(resStr => {
+      let res = JSON.parse(resStr); //将返回的字符串转换成json对象
       if(res.code == 1) {
+        console.log(res.result)
         let url = res.result;
-        //将获得的图片链接丢进中转array里
-        let formFiles = that.data.formFiles;
-        formFiles.push(url);
-        that.setData({ formFiles });
-        //
+        //将图片url丢进图片选择器组件里
         let fileList = that.data.fileList;
         fileList.push({path: url});
         that.setData({ fileList });
@@ -131,9 +158,15 @@ Page({
 
   //提交
   submitForm: function (e) {
-    this.setData({
-      'formData.files': JSON.stringify(this.data.formFiles)
+    //先将图片选择组件里的图片array转换格式，并格式化成字符串形式，再存入表单
+    let cacheFilelist = [];
+    this.data.fileList.forEach((item, index) => {
+      cacheFilelist.push(item.path)
     });
+    this.setData({
+      'formData.files': JSON.stringify(cacheFilelist)
+    });
+    //提交表单
     let data = this.data.formData;
     console.log(data)
     createThread(data).then(res => {

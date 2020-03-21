@@ -1,5 +1,5 @@
 // pages/discuss/index/index.js
-import { allThreads } from '../../../api/discuss.js';
+import { allThreads, threadTypes } from '../../../api/discuss.js';
 
 Page({
 
@@ -7,20 +7,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: '',
+    searchValue: '',
     //帖子列表数据
     threadListData: [],
     listQuery: {
       pageIndex: 0,
       pageSize: 10,
-      searchText: ''
-    }
+      searchText: '',
+      postType: 0
+    },
+    //下拉菜单配置
+    menuOption: [],
+    //下拉菜单选中值
+    menuValue: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getThreadTypes();
     this.getThreads();
   },
 
@@ -38,6 +44,9 @@ Page({
     //当帖子列表数据为空时重新获取数据
     if (this.data.threadListData.length == 0) {
       this.getThreads();
+    }
+    if (this.data.menuOption.length == 0) {
+      this.getThreadTypes();
     }
   },
 
@@ -76,11 +85,40 @@ Page({
 
   },
 
-  //编辑新主题
-  editNewThread: function () {
-    wx.navigateTo({
-      // url: '../checkIn/checkIn'
-      url: '../editNewThread/editNewThread'
+  //改变搜索文字时调用
+  onChangeSearchText: function (e) {
+    this.setData({
+      'listQuery.searchText': e.detail
+    })
+  },
+
+  //搜索
+  onSearch: function (e) {
+    this.getThreads();
+  },
+
+  //切换分类时调用
+  onChangeType: function ({ detail }) {
+    this.setData({
+      'listQuery.postType': detail
+    });
+    this.getThreads();
+  },
+
+  //获取帖子类型列表
+  getThreadTypes: function() {
+    threadTypes().then(res => {
+      if(res.code == 1) {
+        let options = res.result;
+        options.forEach((item, index) => {
+          item.value = item.id
+          item.text = item.type
+        });
+        options.unshift({ value: 0, text:'所有分类' })
+        this.setData({
+          menuOption: options
+        })
+      }
     })
   },
 
@@ -99,5 +137,13 @@ Page({
     }).catch(error => {
       console.error("获取讨论帖错误，" + error)
     });
+  },
+
+  //编辑新主题
+  editNewThread: function () {
+    wx.navigateTo({
+      // url: '../checkIn/checkIn'
+      url: '../editNewThread/editNewThread'
+    })
   }
 })

@@ -1,5 +1,12 @@
 <!--pages/mine/threadCollection/threadCollection.wxml-->
 <view>
+
+  <van-dropdown-menu>
+    <van-dropdown-item value="{{ menuValue }}" 
+                       options="{{ menuOption }}"
+                       bind:change="onChangeType" />
+  </van-dropdown-menu>
+
   <view class="threadCard" 
         wx:for="{{ collectionsData }}" 
         wx:key="id" 

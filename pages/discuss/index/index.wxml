@@ -1,10 +1,22 @@
 <!--pages/discuss/index/index.wxml-->
 <view class="">
-  <van-search value="{{ value }}" placeholder="请输入搜索关键词" />
+  <van-search value="{{ searchValue }}" 
+              placeholder="请输入搜索关键词" 
+              use-action-slot 
+              bind:change="onChangeSearchText"
+              bind:search="onSearch">
+    <view slot="action" bind:tap="onSearch">搜索</view>
+  </van-search>
 
-  <van-grid column-num="4" clickable>
+  <van-dropdown-menu>
+    <van-dropdown-item value="{{ menuValue }}" 
+                       options="{{ menuOption }}"
+                       bind:change="onChangeType" />
+  </van-dropdown-menu>
+
+  <!-- <van-grid column-num="4" clickable>
     <van-grid-item icon="photo-o" text="文字" wx:for="{{ 4 }}" />
-  </van-grid>
+  </van-grid> -->
 
   <threadCard
           wx:for="{{ threadListData }}"
@@ -14,7 +26,7 @@
           threadId="{{ item.id }}"
           userName="{{ item.nameString }}"
           avatar="{{ item.headPortrait }}"
-          time="{{ item.date }}"
+          date="{{ item.date }}"
           thumbsUps="{{ item.likeNum }}"
           comments="{{ item.comment }}"
           title="{{ item.title }}"

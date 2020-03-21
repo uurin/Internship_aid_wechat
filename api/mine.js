@@ -11,7 +11,7 @@ export function userInfo(data) {
 
 //获取我发出的讨论帖列表
 export function myThreadsSent(data) {
-  return api._get('/forum/userPostByCategory', data)
+  return api._get('/forum/selectPost', data)
 }
 
 //获取收藏的讨论帖列表

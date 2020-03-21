@@ -15,12 +15,12 @@ export function threadTypes(data) {
 
 //获取帖子列表
 export function allThreads(data) {
-    return api._post('forum/allPost', data)
+  return api._post('/forum/selectPost', data)
 }
 
 //发新帖
 export function createThread(data) {
-  return api._get('/forum/createPostByPic', data)
+  return api._post('/forum/createPostByPic', data)
 }
 
 //获取某条帖子的详细信息

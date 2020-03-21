@@ -16,7 +16,7 @@ const http = ({ url = '', param = {}, loading=true, ...other } = {}) => {
             url: getUrl(url),
             data: param,
             header: {
-                'content-type': 'application/x-www-form-urlencoded',
+              'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'token': token
             },
             ...other,
@@ -209,7 +209,6 @@ const uploadFile = (filePath='') => {
       name: 'file', //传给后台的图片字段名称
       header: {
         "Content-Type": "multipart/form-data",
-        'Accept': 'application/json',
         'token': token
       },
       success(res) {
