@@ -65,6 +65,7 @@ Component({
 
     //图片预览
     previewImg:function(e){
+      console.log(e)
       var imgUrl = e.currentTarget.dataset.src; //获取当前点击的图片
       var imgArr = this.data.images;
       wx.previewImage({

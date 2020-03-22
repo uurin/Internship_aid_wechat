@@ -18,6 +18,6 @@
   <text class="title">{{title}}</text>
   <text class="content">{{content}}</text>
   <view class="images">
-    <image wx:for="{{images}}" wx:key="this" src="{{item}}" mode="aspectFill" catchtap="previewImg"/>
+    <image wx:for="{{images}}" wx:key="this" src="{{item}}" mode="aspectFill" data-src="{{ item }}" catchtap="previewImg"/>
   </view>
 </view>

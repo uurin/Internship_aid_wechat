@@ -4,6 +4,9 @@
     "van-field": "/@vant/weapp/field",
     "van-row": "/@vant/weapp/row",
     "van-col": "/@vant/weapp/col",
-    "van-button": "/@vant/weapp/button"
+    "van-button": "/@vant/weapp/button",
+    "van-icon": "/@vant/weapp/icon",
+    "van-uploader": "/@vant/weapp/uploader",
+    "van-transition": "/@vant/weapp/transition"
   }
 }

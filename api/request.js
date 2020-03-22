@@ -17,7 +17,7 @@ const http = ({ url = '', param = {}, loading=true, ...other } = {}) => {
             data: param,
             header: {
               'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                'token': token
+              'token': token
             },
             ...other,
             complete: (res) => {

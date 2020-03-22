@@ -1,17 +1,47 @@
 /* components/commentBox/commentBox.wxss */
+@keyframes 
+panel-show {
+  0%{
+      left: 100px;
+  }
+  50%{
+      left: 150px;
+  }
+  100%{
+      left: 200px;
+  }
+}
+
 .commentBox {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #fff;
-    display: flex;
-    box-shadow: 0 0 6px rgb(205, 205, 205);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 0 6px rgb(205, 205, 205);
 }
-.commentBox .input {
-    font-size: 16px;
-    flex: 1;
+
+.main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px rgb(223, 223, 223);
+  transition: all .2s ease-in;
 }
-.commentBox .btn-send {
-    box-shadow: none;
-    border: none;
+.main .input {
+  font-size: 16px;
+  flex: 1;
+}
+.main .btn-icon {
+  box-shadow: none;
+  border: none;
+}
+.main .btn-send {
+  box-shadow: none;
+  border: none;
+}
+
+
+.panel {
+  width: 100%;
+  padding: 6px;
 }

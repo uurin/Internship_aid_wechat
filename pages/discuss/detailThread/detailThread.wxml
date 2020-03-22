@@ -20,7 +20,7 @@
         <text class="title">{{ mainData.title }}</text>
         <text class="content">{{ mainData.content }}</text>
         <view class="images">
-            <image wx:for="{{ mainData.realFile }}" wx:key="this" src="{{ item }}" mode="aspectFill" catchtap="previewMainImg"/>
+            <image wx:for="{{ mainData.realFile }}" wx:key="this" src="{{ item }}" data-src="{{ item }}" mode="aspectFill" catchtap="previewMainImg"/>
         </view>
     </view>
 
@@ -32,14 +32,16 @@
     </view>
 
     <!-- 评论的卡片 -->
-    <view wx:for="{{ commentData }}" wx:key="id" style="background: #fff">
-        <view class="commentCard" data-commentid="{{ item.id }}" data-username="{{ item.nameString }}" bindtap="bindTapComment" >
-            <image class="headicon" src="../../../images/aa.jpg"/>
-            <view style="padding-top: 2px">
-                <text class="name">某用户A</text>
-                <text class="content">我这里有，我可以帮你。我这里有，我可以帮你。我这里有，我可以帮你。</text>
-                <image class="image" src="https://recomi.site/files/images/headicon1.jpg" mode="aspectFill"/>
-                <text class="time">2020-01-01 11:33:42</text>
+    <view wx:for="{{ commentData }}" wx:for-item="commentItem" wx:key="id" style="background: #fff">
+        <view class="commentCard" data-commentid="{{ commentItem.id }}" data-username="{{ commentItem.nameString }}" bindtap="bindTapComment" >
+            <image class="headicon" src="{{ commentItem.headPortrait }}"/>
+            <view style="padding-top: 2px; flex: 1">
+                <text class="name">{{ commentItem.name }}</text>
+                <text class="content">{{ commentItem.content }}</text>
+                <view class="images">
+                    <image wx:for="{{ commentItem.realFile }}" wx:key="this" src="{{ item }}" data-images="{{ commentItem.realFile }}" data-src="{{ item }}" mode="aspectFill" catchtap="previewCommentImg"/>
+                </view>
+                <text class="time">{{ commentItem.date }}</text>
                 
                 <!--    评论中的回复-->
                 <view class="reply-in-comment" hover-class="reply-in-comment-hover" bindtap="goDetailComment">
@@ -54,8 +56,9 @@
     </view>
 
     <!-- 输入框 -->
-    <commentBox value="{{ inputValue }}" 
+    <commentBox inputValue="{{ inputValue }}" 
                 placeholder="{{ placeholder }}" 
+                bindonChangeInput="onChangeInput"
                 bindtapSend="send"></commentBox>
 
     <view wx:if="{{ commentData.length == 0 }}">
@@ -66,6 +69,7 @@
     <van-action-sheet
       show="{{ showCommentMenu }}"
       actions="{{ menuActions }}"
+      bind:click-overlay="onClickCommentMenuOverlay"
       bind:close="onCloseCommentMenu"
       bind:select="onSelectCommentMenu"
     />

@@ -1,5 +1,5 @@
 // pages/discuss/detailThread/detailThread.js
-import { threadDetail, commentThread} from '../../../api/discuss.js';
+import { threadDetail, sendComment} from '../../../api/discuss.js';
 
 Page({
 
@@ -13,9 +13,9 @@ Page({
       pageIndex: 1
     },
     //帖主的数据
-    mainData: {},
+    mainData: [],
     //评论的数据
-    commentData: {},
+    commentData: [],
     //输入框待发送的内容，和占位内容
     inputValue: '',
     placeholder: '写评论...',
@@ -123,6 +123,13 @@ Page({
     })
   },
 
+  //点击评论菜单的遮罩层
+  onClickCommentMenuOverlay: function() {
+    this.setData({
+      showCommentMenu: false
+    })
+  },
+
   //关闭评论菜单
   onCloseCommentMenu: function (e) {
     this.setData({
@@ -155,15 +162,24 @@ Page({
     })
   },
 
+  //改变输入框内容时改变页面的参数，来自子组件
+  onChangeInput: function(e) {
+    this.setData({
+      inputValue: e.detail.inputValue
+    })
+  },
+
   //发送评论或回复
-  send: function() {
+  send: function(e) {
     if (this.data.commentId == null) {
       //评论帖主
       let data = {
-        id: this.data.listQuery.id,
-        content: this.data.inputValue
+        postWho: this.data.listQuery.id,
+        content: this.data.inputValue,
+        files: JSON.stringify(e.detail.imagesList),
+        postType: 0
       }
-      commentThread(data).then(res => {
+      sendComment(data).then(res => {
         console.log(res)
       }).catch(err => {
         console.error(err);
@@ -188,5 +204,19 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
-  }
+  },
+
+  //评论里的图片预览
+  previewCommentImg: function (e) {
+    var imgUrl = e.currentTarget.dataset.src; //获取当前点击的图片
+    var imgArr = e.currentTarget.dataset.images;
+    wx.previewImage({
+      current: imgUrl, //当前图片地址
+      urls: imgArr,  //所有图片集合
+      // urls: [imgUrl], //单张图
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
 })

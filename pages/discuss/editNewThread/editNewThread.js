@@ -125,9 +125,6 @@ Page({
   //读取图片后
   afterReadImage: function(e) {
     console.log(e.detail.file);
-    // let fileList = this.data.fileList;
-    // fileList.push(e.detail.file);
-    // this.setData({ fileList });
     this.uploadPic(e.detail.file);
   },
 

@@ -28,12 +28,12 @@ export function threadDetail(data) {
   return api._get('/forum/postDetail', data)
 }
 
-//评论帖主
-export function commentThread(data) {
-  return api._post('/forum/replyPost', data)
+//评论
+export function sendComment(data) {
+  return api._post('/forum/reply', data)
 }
 
 //回复某条评论
 export function replyComment(data) {
-  return api._post('/forum/replyReply', data)
+  return api._post('/forum/reply', data)
 }
