@@ -20,7 +20,12 @@
         <text class="title">{{ mainData.title }}</text>
         <text class="content">{{ mainData.content }}</text>
         <view class="images">
-            <image wx:for="{{ mainData.realFile }}" wx:key="this" src="{{ item }}" data-src="{{ item }}" mode="aspectFill" catchtap="previewMainImg"/>
+            <image wx:for="{{ mainData.realFile }}" 
+                   wx:key="this" 
+                   src="{{ item }}" 
+                   data-src="{{ item }}" 
+                   mode="aspectFill" 
+                   catchtap="previewMainImg"/>
         </view>
     </view>
 
@@ -32,23 +37,43 @@
     </view>
 
     <!-- 评论的卡片 -->
-    <view wx:for="{{ commentData }}" wx:for-item="commentItem" wx:key="id" style="background: #fff">
-        <view class="commentCard" data-commentid="{{ commentItem.id }}" data-username="{{ commentItem.nameString }}" bindtap="bindTapComment" >
+    <view wx:for="{{ commentsData }}" 
+          wx:for-item="commentItem" 
+          wx:for-index="commentIndex" 
+          wx:key="id" 
+          style="background: #fff">
+        <view class="commentCard" 
+              data-comment_being_used="{{ commentItem }}" 
+              data-username="{{ commentItem.nameString }}" 
+              bindtap="bindTapComment" >
             <image class="headicon" src="{{ commentItem.headPortrait }}"/>
             <view style="padding-top: 2px; flex: 1">
-                <text class="name">{{ commentItem.name }}</text>
+                <text class="name">{{ commentItem.nameString }}</text>
                 <text class="content">{{ commentItem.content }}</text>
                 <view class="images">
-                    <image wx:for="{{ commentItem.realFile }}" wx:key="this" src="{{ item }}" data-images="{{ commentItem.realFile }}" data-src="{{ item }}" mode="aspectFill" catchtap="previewCommentImg"/>
+                    <image wx:for="{{ commentItem.realFile }}" 
+                           wx:key="this" src="{{ item }}" 
+                           data-images="{{ commentItem.realFile }}" 
+                           data-src="{{ item }}" 
+                           mode="aspectFill" catchtap="previewCommentImg"/>
                 </view>
                 <text class="time">{{ commentItem.date }}</text>
                 
                 <!--    评论中的回复-->
-                <view class="reply-in-comment" hover-class="reply-in-comment-hover" bindtap="goDetailComment">
-                    <view style="display: block;">
-                        <text class="reply-name">路过的清洁工：</text>
-                        <text class="reply-content">多谢帮助！</text>
+                <view wx:if="{{ commentItem.childComments.length > 0 }}"
+                      class="reply-box" 
+                      hover-class="reply-box-hover" 
+                      data-comment_item="{{ commentItem }}" 
+                      catchtap="bindtapReplyBox">
+                    <view wx:for="{{ commentItem.childComments }}" 
+                          wx:if="{{ index < 3 }}"
+                          class="reply-item">
+                        <text class="reply-name">{{ item.nameString }}：</text>
+                        <text class="reply-content">{{ item.content }}</text>
                     </view>
+                    <text wx:if="{{ commentItem.childComments.length > 2 }}" >
+                      查看全部{{ commentItem.childComments.length + 1 }}条回复>
+                    </text>
                 </view>
             </view>
         </view>
@@ -61,16 +86,18 @@
                 bindonChangeInput="onChangeInput"
                 bindtapSend="send"></commentBox>
 
-    <view wx:if="{{ commentData.length == 0 }}">
+    <view wx:if="{{ commentsData.length == 0 }}">
       <text class="text-withoutComment">暂无评论</text>
     </view>
 
     <!-- 评论的操作菜单 -->
     <van-action-sheet
-      show="{{ showCommentMenu }}"
-      actions="{{ menuActions }}"
-      bind:click-overlay="onClickCommentMenuOverlay"
-      bind:close="onCloseCommentMenu"
-      bind:select="onSelectCommentMenu"
+        show="{{ showCommentMenu }}"
+        actions="{{ menuActions }}"
+        bind:click-overlay="onClickCommentMenuOverlay"
+        bind:close="onCloseCommentMenu"
+        bind:select="onSelectCommentMenu"
+        bind:cancel="onCancelCommentMenu"
+        cancel-text="取消"
     />
 </view>

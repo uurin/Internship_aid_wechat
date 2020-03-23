@@ -28,6 +28,11 @@ export function threadDetail(data) {
   return api._get('/forum/postDetail', data)
 }
 
+//点赞评论
+export function likeComment(data) {
+  return api._get('/forum/likeReply', data)
+}
+
 //评论
 export function sendComment(data) {
   return api._post('/forum/reply', data)

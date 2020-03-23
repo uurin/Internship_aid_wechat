@@ -1,5 +1,5 @@
 // pages/discuss/detailThread/detailThread.js
-import { threadDetail, sendComment} from '../../../api/discuss.js';
+import { threadDetail, sendComment, likeComment} from '../../../api/discuss.js';
 
 Page({
 
@@ -15,7 +15,7 @@ Page({
     //帖主的数据
     mainData: [],
     //评论的数据
-    commentData: [],
+    commentsData: [],
     //输入框待发送的内容，和占位内容
     inputValue: '',
     placeholder: '写评论...',
@@ -24,17 +24,20 @@ Page({
     //评论的操作菜单
     menuActions: [
       {
-        name: '回复'
+        name: '回复',
+        value: 'reply'
       },
       {
-        name: '点赞'
+        name: '点赞',
+        value: 'like'
       },
       {
-        name: '查看详情'
+        name: '查看详情',
+        value: 'detail'
       }
     ],
-    //1.操作菜单的标识；2.输入框回复的标识；3.当值为null时标识为评论帖主；
-    commentId: null
+    //当前操作的评论的实例。1.操作菜单的标识；2.输入框回复的标识；3.当值为null时标识为评论帖主；
+    commentBeingUsed: null
   },
 
   /**
@@ -104,7 +107,7 @@ Page({
       if(res.code == 1) {
         this.setData({
           mainData: res.result.post,
-          commentData: res.result.reply
+          commentsData: res.result.reply
         })
       }else{
         console.error('获取帖子详情失败，' + res.describe);
@@ -116,9 +119,9 @@ Page({
 
   //点击评论弹出操作菜单
   bindTapComment: function(e) {
-    let id = e.currentTarget.dataset.commentid;
+    let item = e.currentTarget.dataset.comment_being_used;
     this.setData({
-      commentId: id,
+      commentBeingUsed: item,
       showCommentMenu: true
     })
   },
@@ -126,28 +129,62 @@ Page({
   //点击评论菜单的遮罩层
   onClickCommentMenuOverlay: function() {
     this.setData({
-      showCommentMenu: false
+      showCommentMenu: false,
+      commentBeingUsed: null
     })
   },
 
   //关闭评论菜单
   onCloseCommentMenu: function (e) {
-    this.setData({
-      commentId: null
-    })
+
   },
 
   //选择评论菜单
   onSelectCommentMenu: function (e) {
-    this.setData({
-      commentId: ''
-    });
-    switch (e.detail) {
-      case '回复':
+    console.log(e)
+    switch (e.detail.value) {
+      case 'reply':
+        console.log('回复');
+        // this.setData({
+        //   commentId: ''
+        // })
         break;
-      case '点赞':
+      case 'like':
+        console.log('点赞');
+        likeComment({ id: this.data.commentBeingUsed.id}).then(res => {
+          if (res.code == 1) {
+            wx.showToast({
+              title: '点赞成功',
+              icon: 'none',
+              duration: 1500
+            })
+          } else if(res.code == '-2'){
+            wx.showToast({
+              title: '已点过赞',
+              icon: 'none',
+              duration: 1500
+            })
+          } else {
+            wx.showToast({
+              title: '点赞失败',
+              icon: 'none',
+              duration: 1500
+            })
+          }
+        }).catch(err => {
+          console.error(err);
+          wx.showToast({
+            title: '点赞失败，服务异常',
+            icon: none,
+            duration: 1500
+          })
+        })
         break;
-      case '查看详情':
+      case 'detail':
+        let item = JSON.stringify(this.data.commentsData[0]);
+        wx.navigateTo({
+          url: '/pages/discuss/detailComment/detailComment?item=' + item,
+        })
         break;
     }
     this.setData({
@@ -155,10 +192,19 @@ Page({
     })
   },
 
-  //前往查看评论详情的页面
-  goDetailComment: function(event) {
+  //评论菜单点击取消按钮后触发
+  onCancelCommentMenu: function() {
+    this.setData({
+      showCommentMenu: false,
+      commentBeingUsed: null
+    })
+  },
+
+  //点击评论的回复块时调用
+  bindtapReplyBox: function(e) {
+    let item = JSON.stringify(e.currentTarget.dataset.comment_item);
     wx.navigateTo({
-      url: '../detailComment/detailComment',
+      url: '/pages/discuss/detailComment/detailComment?item=' + item,
     })
   },
 
@@ -171,7 +217,7 @@ Page({
 
   //发送评论或回复
   send: function(e) {
-    if (this.data.commentId == null) {
+    if (this.data.commentBeingUsed == null) {
       //评论帖主
       let data = {
         postWho: this.data.listQuery.id,
@@ -187,9 +233,6 @@ Page({
     } else {
       //回复某条评论
     }
-    // this.setData({
-    //   commentId: null
-    // })
   },
 
   //帖主的图片预览

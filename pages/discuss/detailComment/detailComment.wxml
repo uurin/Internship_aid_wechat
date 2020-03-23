@@ -1,18 +1,20 @@
 <!--pages/discuss/detailComment/detailComment.wxml-->
 <view>
     <view class="commentCard comment">
-        <image class="headicon" src="../../../images/aa.jpg"/>
-        <view>
-            <text class="name">某用户A</text>
-            <text class="content">我这里有，我可以帮你。我这里有，我可以帮你。我这里有，我可以帮你。</text>
-            <image src="https://recomi.site/files/images/headicon1.jpg" mode="aspectFill"/>
-            <text class="time">2020-01-01 11:33:42</text>
+        <image class="headicon" src="{{ commentData.headPortrait }}"/>
+        <view class="rightPanel">
+            <text class="name">{{ commentData.nameString }}</text>
+            <text class="content">{{ commentData.content }}</text>
+            <view class="images">
+                <image wx:for="{{ commentData.realFile }}" wx:key="this" src="{{ item }}" data-src="{{ item }}" mode="aspectFill" catchtap="previewCommentImg"/>
+            </view>
+            <text class="time">{{ commentData.date }}</text>
         </view>
     </view>
 
     <view class="belongThread">
         <text >原帖：</text>
-        <text class="title">谁能帮我整一个内推？</text>
+        <text class="title">{{ commentData.belongPostTitle }}</text>
     </view>
 
     <view class="separateBar">
@@ -21,13 +23,13 @@
         <van-divider customStyle="margin: 12px 0 0" ></van-divider>
     </view>
 
-    <view wx:for="{{ 3 }}" style="background: #fff">
+    <view wx:for="{{ commentData.childComments }}" wx:for-item="replyItem" wx:key="id" style="background: #fff">
         <view class="replyCard comment">
-            <image class="headicon" src="../../../images/aa.jpg"/>
-            <view>
-                <text class="name">某用户A</text>
-                <text class="content">我这里有，我可以帮你。我这里有，我可以帮你。我这里有，我可以帮你。</text>
-                <text class="time">2020-01-01 11:33:42</text>
+            <image class="headicon" src="{{ replyItem.headPortrait }}"/>
+            <view class="rightPanel">
+                <text class="name">{{ replyItem.nameString }}</text>
+                <text class="content">{{ replyItem.content }}</text>
+                <text class="time">{{ replyItem.date }}</text>
             </view>
         </view>
         <van-divider customStyle="margin: 0 16px" ></van-divider>

@@ -7,6 +7,7 @@ page{
 
 .comment {
     display: flex;
+    flex-direction: row;
     background: #fff;
 }
 .comment .headicon {
@@ -34,13 +35,23 @@ page{
     margin-top: 2px;
     margin-bottom: 2px;
 }
-.comment image {
-    width: 40%;
-    height: 80px;
+.comment .images {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 4px 0;
+}
+.comment .images image {
+    width: 35%;
+    height: 100px;
     object-fit: cover;
     margin-right: 2%;
-    margin-top: 8px;
 }
+.comment .rightPanel {
+    flex: 1;
+}
+
 
 
 .commentCard {

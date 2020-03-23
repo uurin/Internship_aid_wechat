@@ -120,22 +120,16 @@ page{
     margin-top: 2px;
     margin-bottom: 2px;
 }
-/* .commentCard .image {
-    width: 40%;
-    height: 80px;
-    object-fit: cover;
-    margin-right: 2%;
-    margin-top: 8px;
-} */
 .commentCard .images {
     width: 100%;
+    flex: 1;
     display: flex;
     flex-direction: row;
     justify-content: start;
     padding: 4px 0;
 }
 .commentCard .images image {
-    width: 40%;
+    width: 35%;
     height: 100px;
     object-fit: cover;
     margin-right: 2%;
@@ -143,21 +137,32 @@ page{
 
 
 
-.reply-in-comment {
+.reply-box {
     background: #f0f0f0;
+    display: block;
     padding: 8px;
     transition: all .2s ;
 }
-.reply-in-comment-hover {
+.reply-box-hover {
     background: #cdcdcd;
 }
-.reply-in-comment .reply-name{
-    color: #4da7ff;
-    display: inline-block;
+.reply-box .reply-item {
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
-.reply-in-comment .reply-content{
+.reply-item .reply-name{
+    color: #4da7ff;
+    display: inline;
+}
+.reply-item .reply-content{
     color: #737373;
-    display: inline-block;
+    display: inline;
 }
 
 .text-withoutComment {
