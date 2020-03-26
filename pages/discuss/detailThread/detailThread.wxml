@@ -45,6 +45,7 @@
         <view class="commentCard" 
               data-comment_being_used="{{ commentItem }}" 
               data-username="{{ commentItem.nameString }}" 
+              data-content="{{ commentItem.content }}" 
               bindtap="bindTapComment" >
             <image class="headicon" src="{{ commentItem.headPortrait }}"/>
             <view style="padding-top: 2px; flex: 1">
@@ -63,7 +64,7 @@
                 <view wx:if="{{ commentItem.childComments.length > 0 }}"
                       class="reply-box" 
                       hover-class="reply-box-hover" 
-                      data-comment_item="{{ commentItem }}" 
+                      data-comment_id="{{ commentItem.id }}" 
                       catchtap="bindtapReplyBox">
                     <view wx:for="{{ commentItem.childComments }}" 
                           wx:if="{{ index < 3 }}"
@@ -71,24 +72,33 @@
                         <text class="reply-name">{{ item.nameString }}：</text>
                         <text class="reply-content">{{ item.content }}</text>
                     </view>
-                    <text wx:if="{{ commentItem.childComments.length > 2 }}" >
-                      查看全部{{ commentItem.childComments.length + 1 }}条回复>
-                    </text>
+                    <view wx:if="{{ commentItem.childComments.length > 3 }}" >
+                      <text class="reply-more">查看全部{{ commentItem.childComments.length }}条回复></text>
+                    </view>
                 </view>
             </view>
         </view>
         <van-divider customStyle="margin: 0 16px" ></van-divider>
     </view>
 
-    <!-- 输入框 -->
-    <commentBox inputValue="{{ inputValue }}" 
-                placeholder="{{ placeholder }}" 
-                bindonChangeInput="onChangeInput"
-                bindtapSend="send"></commentBox>
-
+    <!-- 无评论的占位文字 -->
     <view wx:if="{{ commentsData.length == 0 }}">
       <text class="text-withoutComment">暂无评论</text>
     </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <ThreadOperationBar 
+                  id="threadBar"
+                  option="{{ operationBarOptions }}"
+                  bindtapInput="bindtapInput"
+                  bindtapButtons="bindtapOperationBarButtons">
+      </ThreadOperationBar>
+    </view>
+
+    <!-- 弹出的输入框 -->
+    <commentInputBox isShow="{{ isShowInputBox }}"
+                     inputValue="{{ inputValue }}"></commentInputBox>
 
     <!-- 评论的操作菜单 -->
     <van-action-sheet
@@ -100,4 +110,6 @@
         bind:cancel="onCancelCommentMenu"
         cancel-text="取消"
     />
+
+
 </view>

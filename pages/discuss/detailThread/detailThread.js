@@ -1,5 +1,16 @@
 // pages/discuss/detailThread/detailThread.js
-import { threadDetail, sendComment, likeComment} from '../../../api/discuss.js';
+import { threadDetail, 
+  sendComment, 
+  replyComment, 
+  likeThread, 
+  likeComment, 
+  starThread, 
+  unstarThread
+} from '../../../api/discuss.js';
+
+//用于输入框的模式切换
+const REPLY_COMMENT_MODE = 1;   //回复某条评论的模式
+const COMMENT_THREAD_MODE = 2;  //评论帖子模式
 
 Page({
 
@@ -24,6 +35,12 @@ Page({
     //评论的操作菜单
     menuActions: [
       {
+        name: '',
+        className: 'menu-description',
+        color: '#afafaf',
+        disabled: true
+      },
+      {
         name: '回复',
         value: 'reply'
       },
@@ -36,8 +53,24 @@ Page({
         value: 'detail'
       }
     ],
-    //当前操作的评论的实例。1.操作菜单的标识；2.输入框回复的标识；3.当值为null时标识为评论帖主；
-    commentBeingUsed: null
+    //当前(操作菜单)操作的评论的实例。
+    commentBeingUsed: null,
+    //输入框的输入模式，用于区分评论和回复
+    inputMode: COMMENT_THREAD_MODE,
+
+    //底部操作栏的配置参数
+    operationBarOptions: {
+      //按钮列表
+      buttons: [
+        { icon: 'comment-o', highLight: false, number: 0, bindtap: 'comment' },
+        { icon: 'good-job-o', iconHighLight: 'good-job', highLight: true, number: 0, bindtap: 'like' },
+        { icon: 'star-o', iconHighLight: 'star', highLight: false, number: '', bindtap: 'star' },
+        { icon: 'arrow-up', highLight: false, number: '', bindtap: 'arrowUp' }
+      ],
+      placeholder: '写评论...'
+    },
+    //是否隐藏弹出式输入框
+    isShowInputBox: false
   },
 
   /**
@@ -107,7 +140,11 @@ Page({
       if(res.code == 1) {
         this.setData({
           mainData: res.result.post,
-          commentsData: res.result.reply
+          commentsData: res.result.reply,
+          'operationBarOptions.buttons[0].number': res.result.post.comment,
+          'operationBarOptions.buttons[1].number': res.result.post.likeNum,
+          'operationBarOptions.buttons[1].highLight': res.result.post.isLike,
+          'operationBarOptions.buttons[2].highLight': res.result.post.isCollect
         })
       }else{
         console.error('获取帖子详情失败，' + res.describe);
@@ -120,9 +157,12 @@ Page({
   //点击评论弹出操作菜单
   bindTapComment: function(e) {
     let item = e.currentTarget.dataset.comment_being_used;
+    let name = e.currentTarget.dataset.username;
+    let content = e.currentTarget.dataset.content;
     this.setData({
       commentBeingUsed: item,
-      showCommentMenu: true
+      showCommentMenu: true,
+      'menuActions[0].name': '@' + name + '：' + content
     })
   },
 
@@ -145,9 +185,7 @@ Page({
     switch (e.detail.value) {
       case 'reply':
         console.log('回复');
-        // this.setData({
-        //   commentId: ''
-        // })
+        this.switchInputMode(REPLY_COMMENT_MODE);
         break;
       case 'like':
         console.log('点赞');
@@ -181,9 +219,9 @@ Page({
         })
         break;
       case 'detail':
-        let item = JSON.stringify(this.data.commentsData[0]);
+        let commentId = this.data.commentBeingUsed.id;
         wx.navigateTo({
-          url: '/pages/discuss/detailComment/detailComment?item=' + item,
+          url: '/pages/discuss/detailComment/detailComment?commentId=' + commentId,
         })
         break;
     }
@@ -202,9 +240,9 @@ Page({
 
   //点击评论的回复块时调用
   bindtapReplyBox: function(e) {
-    let item = JSON.stringify(e.currentTarget.dataset.comment_item);
+    let commentId = e.currentTarget.dataset.comment_id;
     wx.navigateTo({
-      url: '/pages/discuss/detailComment/detailComment?item=' + item,
+      url: '/pages/discuss/detailComment/detailComment?commentId=' + commentId,
     })
   },
 
@@ -217,7 +255,15 @@ Page({
 
   //发送评论或回复
   send: function(e) {
-    if (this.data.commentBeingUsed == null) {
+    if (this.data.inputValue == '') {
+      wx.showToast({
+        title: '请输入内容！',
+        icon: 'none',
+        duration: 1000
+      })
+      return;
+    }
+    if (this.data.inputMode === COMMENT_THREAD_MODE) {
       //评论帖主
       let data = {
         postWho: this.data.listQuery.id,
@@ -230,8 +276,19 @@ Page({
       }).catch(err => {
         console.error(err);
       })
-    } else {
+    } else if (this.data.inputMode === REPLY_COMMENT_MODE) {
       //回复某条评论
+      let data = {
+        postWho: this.data.commentBeingUsed.id,
+        content: this.data.inputValue,
+        files: JSON.stringify(e.detail.imagesList),
+        postType: 1
+      }
+      replyComment(data).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.error(err);
+      })
     }
   },
 
@@ -262,4 +319,148 @@ Page({
       complete: function (res) { },
     })
   },
+
+  /**
+   * 切换输入框的模式，‘评论帖主’or‘回复某条评论’两种模式
+   * 
+   */
+  switchInputMode: function(mode) {
+    switch(mode) {
+      case COMMENT_THREAD_MODE:  //‘评论帖主’
+        this.setData({
+          placeholder: '写评论...',
+          inputMode: COMMENT_THREAD_MODE
+        })
+        break;
+      case REPLY_COMMENT_MODE: //‘回复某条评论’
+        this.setData({
+          placeholder: '回复@' + this.data.commentBeingUsed.nameString + '：',
+          inputMode: REPLY_COMMENT_MODE
+        })
+        break;
+    }
+  },
+
+
+
+
+
+
+
+
+  //点击伪输入框按钮时触发
+  bindtapInput: function(e) {
+    console.log('按下：' + '输入按钮');
+    this.setData({
+      isShowInputBox: true
+    })
+  },
+  //点击操作栏的按钮组触发事件
+  bindtapOperationBarButtons: function(e) {
+    console.log('按下：', e.detail);
+    let that = this;
+    switch(e.detail) {
+      case 'arrowUp':
+        break;
+      case 'star':
+        if (this.data.operationBarOptions.buttons[2].highLight) {
+          //请求取消收藏帖子
+          unstarThread({ ids: this.data.mainData.id }).then(res => {
+            if (res.code == 1) {
+              wx.showToast({
+                title: '取消收藏成功',
+                icon: 'none',
+                duration: '1000'
+              });
+              //界面渲染的收藏给高亮
+              this.setData({
+                'operationBarOptions.buttons[2].highLight': false
+              })
+              //更新子组件数据
+              this.selectComponent("#threadBar").updateData(this.data.operationBarOptions);
+            } else {
+              wx.showToast({
+                title: '取消收藏失败',
+                icon: 'none',
+                duration: '1000'
+              })
+            }
+          }).catch(err => {
+            console.error(err);
+            wx.showToast({
+              title: '取消收藏失败，后台异常',
+              icon: 'none',
+              duration: '1000'
+            })
+          })
+        } else {
+          //请求收藏帖子
+          starThread({id: this.data.mainData.id}).then(res => {
+            if(res.code == 1) {
+              wx.showToast({
+                title: '收藏成功',
+                icon: 'none',
+                duration: '1000'
+              });
+              //界面渲染的收藏给高亮
+              this.setData({
+                'operationBarOptions.buttons[2].highLight': true
+              })
+              //更新子组件数据
+              this.selectComponent("#threadBar").updateData(this.data.operationBarOptions);
+            } else {
+              wx.showToast({
+                title: '收藏失败',
+                icon: 'none',
+                duration: '1000'
+              })
+            }
+          }).catch(err => {
+            console.error(err)
+            wx.showToast({
+              title: '收藏失败，后台异常',
+              icon: 'none',
+              duration: '1000'
+            })
+          })
+        }
+        break;
+      case 'like':
+        likeThread({ id: this.data.mainData.id }).then(res => {
+          if (res.code == 1) {
+            wx.showToast({
+              title: '点赞成功',
+              icon: 'none',
+              duration: 1000
+            });
+            //界面渲染的点赞数+1
+            this.setData({
+              'operationBarOptions.buttons[1].number': Number(this.data.operationBarOptions.buttons[1].number) + 1
+            })
+            //更新子组件数据
+            this.selectComponent("#threadBar").updateData(this.data.operationBarOptions);
+          } else if (res.code == '-2') {
+            wx.showToast({
+              title: '已点过赞',
+              icon: 'none',
+              duration: 1000
+            })
+          } else {
+            wx.showToast({
+              title: '点赞失败',
+              icon: 'none',
+              duration: 1500
+            })
+          }
+        }).catch(err => {
+          console.error(err);
+          wx.showToast({
+            title: '点赞失败，服务异常',
+            icon: none,
+            duration: 1500
+          })
+        })
+        break;
+    }
+  }
 })

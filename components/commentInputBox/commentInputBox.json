@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-field": "/@vant/weapp/field",
+    "van-button": "/@vant/weapp/button",
+    "van-icon": "/@vant/weapp/icon",
+    "van-uploader": "/@vant/weapp/uploader",
+    "van-transition": "/@vant/weapp/transition",
+    "van-overlay": "/@vant/weapp/overlay"
+  }
+}

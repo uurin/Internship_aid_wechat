@@ -28,10 +28,31 @@ export function threadDetail(data) {
   return api._get('/forum/postDetail', data)
 }
 
+//获取某条评论的详细信息
+export function commentDetail(data) {
+  return api._get('/forum/replyDetail', data)
+}
+
+//点赞帖子
+export function likeThread(data) {
+  return api._get('/forum/likePost', data)
+} 
+
 //点赞评论
 export function likeComment(data) {
   return api._get('/forum/likeReply', data)
-}
+} 
+
+//收藏帖子
+export function starThread(data) {
+  return api._get('/forum/collectPost', data)
+} 
+
+//取消收藏帖子
+export function unstarThread(data) {
+  return api._get('/forum/cancelCollectPost', data)
+} 
+
 
 //评论
 export function sendComment(data) {

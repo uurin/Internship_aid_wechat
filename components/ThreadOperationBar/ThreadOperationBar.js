@@ -1,15 +1,24 @@
-// components/commentBox/commentBox.js
+// components/ThreadOperationBar/ThreadOperationBar.js
 /**
- ** 对外的参数：
- * commentValue：输入框的内容
- * placeholder：输入框的占位内容
+ ** 对外的参数：options
  * 
  ** 对外的方法（triggerEvent）:
- * 1、tapSend：发送按钮的点击事件，带参数： {
-              inputValue: 输入框的值
-              imagesList: 图片列表
-            }
- * 2、onChangeInput：改变输入内容时调用，带参数：{inputValue: 值}
+ * 1、tapInput：点击伪输入框按钮时调用
+ * 2、tapButtons：点击按钮组时调用，带参数： e.detail（点击的按钮bindtap属性值，用于区分点击了哪个按钮）
+ * 
+ * 
+ * 完整示例：
+  properties绑定参数：
+    options: {
+      buttons: [
+        { icon: 'comment-o', highLight: false, number: 0, bindtap: 'comment' },
+        { icon: 'good-job-o', iconHighLight: 'good-job', highLight: true, number: 0, bindtap: 'like' },
+        { icon: 'star-o', iconHighLight: 'star', highLight: false, number: '', bindtap: 'star' },
+        { icon: 'arrow-up', highLight: false, number: '', bindtap: 'arrowUp' }
+      ],
+      placeholder: '写评论...'
+    }
+  
  */
 import { uploadImage } from '../../api/discuss.js';
 
@@ -25,7 +34,10 @@ Component({
     placeholder: {
       type: String
     },
-    
+    //配置参数
+    option: {
+      type: Object
+    }
   },
 
   /**
@@ -103,6 +115,38 @@ Component({
       }
       //向外调用父页面或组件的函数
       this.triggerEvent("tapSend", data);
+    },
+
+    //清空所有内容
+    clearAll: function() {
+      this.setData({
+        inputValue: '',
+        fileList: []
+      })
+    },
+
+
+
+
+
+
+    //点击伪输入框的按钮
+    bindtapInputButton: function(e) {
+      this.triggerEvent("tapInput");
+    },
+
+    //点击按钮组触发
+    bindtapButtons: function(e) {
+      // console.log('按下：' + e.currentTarget.dataset.ontap)
+      this.triggerEvent('tapButtons', e.currentTarget.dataset.ontap);
+    },
+
+    //updateData
+    updateData: function(data) {
+      console.log('子组件更新数据，')
+      this.setData({
+        option: data
+      })
     }
   }
 })

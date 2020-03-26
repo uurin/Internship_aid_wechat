@@ -148,9 +148,8 @@ page{
 }
 .reply-box .reply-item {
     width: 100%;
-    display: block;
+    margin: 4px 0;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 1;
@@ -161,9 +160,14 @@ page{
     display: inline;
 }
 .reply-item .reply-content{
-    color: #737373;
+    color: #626262;
     display: inline;
 }
+.reply-box .reply-more {
+  color: #858585;
+  padding-top: 4px;
+}
+
 
 .text-withoutComment {
   font-size: 16px;
@@ -171,4 +175,23 @@ page{
   display: block;
   text-align: center;
   margin: 4rem 0
+}
+
+
+/* 底部操作栏的总容器 */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+
+/* 评论菜单的描述文字 */
+.menu-description {
+  font-size: 14px!important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }

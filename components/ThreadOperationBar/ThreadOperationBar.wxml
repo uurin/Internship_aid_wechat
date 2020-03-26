@@ -1,0 +1,36 @@
+<!--components/ThreadOperationBar/ThreadOperationBar.wxml-->
+<view class="commentBox">
+  <view class="main">
+
+    <!-- 伪输入框的按钮 -->
+    <view class="input">
+      <van-button custom-class="btn-input" 
+                  icon="edit"
+                  bindclick="bindtapInputButton"
+                  plain
+                  color="#898989">{{ option.placeholder }}</van-button>
+    </view>
+
+    <!-- 按钮列 -->
+    <van-button wx:for="{{ option.buttons }}"
+                icon="{{ item.highLight ? item.iconHighLight : item.icon }}"
+                color="{{ item.highLight ? '#509fc9' : '#898989' }}"
+                custom-class="btn"
+                data-ontap="{{ item.bindtap }}"
+                plain
+                bindclick="bindtapButtons">
+      <view class="btn-number"> {{ item.number }}</view>
+    </van-button>
+    
+  </view>
+
+  <!-- <van-transition show="{{ panelShow }}" 
+                  custom-class="panel" 
+                  name="fade-up" 
+                  duration="200">
+    <van-uploader file-list="{{ fileList }}" 
+                  max-count="2"
+                  bind:after-read="afterReadImage" 
+                  bind:delete="deleteImage"/>
+  </van-transition> -->
+</view>

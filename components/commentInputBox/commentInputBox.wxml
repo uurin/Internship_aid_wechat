@@ -1,0 +1,30 @@
+<!--components/commentInputBox/commentInputBox.wxml-->
+<view>
+  <van-overlay show="{{ isShow }}" bind:click="onClickHide">
+      <van-transition show="{{ isShow }}" name="slide-up" >
+        <view class="root" catchtap="tapRoot">
+          <view class="input">
+            <van-field
+              type="textarea"
+              value="{{ inputValue }}"
+              placeholder="{{ placeholder }}"
+              border="{{ true }}"
+              bind:change="onChange"
+              maxlength="400"
+              show-word-limit
+              autosize
+              fixed
+            />
+          </view>
+          <view class="images-uploader">
+            <van-uploader file-list="{{ fileList }}" 
+                          max-count="2"
+                          bind:after-read="afterRead" />
+          </view>
+          <view class="buttons">
+            <van-button bindclick="send">发送</van-button>
+          </view>
+        </view> 
+    </van-transition>
+  </van-overlay>
+</view>

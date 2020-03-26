@@ -51,6 +51,20 @@ page{
 .comment .rightPanel {
     flex: 1;
 }
+.rightPanel .images {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 4px 0;
+}
+.rightPanel .images image {
+    width: 35%;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 2%;
+}
 
 
 
@@ -79,4 +93,11 @@ page{
     padding: 16px 16px 0;
     color: #373737;
     background: #fff;
+}
+
+
+.bottom-box {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

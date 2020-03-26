@@ -1,39 +1,67 @@
 <!--pages/discuss/detailComment/detailComment.wxml-->
 <view>
+
+    <!-- 评论的主体 -->
     <view class="commentCard comment">
         <image class="headicon" src="{{ commentData.headPortrait }}"/>
         <view class="rightPanel">
             <text class="name">{{ commentData.nameString }}</text>
             <text class="content">{{ commentData.content }}</text>
             <view class="images">
-                <image wx:for="{{ commentData.realFile }}" wx:key="this" src="{{ item }}" data-src="{{ item }}" mode="aspectFill" catchtap="previewCommentImg"/>
+                <image wx:for="{{ commentData.realFile }}" 
+                       wx:key="this" 
+                       src="{{ item }}" 
+                       data-src="{{ item }}"
+                       mode="aspectFill" 
+                       catchtap="previewCommentImg"/>
             </view>
             <text class="time">{{ commentData.date }}</text>
         </view>
     </view>
 
+    <!-- 评论来源的帖子 -->
     <view class="belongThread">
         <text >原帖：</text>
         <text class="title">{{ commentData.belongPostTitle }}</text>
     </view>
 
+    <!-- 隔条 -->
     <view class="separateBar">
         <text>回复</text>
         <van-icon name="arrow-down" />
         <van-divider customStyle="margin: 12px 0 0" ></van-divider>
     </view>
 
-    <view wx:for="{{ commentData.childComments }}" wx:for-item="replyItem" wx:key="id" style="background: #fff">
+    <!-- 每条回复 -->
+    <view wx:for="{{ commentData.childComments }}" 
+          wx:for-item="replyItem" 
+          wx:key="id" 
+          style="background: #fff">
         <view class="replyCard comment">
             <image class="headicon" src="{{ replyItem.headPortrait }}"/>
             <view class="rightPanel">
                 <text class="name">{{ replyItem.nameString }}</text>
                 <text class="content">{{ replyItem.content }}</text>
+                <view class="images">
+                    <image wx:for="{{ replyItem.realFile }}" 
+                           wx:key="this" src="{{ item }}" 
+                           data-images="{{ replyItem.realFile }}" 
+                           data-src="{{ item }}" 
+                           mode="aspectFill" catchtap="previewReplyImg"/>
+                </view>
                 <text class="time">{{ replyItem.date }}</text>
             </view>
         </view>
         <van-divider customStyle="margin: 0 16px" ></van-divider>
     </view>
 
-    <commentBox></commentBox>
+    <!-- 输入框 -->
+    <view class="bottom-box">
+        <ThreadOperationBar 
+                  id="commentBar"
+                  option="{{ operationBarOptions }}"
+                  bindtapInput="bindtapInput"
+                  bindtapButtons="bindtapOperationBarButtons">
+        </ThreadOperationBar>
+    </view>
 </view>

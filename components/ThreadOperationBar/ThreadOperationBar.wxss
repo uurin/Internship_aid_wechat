@@ -1,20 +1,7 @@
-/* components/commentBox/commentBox.wxss */
-@keyframes 
-panel-show {
-  0%{
-      left: 100px;
-  }
-  50%{
-      left: 150px;
-  }
-  100%{
-      left: 200px;
-  }
-}
-
+/* components/ThreadOperationBar/ThreadOperationBar.wxss */
 .commentBox {
-  position: fixed;
-  bottom: 0;
+  /* position: fixed;
+  bottom: 0; */
   width: 100%;
   background: #fff;
   box-shadow: 0 0 6px rgb(205, 205, 205);
@@ -44,4 +31,27 @@ panel-show {
 .panel {
   width: 100%;
   padding: 6px;
+}
+
+
+
+
+.btn-input {
+  width: 100%;
+  box-shadow: none;
+  border: none;
+  justify-content: left;
+}
+
+.btn {
+  box-shadow: none;
+  border: none;
+  font-size: 16px;
+  padding: 0 10px 0 12px;
+}
+.btn-number {
+  position: relative;
+  margin-left: -2px;
+  font-size: 12px;
+  margin-bottom: 4px;
 }
