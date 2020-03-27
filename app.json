@@ -12,7 +12,10 @@
     "pages/discuss/detailComment/detailComment",
     "pages/home/checkInRecord/checkInRecord",
     "pages/mine/threadCollection/threadCollection",
-    "pages/mine/myThreadsSent/myThreadsSent"
+    "pages/mine/myThreadsSent/myThreadsSent",
+    "pages/mine/weeklyReport/weeklyReport",
+    "pages/mine/addWeeklyReport/addWeeklyReport",
+    "pages/mine/weeklyReportView/weeklyReportView"
   ],
   "permission": {
     "scope.userLocation": {

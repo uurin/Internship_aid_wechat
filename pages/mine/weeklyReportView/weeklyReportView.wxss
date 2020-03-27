@@ -1,0 +1,18 @@
+/* pages/mine/weeklyReportView/weeklyReportView.wxss */
+page{
+    background: #fff;
+}
+
+.date {
+  display: block;
+  padding: 8px;
+  text-align: center;
+}
+.title {
+  display: block;
+  padding: 8px;
+}
+.content {
+  display: block;
+  padding: 8px;
+}

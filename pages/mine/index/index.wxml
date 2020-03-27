@@ -16,6 +16,7 @@
       <van-cell size="large" title="我发出的讨论帖" is-link link-type="navigateTo" url="/pages/mine/myThreadsSent/myThreadsSent"/>
       <van-cell size="large" title="我的收藏帖" is-link link-type="navigateTo" url="/pages/mine/threadCollection/threadCollection"/>
       <van-cell size="large" title="签到记录" is-link link-type="navigateTo" url="/pages/home/checkInRecord/checkInRecord"/>
+      <van-cell size="large" title="我的周记" is-link link-type="navigateTo" url="/pages/mine/weeklyReport/weeklyReport"/>
     </van-cell-group>
   </view>
 

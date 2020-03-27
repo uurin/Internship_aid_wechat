@@ -20,7 +20,7 @@ Page({
         text: "日记",
         backgroundColor: "#8aa4c7",
         src: "/images/icons/check_in_light.png",
-        url: "/pages/discuss/index/index"
+        url: "/pages/mine/weeklyReport/weeklyReport"
       },
       {
         text: "更多",

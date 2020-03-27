@@ -205,10 +205,21 @@ Page({
       location: this.data.location
     };
     doCheckIn(data).then(res => {
-      console.log(res)
+      if (res.code == 1) {
+        wx.showToast({
+          title: '签到成功！',
+          icon: 'none',
+          duration: 1000
+        })
+      }
       this.getIsCheckedIn();
     }).catch(error => {
       console.error(error);
+      wx.showToast({
+        title: '签到失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      })
     });
   }
 })

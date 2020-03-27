@@ -1,0 +1,18 @@
+<!--pages/mine/weeklyReportView/weeklyReportView.wxml-->
+<view>
+
+  <view class="date">
+    <text>{{ detailData.date }}</text>
+  </view>
+
+  <van-divider contentPosition="center" customStyle=""></van-divider>
+
+  <view class="title">
+    <text>{{ detailData.title }}</text>
+  </view>
+
+  <view class="content">
+    <text>{{ detailData.content }}</text>
+  </view>
+
+</view>

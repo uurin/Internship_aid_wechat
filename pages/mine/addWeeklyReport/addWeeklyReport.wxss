@@ -1,0 +1,26 @@
+/* pages/mine/addWeeklyReport/addWeeklyReport.wxss */
+page{
+    background: #f6f6f6;
+}
+
+
+.title, .content {
+  margin: 8px 0;
+  background: #fff;
+}
+
+
+.content textarea{
+  height: calc( 100vh / 3);
+  padding: 12px;
+}
+.content .markTextSize {
+  display: block;
+  text-align: right;
+  margin: 0 8px 4px;
+}
+
+
+.btn-submit {
+  padding: 24px 16px;
+}

@@ -167,8 +167,25 @@ Page({
     let data = this.data.formData;
     console.log(data)
     createThread(data).then(res => {
-      //
-      console.log(res);
+      if (res.code == 1) {
+        wx.showToast({
+          title: '提交成功',
+          duration: 1000,
+          success: function () {
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }, 1000);
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '提交失败',
+          icon: 'none',
+          duration: 1000
+        })
+      }
     }).catch(error => {
       console.error('提交新帖出现异常,', error);
     })
