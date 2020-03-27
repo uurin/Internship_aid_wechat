@@ -9,8 +9,8 @@
 
   <view class="threadCard" 
         wx:for="{{ collectionsData }}" 
-        wx:key="id" 
-        data-threadid="{{ item.id }}"
+        wx:key="postId" 
+        data-threadid="{{ item.postId }}"
         bindtap="bindTapCard">
     <view class="info">
       <text class="name">{{ item.username }}</text>

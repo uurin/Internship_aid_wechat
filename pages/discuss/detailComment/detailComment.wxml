@@ -55,13 +55,22 @@
         <van-divider customStyle="margin: 0 16px" ></van-divider>
     </view>
 
-    <!-- 输入框 -->
-    <view class="bottom-box">
-        <ThreadOperationBar 
-                  id="commentBar"
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <ThreadOperationBar 
+                  id="replyBar"
                   option="{{ operationBarOptions }}"
                   bindtapInput="bindtapInput"
                   bindtapButtons="bindtapOperationBarButtons">
-        </ThreadOperationBar>
+      </ThreadOperationBar>
     </view>
+
+    <!-- 弹出的输入框 -->
+    <commentInputBox id="replyInputBox"
+                     isShow="{{ isShowInputBox }}"
+                     inputValue="{{ inputValue }}"
+                     promptText="{{ promptText }}"
+                     bindchangeInput="onChangeInput"
+                     bindtapSend="send">
+    </commentInputBox>
 </view>

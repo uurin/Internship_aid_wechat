@@ -97,8 +97,13 @@
     </view>
 
     <!-- 弹出的输入框 -->
-    <commentInputBox isShow="{{ isShowInputBox }}"
-                     inputValue="{{ inputValue }}"></commentInputBox>
+    <commentInputBox id="threadInputBox"
+                     isShow="{{ isShowInputBox }}"
+                     inputValue="{{ inputValue }}"
+                     promptText="{{ promptText }}"
+                     bindchangeInput="onChangeInput"
+                     bindtapSend="send">
+    </commentInputBox>
 
     <!-- 评论的操作菜单 -->
     <van-action-sheet

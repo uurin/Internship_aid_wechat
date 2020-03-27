@@ -96,7 +96,8 @@ page{
 }
 
 
-.bottom-box {
+/* 底部操作栏的总容器 */
+.bottom-bar {
   position: fixed;
   bottom: 0;
   width: 100%;

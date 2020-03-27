@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "ThreadOperationBar": "/components/ThreadOperationBar/ThreadOperationBar",
+    "commentInputBox": "/components/commentInputBox/commentInputBox",
     "van-divider": "/@vant/weapp/divider"
   }
 }

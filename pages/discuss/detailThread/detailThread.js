@@ -27,9 +27,6 @@ Page({
     mainData: [],
     //评论的数据
     commentsData: [],
-    //输入框待发送的内容，和占位内容
-    inputValue: '',
-    placeholder: '写评论...',
     //是否显示评论菜单
     showCommentMenu: false,
     //评论的操作菜单
@@ -53,6 +50,7 @@ Page({
         value: 'detail'
       }
     ],
+
     //当前(操作菜单)操作的评论的实例。
     commentBeingUsed: null,
     //输入框的输入模式，用于区分评论和回复
@@ -63,13 +61,15 @@ Page({
       //按钮列表
       buttons: [
         { icon: 'comment-o', highLight: false, number: 0, bindtap: 'comment' },
-        { icon: 'good-job-o', iconHighLight: 'good-job', highLight: true, number: 0, bindtap: 'like' },
+        { icon: 'good-job-o', iconHighLight: 'good-job', highLight: false, number: 0, bindtap: 'like' },
         { icon: 'star-o', iconHighLight: 'star', highLight: false, number: '', bindtap: 'star' },
         { icon: 'arrow-up', highLight: false, number: '', bindtap: 'arrowUp' }
       ],
       placeholder: '写评论...'
     },
-    //是否隐藏弹出式输入框
+    //输入框待发送的内容
+    inputValue: '',
+    //是否显示弹出式输入框
     isShowInputBox: false
   },
 
@@ -246,52 +246,6 @@ Page({
     })
   },
 
-  //改变输入框内容时改变页面的参数，来自子组件
-  onChangeInput: function(e) {
-    this.setData({
-      inputValue: e.detail.inputValue
-    })
-  },
-
-  //发送评论或回复
-  send: function(e) {
-    if (this.data.inputValue == '') {
-      wx.showToast({
-        title: '请输入内容！',
-        icon: 'none',
-        duration: 1000
-      })
-      return;
-    }
-    if (this.data.inputMode === COMMENT_THREAD_MODE) {
-      //评论帖主
-      let data = {
-        postWho: this.data.listQuery.id,
-        content: this.data.inputValue,
-        files: JSON.stringify(e.detail.imagesList),
-        postType: 0
-      }
-      sendComment(data).then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.error(err);
-      })
-    } else if (this.data.inputMode === REPLY_COMMENT_MODE) {
-      //回复某条评论
-      let data = {
-        postWho: this.data.commentBeingUsed.id,
-        content: this.data.inputValue,
-        files: JSON.stringify(e.detail.imagesList),
-        postType: 1
-      }
-      replyComment(data).then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.error(err);
-      })
-    }
-  },
-
   //帖主的图片预览
   previewMainImg:function(e){
     var imgUrl = e.currentTarget.dataset.src; //获取当前点击的图片
@@ -320,47 +274,33 @@ Page({
     })
   },
 
-  /**
-   * 切换输入框的模式，‘评论帖主’or‘回复某条评论’两种模式
-   * 
-   */
-  switchInputMode: function(mode) {
-    switch(mode) {
-      case COMMENT_THREAD_MODE:  //‘评论帖主’
-        this.setData({
-          placeholder: '写评论...',
-          inputMode: COMMENT_THREAD_MODE
-        })
-        break;
-      case REPLY_COMMENT_MODE: //‘回复某条评论’
-        this.setData({
-          placeholder: '回复@' + this.data.commentBeingUsed.nameString + '：',
-          inputMode: REPLY_COMMENT_MODE
-        })
-        break;
-    }
-  },
-
-
-
-
-
-
-
-
   //点击伪输入框按钮时触发
   bindtapInput: function(e) {
     console.log('按下：' + '输入按钮');
+    this.switchInputMode(COMMENT_THREAD_MODE);
     this.setData({
       isShowInputBox: true
     })
   },
+
   //点击操作栏的按钮组触发事件
   bindtapOperationBarButtons: function(e) {
     console.log('按下：', e.detail);
     let that = this;
     switch(e.detail) {
       case 'arrowUp':
+        //滚动到顶部
+        if (wx.pageScrollTo) {
+          wx.pageScrollTo({
+            scrollTop: 0,
+            duration: 500
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '当前微信版本过低，暂无法使用该功能，请升级后重试。'
+          })
+        }
         break;
       case 'star':
         if (this.data.operationBarOptions.buttons[2].highLight) {
@@ -433,9 +373,10 @@ Page({
               icon: 'none',
               duration: 1000
             });
-            //界面渲染的点赞数+1
+            //界面渲染的点赞数+1，并高亮
             this.setData({
-              'operationBarOptions.buttons[1].number': Number(this.data.operationBarOptions.buttons[1].number) + 1
+              'operationBarOptions.buttons[1].number': Number(this.data.operationBarOptions.buttons[1].number) + 1,
+              'operationBarOptions.buttons[1].highLight': true
             })
             //更新子组件数据
             this.selectComponent("#threadBar").updateData(this.data.operationBarOptions);
@@ -462,5 +403,121 @@ Page({
         })
         break;
     }
+  },
+
+  //改变输入框内容时改变页面的参数，来自子组件
+  onChangeInput: function(e) {
+    this.setData({
+      inputValue: e.detail.inputValue
+    })
+  },
+
+  //发送评论或回复
+  send: function(e) {
+    if (this.data.inputValue == '') {
+      wx.showToast({
+        title: '请输入内容！',
+        icon: 'none',
+        duration: 1000
+      })
+      return;
+    }
+    if (this.data.inputMode === COMMENT_THREAD_MODE) {
+      //评论帖主
+      let data = {
+        postWho: this.data.listQuery.id,
+        content: this.data.inputValue,
+        files: JSON.stringify(e.detail.imagesList),
+        postType: 0
+      }
+      sendComment(data).then(res => {
+        if (res.code == 1) {
+          this.selectComponent("#threadInputBox").clearALl();
+          this.getData();
+          this.setData({
+            inputValue: '',
+            isShowInputBox: false
+          });
+          wx.showToast({
+            title: '评论成功',
+            icon: 'none',
+            duration: 1000
+          })
+        } else {
+          wx.showToast({
+            title: '评论失败',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      }).catch(err => {
+        console.error(err);
+        wx.showToast({
+          title: '评论失败，服务器异常',
+          icon: 'none',
+          duration: 1000
+        })
+      })
+    } else if (this.data.inputMode === REPLY_COMMENT_MODE) {
+      //回复某条评论
+      let data = {
+        postWho: this.data.commentBeingUsed.id,
+        content: this.data.inputValue,
+        files: JSON.stringify(e.detail.imagesList),
+        postType: 1
+      }
+      replyComment(data).then(res => {
+        if (res.code == 1) {
+          this.selectComponent("#threadInputBox").clearALl();
+          this.getData();
+          this.setData({
+            inputValue: '',
+            isShowInputBox: false
+          })
+          wx.showToast({
+            title: '回复成功',
+            icon: 'none',
+            duration: 1000
+          })
+        } else {
+          wx.showToast({
+            title: '回复失败',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      }).catch(err => {
+        console.error(err);
+        wx.showToast({
+          title: '回复失败，服务器异常',
+          icon: 'none',
+          duration: 1000
+        })
+      })
+    }
+  },
+
+  /**
+   * 切换输入框的模式，‘评论帖主’or‘回复某条评论’两种模式
+   * 
+   */
+  switchInputMode: function(mode) {
+    switch(mode) {
+      case COMMENT_THREAD_MODE:  //‘评论帖主’
+        this.selectComponent("#threadInputBox").setPromptText('评论帖主：');
+        this.setData({
+          inputMode: COMMENT_THREAD_MODE
+        })
+        break;
+      case REPLY_COMMENT_MODE: //‘回复某条评论’
+        let promptText = '回复@' + this.data.commentBeingUsed.nameString + '：';
+        this.selectComponent("#threadInputBox").setPromptText(promptText);
+        this.setData({
+          inputMode: REPLY_COMMENT_MODE,
+          isShowInputBox: true
+        })
+        break;
+    }
   }
+
 })

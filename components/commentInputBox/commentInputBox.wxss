@@ -6,3 +6,65 @@
   bottom: 0;
   z-index: 1000;
 }
+
+
+.root .info {
+  width: 100%;
+  display: flex;
+  padding: 10px 0;
+  align-items: center;
+}
+.root .info .text {
+  margin-left: 14px;
+  flex: 1;
+}
+.root .info .buttons {
+  padding-right: 8px;
+}
+.root .info .buttons .btn-icon {
+  padding: 8px;
+  margin: 0 4px;
+  font-size: 18px;
+  height: auto;
+  border-radius: 50px;
+  border: 1px #509fc9; 
+}
+.root .info .buttons .button {
+  padding: 8px 16px;
+  margin: 0 4px;
+  height: auto;
+  border: none;
+  border-radius: 50px;
+  color: #fff;
+  background: #509fc9;
+}
+
+
+.root .input {
+  display: flex;
+}
+.input .textarea-class {
+  display: block;
+  flex: 1;
+  height: 60px;
+  /* max-height: 100px; */
+  /* min-height: 40px; */
+  padding: 6px 8px;
+  margin: 6px;
+  background: #f4f4f4;
+  border-radius: 5px;
+}
+.default-height {
+  height: 60px!important;
+}
+.medium-height {
+  height: 80px!important;
+}
+.max-height {
+  height: 100px!important;
+}
+
+
+.uploader-box {
+  padding: 8px;
+}

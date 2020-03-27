@@ -11,20 +11,21 @@ Page({
     commentData: [],
     //该条评论的id，由上一级页面传入
     commentId: null,
-    inputValue: '',
-    placeholder: '写回复...',
-
 
     //底部操作栏的配置参数
     operationBarOptions: {
       //按钮列表
       buttons: [
         { icon: 'comment-o', highLight: false, number: 0, bindtap: 'comment' },
-        { icon: 'good-job-o', highLight: true, number: 0, bindtap: 'like' },
+        { icon: 'good-job-o', iconHighLight: 'good-job', highLight: false, number: 0, bindtap: 'like' },
         { icon: 'arrow-up', highLight: false, number: '', bindtap: 'arrowUp' }
       ],
-      placeholder: '写评论...'
-    }
+      placeholder: '写回复...'
+    },
+    //输入框待发送的内容
+    inputValue: '',
+    //是否显示弹出式输入框
+    isShowInputBox: false
   },
 
   /**
@@ -141,7 +142,8 @@ Page({
         this.setData({
           commentData: res.result,
           'operationBarOptions.buttons[0].number': res.result.childComments.length,
-          'operationBarOptions.buttons[1].number': res.result.likeNum
+          'operationBarOptions.buttons[1].number': res.result.likeNum,
+          'operationBarOptions.buttons[1].highLight': res.result.isLike,
         })
       }
     }).catch(err => {
@@ -184,39 +186,49 @@ Page({
     })
   },
 
-
-
-
-
-
-
-
-
   //点击伪输入框按钮时触发
   bindtapInput: function (e) {
-    console.log('按下：' + '输入按钮');
+    let promptText = '回复@' + this.data.commentData.nameString + '：';
+    this.selectComponent("#replyInputBox").setPromptText(promptText);
+    this.setData({
+      isShowInputBox: true
+    })
   },
+
   //点击操作栏的按钮组触发事件
   bindtapOperationBarButtons: function (e) {
     console.log('按下：', e.detail);
     let that = this;
     switch (e.detail) {
       case 'arrowUp':
+        //滚动到顶部
+        if (wx.pageScrollTo) {
+          wx.pageScrollTo({
+            scrollTop: 0,
+            duration: 500
+          })
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '当前微信版本过低，暂无法使用该功能，请升级后重试。'
+          })
+        }
         break;
       case 'like':
         likeComment({ id: this.data.commentData.id }).then(res => {
           if (res.code == 1) {
+            //界面渲染的点赞数+1，并高亮
+            this.setData({
+              'operationBarOptions.buttons[1].number': Number(this.data.operationBarOptions.buttons[1].number) + 1,
+              'operationBarOptions.buttons[1].highLight': true
+            })
+            //更新子组件数据
+            this.selectComponent("#replyBar").updateData(this.data.operationBarOptions);
             wx.showToast({
-              title: '点赞成功',
+              title: '点赞该评论成功',
               icon: 'none',
               duration: 1000
             });
-            //界面渲染的点赞数+1
-            this.setData({
-              'operationBarOptions.buttons[1].number': Number(this.data.operationBarOptions.buttons[1].number) + 1
-            })
-            //更新子组件数据
-            this.selectComponent("#thread-bar").updateData(this.data.operationBarOptions);
           } else if (res.code == '-2') {
             wx.showToast({
               title: '已赞过该条评论',
@@ -240,5 +252,61 @@ Page({
         })
         break;
     }
-  }
+  },
+
+  //改变输入框内容时改变页面的参数，来自子组件
+  onChangeInput: function (e) {
+    this.setData({
+      inputValue: e.detail.inputValue
+    })
+  },
+
+  /**
+   * 发送回复
+   */
+  send: function (e) {
+    if (this.data.inputValue == '') {
+      wx.showToast({
+        title: '请输入回复内容！',
+        icon: 'none',
+        duration: 1000
+      })
+      return;
+    }
+    //回复某条评论
+    let data = {
+      postWho: this.data.commentData.id,
+      content: this.data.inputValue,
+      files: JSON.stringify(e.detail.imagesList),
+      postType: 1
+    }
+    replyComment(data).then(res => {
+      if (res.code == 1) {
+        this.selectComponent("#replyInputBox").clearALl();
+        this.getCommentData();
+        this.setData({
+          inputValue: '',
+          isShowInputBox: false
+        })
+        wx.showToast({
+          title: '回复成功',
+          icon: 'none',
+          duration: 1000
+        })
+      } else {
+        wx.showToast({
+          title: '回复失败',
+          icon: 'none',
+          duration: 1000
+        })
+      }
+    }).catch(err => {
+      console.error(err);
+      wx.showToast({
+        title: '回复失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      })
+    })
+  },
 })
