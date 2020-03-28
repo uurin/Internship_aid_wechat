@@ -1,5 +1,4 @@
 // pages/mine/userInfo/userInfo.js
-let util = require('../../../utils/util.js');
 import { userInfo } from '../../../api/mine.js';
 import Dialog from '/@vant/weapp/dialog/dialog';
 
@@ -111,7 +110,10 @@ Page({
       title: '提示',
       message: '是否退出并重新登录？'
     }).then(() => {
-      util.setCache("token", null);
+      wx.setStorageSync("token", null);
+      wx.setStorageSync('userName', null);
+      wx.setStorageSync('id', null);
+      wx.setStorageSync('avatar', null);
       wx.showToast({
         title: '已退出登录',
         icon: 'none',

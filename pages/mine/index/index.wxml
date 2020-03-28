@@ -1,11 +1,11 @@
 <!--pages/mine/index/index.wxml-->
 <view>
   <view class="user-panel" hover-class="user-panel-hover" bindtap="bindTapUserPanel">
-    <image src="../../../images/aa.jpg"/>
+    <image src="{{ avatar }}"/>
     <view>
       <view class="text">
         <text class="title">{{ userName }}</text>
-        <text class="">{{ id }}</text>
+        <text class="subtitle">{{ id }}</text>
       </view>
     </view>
     <van-icon class="arrow" name="arrow" />

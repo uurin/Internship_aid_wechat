@@ -31,7 +31,14 @@ page{
     font-size: 18px;
 }
 
+.user-panel .text .subtitle {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #888888;
+}
+
 .user-panel .arrow {
     position: absolute;
     right: 6%;
+    color: rgb(100, 100, 100);
 }
