@@ -70,7 +70,9 @@ Page({
     //输入框待发送的内容
     inputValue: '',
     //是否显示弹出式输入框
-    isShowInputBox: false
+    isShowInputBox: false,
+    //上拉加载更多的文字信息
+    loadingText: '加载中...'
   },
 
   /**
@@ -117,14 +119,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      'listQuery.pageIndex': 1,
+      'listQuery.pageSize': 10,
+      loadingText: '加载中...'
+    });
+    this.getData(true);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.setData({
+      'listQuery.pageIndex': 1,
+      'listQuery.pageSize': this.data.listQuery.pageSize + 10
+    });
+    this.getData(false)
   },
 
   /**
@@ -135,9 +146,14 @@ Page({
   },
 
   //获取或刷新数据
-  getData: function() {
+  getData: function (isShowToast = false) {
     threadDetail(this.data.listQuery).then(res => {
       if(res.code == 1) {
+        if (res.result.reply.length < 10 || res.result.reply.length === this.data.commentsData.length) {
+          this.setData({
+            loadingText: '没有更多了'
+          })
+        }
         this.setData({
           mainData: res.result.post,
           commentsData: res.result.reply,
@@ -145,12 +161,33 @@ Page({
           'operationBarOptions.buttons[1].number': res.result.post.likeNum,
           'operationBarOptions.buttons[1].highLight': res.result.post.isLike,
           'operationBarOptions.buttons[2].highLight': res.result.post.isCollect
-        })
+        });
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }else{
         console.error('获取帖子详情失败，' + res.describe);
+        wx.showToast({
+          title: '获取信息失败',
+          icon: 'none',
+          duration: 1000
+        });
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }
     }).catch(err => {
       console.error(err);
+      wx.showToast({
+        title: '获取信息失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
     })
   },
 

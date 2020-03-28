@@ -5,7 +5,7 @@
     <text>{{ detailData.date }}</text>
   </view>
 
-  <van-divider contentPosition="center" customStyle=""></van-divider>
+  <van-divider customStyle="margin-left: 12px; margin-right: 12px;"></van-divider>
 
   <view class="title">
     <text>{{ detailData.title }}</text>

@@ -7,11 +7,15 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //查询条件
     listQuery: {
       pageIndex: 1,
       pageSize: 20
     },
-    dataList: []
+    //数据
+    dataList: [],
+    //上拉加载更多的文字信息
+    loadingText: '加载中...'
   },
 
   /**
@@ -53,14 +57,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      'listQuery.pageIndex': 1,
+      'listQuery.pageSize': 20,
+      loadingText: '加载中...'
+    });
+    this.getData(true);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.setData({
+      'listQuery.pageIndex': 1,
+      'listQuery.pageSize': this.data.listQuery.pageSize + 15
+    });
+    this.getData(false)
   },
 
   /**
@@ -71,15 +84,42 @@ Page({
   },
 
   //获取数据
-  getData() {
+  getData(isShowToast = false) {
     weeklyReportList(this.data.listQuery).then(res => {
       if (res.code == 1) {
-        this.setData({
-          dataList: res.result
-        })
+        if (res.result.length < 20 || res.result.length === this.data.dataList.length) {
+          this.setData({
+            loadingText: '没有更多了',
+            dataList: res.result
+          })
+        } else {
+          this.setData({ dataList: res.result });
+        }
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
+      } else {
+        wx.showToast({
+          title: '获取信息失败',
+          icon: 'none',
+          duration: 1000
+        });
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }
     }).catch(err => {
-      console.error(err)
+      console.error(err);
+      wx.showToast({
+        title: '获取信息失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
     })
   },
 

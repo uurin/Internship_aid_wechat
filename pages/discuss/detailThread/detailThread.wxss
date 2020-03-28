@@ -195,3 +195,11 @@ page{
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+
+/* 上拉加载更多 */
+.loading {
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+  color: rgb(133, 133, 133);
+}

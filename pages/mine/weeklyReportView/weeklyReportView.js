@@ -54,7 +54,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getData(true);
   },
 
   /**
@@ -72,18 +72,29 @@ Page({
   },
 
   //获取数据
-  getData() {
+  getData(isShowToast = false) {
     detailWeeklyReport().then(res => {
       if (res.code == 1) {
         this.setData({
           detailData: res.result
         })
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       } else {
         wx.showToast({
           title: '获取信息失败',
           icon: 'none',
           duration: 1000
-        })
+        });
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }
     }).catch(err => {
       console.error(err);

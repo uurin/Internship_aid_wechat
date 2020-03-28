@@ -10,7 +10,7 @@ Page({
   data: {
     listQuery: {
       pageIndex: 1,
-      pageSize: 40,
+      pageSize: 20,
       scope: 1,  //无关紧要，1代表查询用户自己
       postType: 0
     },
@@ -18,7 +18,9 @@ Page({
     //下拉菜单配置
     menuOption: [],
     //下拉菜单选中值
-    menuValue: 0
+    menuValue: 0,
+    //上拉加载更多的文字信息
+    loadingText: '加载中...'
   },
 
   /**
@@ -66,14 +68,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      'listQuery.pageIndex': 1,
+      'listQuery.pageSize': 10,
+      loadingText: '加载中...'
+    });
+    this.getData(true);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.setData({
+      'listQuery.pageIndex': 1,
+      'listQuery.pageSize': this.data.listQuery.pageSize + 10
+    });
+    this.getData(false)
   },
 
   /**
@@ -109,7 +120,7 @@ Page({
   },
 
   //
-  getData: function() {
+  getData: function (isShowToast = false) {
     let data = this.data.listQuery;
     myThreadsCollection(data).then(res => {
       if(res.code == 1) {
@@ -118,16 +129,39 @@ Page({
         result.forEach((item, index) => {
           item.date = item.date.split(' ')[0]
         });
-        this.setData({
+        if (result.length < 20 || result.length === this.data.collectionsData.length) {
+          this.setData({
+            loadingText: '没有更多了',
           collectionsData: result
-        })
+          })
+        } else {
+          this.setData({ collectionsData: result })
+        }
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }else {
         wx.showToast({
           title: '获取信息失败',
-        })
+          icon: 'none',
+          duration: 1000
+        });
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }
     }).catch(err => {
-      console.error(err)
+      console.error(err);
+      wx.showToast({
+        title: '获取信息失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
     })
   },
 

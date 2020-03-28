@@ -1,6 +1,8 @@
 {
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "首页",
   "usingComponents": {
-    "gridBtn": "/components/gridBtn/gridBtn",
     "van-divider": "/@vant/weapp/divider"
   }
 }

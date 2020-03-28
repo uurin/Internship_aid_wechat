@@ -1,4 +1,7 @@
 {
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "讨论",
   "usingComponents": {
     "threadCard": "/components/threadCard/threadCard",
     "van-dropdown-menu": "/@vant/weapp/dropdown-menu",

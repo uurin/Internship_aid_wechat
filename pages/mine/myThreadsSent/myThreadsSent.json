@@ -1,4 +1,7 @@
 {
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "我发出的讨论帖",
   "usingComponents": {
     "van-dropdown-menu": "/@vant/weapp/dropdown-menu",
     "van-dropdown-item": "/@vant/weapp/dropdown-item"

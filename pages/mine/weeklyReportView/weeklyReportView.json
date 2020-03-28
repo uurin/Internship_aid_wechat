@@ -1,4 +1,7 @@
 {
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "周记详情",
   "usingComponents": {
     "van-field": "/@vant/weapp/field",
     "van-cell": "/@vant/weapp/cell",

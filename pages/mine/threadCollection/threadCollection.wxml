@@ -19,6 +19,9 @@
     <text class="title">{{ item.title }}</text>
   </view>
 
-  <view wx:if="{{ collectionsData.length == 0 }}" class="text-without">暂无</view>
+  <!-- 上拉加载更多 -->
+  <view class="loading" >
+    <text size="24px">{{ loadingText }}</text>
+  </view>
 
 </view>

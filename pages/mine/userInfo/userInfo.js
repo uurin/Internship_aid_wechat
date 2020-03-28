@@ -16,7 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getUserInfo();
+    if (this.data.userInfo == null ) {
+      this.getUserInfo();
+    }
   },
 
   /**
@@ -51,7 +53,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getUserInfo(true);
   },
 
   /**
@@ -69,21 +71,37 @@ Page({
   },
 
   //获取用户信息
-  getUserInfo: function() {
+  getUserInfo: function (isShowToast = false) {
     userInfo().then(res => {
       if(res.code == 1) {
         this.setData({
           userInfo: res.result
-        })
+        });
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }else {
         wx.showToast({
           title: '获取信息失败',
           icon: 'none',
           duration: 1000
         });
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
       }
     }).catch(err => {
-      console.error(err)
+      console.error(err);
+      wx.showToast({
+        title: '获取信息失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
     })
   },
 

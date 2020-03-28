@@ -29,6 +29,7 @@
     />
   </van-cell-group>
 
+  <!-- 签到按钮 -->
   <view class="container-checkIn">
     <view class="btn-checkIn {{ isCheckedIn ? 'style-checkedIn' : 'style-uncheckedIn' }}" 
           bindtap="tapCheckIn">

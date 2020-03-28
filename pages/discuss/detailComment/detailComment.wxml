@@ -73,4 +73,10 @@
                      bindchangeInput="onChangeInput"
                      bindtapSend="send">
     </commentInputBox>
+
+    <!-- 上拉加载更多 -->
+    <view class="loading">
+      <text size="24px">{{ loadingText }}</text>
+    </view>
+
 </view>

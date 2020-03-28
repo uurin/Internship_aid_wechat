@@ -12,7 +12,14 @@
     </view>
   </view>
   
+  <!-- 浮动按钮 -->
   <view class="float-btn" bindtap="addNew">
     <image src="../../../images/icons/edit_quill.png" />
   </view>
+
+  <!-- 上拉加载更多 -->
+  <view class="loading" >
+    <text size="24px">{{ loadingText }}</text>
+  </view>
+
 </view>

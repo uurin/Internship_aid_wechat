@@ -25,7 +25,9 @@ Page({
     //输入框待发送的内容
     inputValue: '',
     //是否显示弹出式输入框
-    isShowInputBox: false
+    isShowInputBox: false,
+    //上拉加载更多的文字信息
+    loadingText: '加载中...'
   },
 
   /**
@@ -72,14 +74,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.setData({
+      // 'listQuery.pageIndex': 1,
+      // 'listQuery.pageSize': 10,
+      loadingText: '加载中...'
+    });
+    this.getCommentData(true);
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    // this.setData({
+    //   'listQuery.pageIndex': 1,
+    //   'listQuery.pageSize': this.data.listQuery.pageSize + 10
+    // });
+    this.getCommentData(false)
   },
 
   /**
@@ -136,18 +147,43 @@ Page({
   },
 
   //获取评论数据
-  getCommentData: function() {
+  getCommentData: function (isShowToast = false) {
     commentDetail({ id: this.data.commentId }).then(res => {
       if (res.code == 1) {
+        if (res.result.childComments.length < 10 || isReachBottom && res.result.childComments.length === this.data.commentData.childComments.length) {
+          this.setData({
+            loadingText: '没有更多了'
+          })
+        }
         this.setData({
           commentData: res.result,
           'operationBarOptions.buttons[0].number': res.result.childComments.length,
           'operationBarOptions.buttons[1].number': res.result.likeNum,
           'operationBarOptions.buttons[1].highLight': res.result.isLike,
-        })
+        });
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
+      } else {
+        wx.showToast({
+          title: '获取信息失败',
+          icon: 'none',
+          duration: 1000
+        });
       }
     }).catch(err => {
-      console.error(err)
+      console.error(err);
+      wx.showToast({
+        title: '获取信息失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
     })
   },
 

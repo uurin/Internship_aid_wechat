@@ -54,7 +54,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getIsCheckedIn(true);
   },
 
   /**
@@ -178,21 +178,47 @@ Page({
   },
 
   //判断今天是否已经签到过
-  getIsCheckedIn: function() {
+  getIsCheckedIn: function (isShowToast = false) {
     isCheckedIn().then(res => {
       if(res.result == 'true') {
         this.setData({
           isCheckedIn: true
         });
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
       } else if (res.result == 'false') {
         this.setData({
           isCheckedIn: false
         });
-      }else {
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      } else {
         console.log("获取今天的签到情况失败," + res.describe);
+        wx.showToast({
+          title: '获取信息失败',
+          icon: 'none',
+          duration: 1000
+        });
       }
+      // 停止下拉动作
+      wx.stopPullDownRefresh();
     }).catch(error => {
       console.error(error);
+      wx.showToast({
+        title: '获取信息失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
     });
   },
 
