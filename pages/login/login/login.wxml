@@ -1,47 +1,56 @@
 <!--pages/login/login/login.wxml-->
 <view>
-    <van-cell-group>
-        <van-field
-                value="{{ formData.id }}"
-                label="用户名"
-                placeholder="请输入用户名"
-                bind:change="onChangeId"
-                clearable
-        />
 
-        <van-field
-                value="{{ formData.pass }}"
-                type="password"
-                label="密码"
-                placeholder="请输入密码"
-                bind:change="onChangePassword"
-                clearable
-        />
+    <view class="wellcome-box">
+      <text>登陆账号</text>
+    </view>
 
-        <van-field
-                value="{{ formData.code }}"
-                placeholder="请输入验证码"
-                bind:change="onChangeCode">
-            <view slot="label" style="margin-top: -6px;">
-                <text >
-                    验证码
-                </text>
-            </view>
-            <van-image
-                    slot="button"
-                    width="6rem"
-                    height="3rem"
-                    fit="contain"
-                    src="{{codeSrc}}"
-                    bindtap="refreshCode"
+    <view class="form">
+
+        <van-cell-group>
+            <van-field
+                    value="{{ formData.id }}"
+                    label="学号"
+                    placeholder="请输入学号"
+                    bind:change="onChangeId"
+                    clearable
             />
 
-        </van-field>
-    </van-cell-group>
+            <van-field
+                    value="{{ formData.pass }}"
+                    type="password"
+                    label="密码"
+                    placeholder="请输入密码"
+                    bind:change="onChangePassword"
+                    clearable
+            />
 
-    <view class="buttons">
-        <van-button custom-class="button" type="info" block bindtap="login">登陆</van-button>
-        <van-button custom-class="button" type="default" block plain>注册</van-button>
+            <van-field
+                    value="{{ formData.code }}"
+                    border="{{ false }}"
+                    placeholder="请输入验证码"
+                    bind:change="onChangeCode">
+                <view slot="label" style="margin-top: -6px;">
+                    <text >
+                        验证码
+                    </text>
+                </view>
+                <van-image
+                        slot="button"
+                        width="6rem"
+                        height="3rem"
+                        fit="contain"
+                        src="{{codeSrc}}"
+                        bindtap="refreshCode"
+                />
+
+            </van-field>
+        </van-cell-group>
+
+        <view class="buttons">
+            <van-button color="#509fc9" custom-class="btn-login" type="info" block bindtap="login" round>登陆</van-button>
+            <van-button custom-class="btn-register" type="default" bindtap="tapRegister" block plain round>未注册？立即注册></van-button>
+        </view>
     </view>
 
 </view>

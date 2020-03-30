@@ -1,6 +1,5 @@
-// pages/login/login/login.js
-import { login, getVerifyCodeSrc } from '../../../api/login.js';
-let util = require('../../../utils/util.js');
+// pages/login/register/register.js
+import { register, getVerifyCodeSrc } from '../../../api/login.js';
 
 Page({
 
@@ -10,7 +9,9 @@ Page({
   data: {
     formData: {
       id: '',
-      pass: '',
+      name: '',
+      password: '',
+      passwordAgain: '',
       code: ''
     },
     //验证码图片链接
@@ -73,16 +74,26 @@ Page({
 
   },
 
-  //id账号的输入监听
+  //学号的输入监听
   onChangeId(event) {
     this.data.formData.id = event.detail;
   },
 
-  //密码的输入监听
-  onChangePassword(event) {
-    this.data.formData.pass = event.detail;
+  //姓名的输入监听
+  onChangeName(event) {
+    this.data.formData.name = event.detail;
   },
 
+  //密码的输入监听
+  onChangePassword(event) {
+    this.data.formData.password = event.detail;
+  },
+
+  //第二次密码的输入监听
+  onChangePasswordAgain(event) {
+    this.data.formData.passwordAgain = event.detail;
+  },
+  
   //密码的输入监听
   onChangeCode(event) {
     this.data.formData.code = event.detail;
@@ -97,9 +108,30 @@ Page({
         duration: 1500
       });
       return false;
-    } else if (this.data.formData.pass == '') {
+    } else if (this.data.formData.name == '') {
+      wx.showToast({
+        title: '姓名不能为空',
+        icon: 'none',
+        duration: 1500
+      });
+      return false;
+    } else if (this.data.formData.password == '') {
       wx.showToast({
         title: '密码不能为空',
+        icon: 'none',
+        duration: 1500
+      });
+      return false;
+    } else if (this.data.formData.passwordAgain == '') {
+      wx.showToast({
+        title: '密码不能为空',
+        icon: 'none',
+        duration: 1500
+      });
+      return false;
+    } else if (this.data.formData.passwordAgain != this.data.formData.password) {
+      wx.showToast({
+        title: '两次密码不一致',
         icon: 'none',
         duration: 1500
       });
@@ -115,64 +147,42 @@ Page({
     return true;
   },
 
-  //登陆
-  login: function () {
-    //检查输入信息的格式
-    if ( ! this.checkInput() ) {
-      return;
-    }
-    let data = {
-      username: this.data.formData.id,
-      password: this.data.formData.pass,
-      vrifyCode: this.data.formData.code,
-    };
-    login(data).then(res => {
-      console.log(res)
-      if (res.code == 1) {
-        //保存token
-        util.setCache('token', res.result);
-        wx.showToast({
-          title: '登陆成功',
-          icon: 'success',
-          duration: 2000, 
-          success: function () {
-            setTimeout(function () {
-              wx.navigateBack({
-                delta: 1,
-              })
-            }, 1000);
-          }
-        })
-      } else if (res.code == -1) {
-        wx.showToast({
-          title: '密码错误',
-          icon: 'none',
-          duration: 2000
-        })
-      } else if (res.code == -2) {
-        wx.showToast({
-          title: '账号不存在',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    }).catch(e => {
-      console.log(e)
-    })
-  },
-
   //刷新验证码
   refreshCode: function () {
     this.setData({
       //利用时间戳使得刷新后的src不会重复
-      codeSrc : getVerifyCodeSrc() + '?timestamp=' + Date.parse(new Date())
+      codeSrc: getVerifyCodeSrc() + '?timestamp=' + Date.parse(new Date())
     });
     console.log(this.data.codeSrc)
   },
 
+  //提交注册
   tapRegister: function() {
-    wx.navigateTo({
-      url: '../register/register',
+    if ( ! this.checkInput()) {
+      return;
+    }
+    register(this.formData).then(res => {
+      if (res.code == 1) {
+        //
+        wx.showToast({
+          title: '注册成功',
+          icon: 'success',
+          duration: 1500
+        })
+      } else {
+        wx.showToast({
+          title: '提交失败，' + res.describe,
+          icon: 'none',
+          duration: 1500
+        })
+      }
+    }).catch(err => {
+      console.error(err);
+      wx.showToast({
+        title: '提交失败，服务异常',
+        icon: 'none',
+        duration: 1500
+      })
     })
   }
 })

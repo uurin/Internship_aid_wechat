@@ -1,8 +1,24 @@
 /* pages/login/login/login.wxss */
 .buttons {
-    padding: 10px 4%;
+  padding: 10px 4%;
 }
 
-.buttons .button {
-    margin: 10px 0;
+.buttons .btn-login {
+  margin: 10px 0;
+}
+
+.buttons .btn-register {
+  color: #509fc9;
+  margin: 10px 0;
+}
+
+.wellcome-box {
+  padding: 2rem;
+  font-size: 20px;
+  text-align: center;
+  color: rgb(70, 70, 70);
+}
+
+.form {
+  padding: 16px;
 }

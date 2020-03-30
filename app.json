@@ -15,7 +15,9 @@
     "pages/mine/myThreadsSent/myThreadsSent",
     "pages/mine/weeklyReport/weeklyReport",
     "pages/mine/addWeeklyReport/addWeeklyReport",
-    "pages/mine/weeklyReportView/weeklyReportView"
+    "pages/mine/weeklyReportView/weeklyReportView",
+    "pages/login/register/register",
+    "pages/discuss/hotThreads/hotThreads"
   ],
   "permission": {
     "scope.userLocation": {
@@ -54,13 +56,10 @@
     ]
   },
   "usingComponents": {
-    "van-button": "@vant/weapp/button",
-    "van-tabbar": "/@vant/weapp/tabbar",
-    "van-tabbar-item": "/@vant/weapp/tabbar-item",
-    "van-search": "/@vant/weapp/search",
-    "van-grid": "/@vant/weapp/grid",
-    "van-grid-item": "/@vant/weapp/grid-item",
-    "van-icon": "/@vant/weapp/icon",
-    "van-image": "/@vant/weapp/image"
+    "van-button": "/miniprogram_npm/@vant/weapp/button/index",
+    "van-grid": "/miniprogram_npm/@vant/weapp/grid/index",
+    "van-grid-item": "/miniprogram_npm/@vant/weapp/grid-item/index",
+    "van-icon": "/miniprogram_npm/@vant/weapp/icon/index",
+    "van-image": "/miniprogram_npm/@vant/weapp/image/index"
   }
 }

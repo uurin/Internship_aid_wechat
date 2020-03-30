@@ -1,0 +1,66 @@
+<!--pages/login/register/register.wxml-->
+<view class="register">
+
+  <view class="top-box">
+    <text>注册账号</text>
+  </view>
+
+  <view class="form">
+    <van-cell-group>
+        <van-field
+                value="{{ formData.id }}"
+                label="学号"
+                placeholder="请输入学号"
+                bind:change="onChangeId"
+                clearable
+        />
+        <van-field
+                value="{{ formData.name }}"
+                label="姓名"
+                placeholder="请输入姓名"
+                bind:change="onChangeName"
+                clearable
+        />
+        <van-field
+                value="{{ formData.password }}"
+                label="密码"
+                placeholder="请输入密码"
+                bind:change="onChangePassword"
+                type="password"
+                clearable
+        />
+        <van-field
+                value="{{ formData.passwordAgain }}"
+                label="确认密码"
+                placeholder="请再次输入密码"
+                bind:change="onChangePasswordAgain"
+                type="password"
+                clearable
+        />
+        <van-field
+                value="{{ formData.code }}"
+                border="{{ false }}"
+                placeholder="请输入验证码"
+                bind:change="onChangeCode">
+            <view slot="label" style="margin-top: -6px;">
+                <text >
+                    验证码
+                </text>
+            </view>
+            <van-image
+                    slot="button"
+                    width="6rem"
+                    height="3rem"
+                    fit="contain"
+                    src="{{codeSrc}}"
+                    bindtap="refreshCode"
+            />
+        </van-field>
+    </van-cell-group>
+
+    <view class="buttons">
+        <van-button color="#509fc9" custom-class="btn-register" type="info" block bindtap="tapRegister" round>提交注册</van-button>
+    </view>
+  </view>
+
+</view>
