@@ -1,8 +1,12 @@
 {
   "navigationBarTitleText": "个人中心",
   "usingComponents": {
-    "van-cell": "/@vant/weapp/cell",
-    "van-cell-group": "/@vant/weapp/cell-group",
-    "van-icon": "/@vant/weapp/icon"
+    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
+    "van-cell-group": "/miniprogram_npm/@vant/weapp/cell-group/index",
+    "van-button": "/miniprogram_npm/@vant/weapp/button/index",
+    "van-grid": "/miniprogram_npm/@vant/weapp/grid/index",
+    "van-grid-item": "/miniprogram_npm/@vant/weapp/grid-item/index",
+    "van-icon": "/miniprogram_npm/@vant/weapp/icon/index",
+    "van-image": "/miniprogram_npm/@vant/weapp/image/index"
   }
 }

@@ -10,7 +10,46 @@ Page({
   data: {
     userName: '未登录',
     id: '',
-    avatar: ''
+    avatar: '',
+    //网格按钮的配置
+    gridBtnList: [
+      {
+        text: "我的讨论",
+        backgroundColor: "#87c38f",
+        src: "/images/tabbar/discuss.png",
+        url: "/pages/mine/myThreadsSent/myThreadsSent"
+      },
+      {
+        text: "我的收藏",
+        backgroundColor: "#8aa4c7",
+        src: "/images/icons/star.png",
+        url: "/pages/mine/threadCollection/threadCollection"
+      },
+      {
+        text: "浏览记录",
+        backgroundColor: "#c78a8a",
+        src: "/images/icons/history.png",
+        url: "/pages/mine/history/history"
+      },
+      {
+        text: "我的周记",
+        backgroundColor: "#c78a8a",
+        src: "/images/icons/node.png",
+        url: "/pages/mine/weeklyReport/weeklyReport"
+      },
+      {
+        text: "签到记录",
+        backgroundColor: "#c78a8a", 
+        src: "/images/icons/check_in.png",
+        url: "/pages/home/checkInRecord/checkInRecord"
+      },
+      {
+        text: "投诉建议",
+        backgroundColor: "#c78a8a",
+        src: "/images/icons/feedback.png",
+        url: "/pages/mine/feedback/feedback"
+      }
+    ],
   },
 
   /**
@@ -145,5 +184,12 @@ Page({
       })
     }
 
+  },
+
+  //网格按钮点击事件
+  bindGridBtnTap: function (event) {
+    wx.navigateTo({
+      url: event.currentTarget.dataset.url
+    })
   }
 })

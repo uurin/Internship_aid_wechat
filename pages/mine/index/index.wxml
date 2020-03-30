@@ -11,10 +11,25 @@
     <van-icon class="arrow" name="arrow" />
   </view>
 
+  <view class="gridBtn">
+    <van-grid column-num="4" border="{{ false }}" clickable gutter="{{ 0 }}" >
+      <van-grid-item use-slot
+                     wx:for="{{ gridBtnList }}"
+                     wx:for-item="item"
+                     data-url="{{ item.url }}"
+                     bindtap="bindGridBtnTap">
+        <image class="grid-icon"
+               src="{{item.src}}"
+        />
+        <text class="grid-text">{{item.text}}</text>
+      </van-grid-item>
+    </van-grid>
+  </view>
+  
   <view>
     <van-cell-group title=" ">
-      <van-cell size="large" title="我发出的讨论帖" is-link link-type="navigateTo" url="/pages/mine/myThreadsSent/myThreadsSent"/>
-      <van-cell size="large" title="我的收藏帖" is-link link-type="navigateTo" url="/pages/mine/threadCollection/threadCollection"/>
+      <van-cell size="large" title="我发出的讨论" is-link link-type="navigateTo" url="/pages/mine/myThreadsSent/myThreadsSent"/>
+      <van-cell size="large" title="我的收藏" is-link link-type="navigateTo" url="/pages/mine/threadCollection/threadCollection"/>
       <van-cell size="large" title="签到记录" is-link link-type="navigateTo" url="/pages/home/checkInRecord/checkInRecord"/>
       <van-cell size="large" title="我的周记" is-link link-type="navigateTo" url="/pages/mine/weeklyReport/weeklyReport"/>
     </van-cell-group>
@@ -25,4 +40,6 @@
       <van-cell size="large" title="投诉建议" is-link />
     </van-cell-group>
   </view>
+
+
 </view>
