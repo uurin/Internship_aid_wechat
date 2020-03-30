@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "热门讨论",
+  "usingComponents": {
+    "threadCard": "/components/threadCard/threadCard",
+    "van-dropdown-menu": "/@vant/weapp/dropdown-menu",
+    "van-dropdown-item": "/@vant/weapp/dropdown-item"
+  }
+}

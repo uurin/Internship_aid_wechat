@@ -18,6 +18,11 @@ export function allThreads(data) {
   return api._post('/forum/selectPost', data)
 }
 
+//获取热门讨论帖列表
+export function hotThreads(data) {
+  return api._get('/forum/selectHotPost', data)
+}
+
 //发新帖
 export function createThread(data) {
   return api._post('/forum/createPostByPic', data)

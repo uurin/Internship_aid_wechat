@@ -1,0 +1,24 @@
+<!--pages/discuss/hotThreads/hotThreads.wxml-->
+<view>
+  <threadCard
+          wx:for="{{ threadListData }}"
+          wx:for-item="item"
+          wx:key="id"
+          my-class="my-class"
+          threadId="{{ item.id }}"
+          userName="{{ item.nameString }}"
+          avatar="{{ item.headPortrait }}"
+          date="{{ item.date }}"
+          thumbsUps="{{ item.likeNum }}"
+          comments="{{ item.comment }}"
+          title="{{ item.title }}"
+          content="{{ item.content }}"
+          images="{{ item.realFile }}"
+  ></threadCard>
+
+  <!-- 上拉加载更多 -->
+  <view class="loading">
+    <text size="24px">{{ loadingText }}</text>
+  </view>
+  
+</view>
