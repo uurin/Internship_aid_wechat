@@ -12,14 +12,20 @@
         wx:key="id" 
         data-threadid="{{ item.id }}"
         bindtap="bindTapCard">
+    <text class="title">{{ item.title }}</text>
+    <text class="content">{{ item.content }}</text>
     <view class="info">
-      <text class="name">{{ item.username }}</text>
+      <view class="icon-group">
+        <van-icon custom-class="icon" class="icon" name="good-job-o" />
+        <text>{{ item.likeNum }}</text>
+      </view>
+      <view class="icon-group">
+        <van-icon custom-class="icon" class="icon" name="comment-o" />
+        <text>{{ item.comment }}</text>
+      </view>
       <text class="time">{{ item.date }}</text>
     </view>
-    <text class="title">{{ item.title }}</text>
   </view>
-
-  <view wx:if="{{ threadsData.length == 0 }}" class="text-without">暂无</view>
 
   <!-- 上拉加载更多 -->
   <view class="loading" >

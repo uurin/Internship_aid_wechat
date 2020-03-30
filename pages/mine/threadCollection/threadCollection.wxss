@@ -4,40 +4,62 @@ page{
 }
 
 .threadCard {
-    padding: 16px;
-    margin: 4px 0;
+    padding: 14px 14px 10px;
     background-color: #fff;
+    margin: 12px 8px;
+    box-shadow: 0 8px 12px #ebedf0;
+    border-radius: 4px;
 }
 .info {
     width: 100%;
-    margin-bottom: 6px;
     display: flex;
     flex-direction: row;
     align-items: center;
+    font-size: 14px;
+    color: #9b9b9b;
+}
+.info .icon-group {
+    margin-right: 8px;
+}
+.icon-group .icon{
+    position: relative;
+    top: 1px;
+}
+.icon-group text{
+    margin-left: 2px;
+}
+.info .avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
 }
 .info .name {
-    display: block;
-    font-size: 16px;
-    color: #000;
+    margin-left: 2px;
 }
 .info .time {
-    color: #9b9b9b;
-    font-size: 14px;
     position: absolute;
     right: 20px;
 }
 .title {
     display: block;
-    font-size: 14px;
-    color: #696969;
+    font-size: 17px;
+    color: #2b2b2b;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
-
-.text-without {
-  font-size: 16px;
-  color: #8d8d8d;
-  display: block;
-  text-align: center;
-  margin: 4rem 0
+.content {
+    display: block;
+    margin: 2px 0 8px 2px;
+    font-size: 15px;
+    color: #777777;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 /* 上拉加载更多 */

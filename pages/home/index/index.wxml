@@ -1,15 +1,5 @@
 <!--index.wxml-->
 <view class="">
-  <!-- <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view> -->
 
   <swiper class='swiper-index' indicator-dots='true' autoplay='true' interval='4000'>
       <swiper-item><image src='../../../images/a.jpg'></image></swiper-item>
@@ -34,13 +24,19 @@
 
   <view class="popularCard">
     <view class="cardHeader">
-      <text class="cardTitle">热门讨论</text>
-      <van-icon name="arrow" />
+      <view class="left">
+        <van-icon name="fire" color="#ff0055"/>
+        <text class="text">热门讨论</text>
+      </view>
+      <view class="right" bindtap="tapMoreHotThreads">
+        <text class="text">查看全部</text>
+        <van-icon name="arrow" />
+      </view>
     </view>
-    <view wx:for="{{ 3 }}">
+    <view wx:for="{{ hotThreadList }}" wx:key="id">
       <view class="item">
-        <text class="title">谁能帮我整一个内推？</text>
-        <text class="time">2020-01-01 22:33</text>
+        <text class="title">{{ item.title }}</text>
+        <text class="time">{{ item.date }}</text>
       </view>
       <van-divider customStyle="margin: 8px 0" ></van-divider>
     </view>

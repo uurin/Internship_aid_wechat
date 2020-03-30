@@ -5,6 +5,7 @@
   "usingComponents": {
     "threadCard": "/components/threadCard/threadCard",
     "van-dropdown-menu": "/@vant/weapp/dropdown-menu",
-    "van-dropdown-item": "/@vant/weapp/dropdown-item"
+    "van-dropdown-item": "/@vant/weapp/dropdown-item",
+    "van-search": "/miniprogram_npm/@vant/weapp/search/index"
   }
 }

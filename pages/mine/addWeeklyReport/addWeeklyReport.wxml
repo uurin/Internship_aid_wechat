@@ -26,6 +26,6 @@
   </view>
 
   <view class="btn-submit">
-    <van-button bindtap="submitForm" type="info" block>添加</van-button>
+    <van-button color="#509fc9" bindtap="submitForm" type="info" block>添加</van-button>
   </view>
 </view>

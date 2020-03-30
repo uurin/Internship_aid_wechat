@@ -1,14 +1,16 @@
 //index.js
+import { hotThreads } from '../../../api/home.js';
+
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     active: 'home',
+    //网格按钮的配置
     gridBtnList: [
       {
         text: "签到",
@@ -28,13 +30,22 @@ Page({
         src: "/images/icons/check_in_light.png",
         url: "/pages/discuss/index/index"
       }
-    ]
+    ],
+    //热门帖的查询条件
+    listQueryHotThread: {
+      pageIndex: 1,
+      pageSize: 4
+    },
+    //热门讨论帖列表
+    hotThreadList: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    //获取数据
+    this.getData();
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -60,6 +71,15 @@ Page({
           })
         }
       })
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    if (this.data.hotThreadList.length == 0) {
+      this.getData();
     }
   },
 
@@ -101,6 +121,42 @@ Page({
 
   //获取各个数据
   getData(isShowToast = false) {
-    //
+    hotThreads(this.data.listQueryHotThread).then(res => {
+      if (res.code == 1) {
+        this.setData({
+          hotThreadList: res.result
+        })
+        if (isShowToast) {
+          wx.showToast({
+            title: '刷新成功',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
+      } else {
+        wx.showToast({
+          title: '获取信息失败',
+          icon: 'none',
+          duration: 1000
+        });
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
+      }
+    }).catch(err => {
+      console.error(err);
+      wx.showToast({
+        title: '获取信息失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
+    })
+  },
+
+  tapMoreHotThreads: function() {
+    wx.navigateTo({
+      url: '/pages/discuss/hotThreads/hotThreads',
+    })
   }
 })

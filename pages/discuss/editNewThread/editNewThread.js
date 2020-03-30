@@ -155,6 +155,9 @@ Page({
 
   //提交
   submitForm: function (e) {
+    if (! this.checkInput()) {
+      return;
+    }
     //先将图片选择组件里的图片array转换格式，并格式化成字符串形式，再存入表单
     let cacheFilelist = [];
     this.data.fileList.forEach((item, index) => {
@@ -189,5 +192,16 @@ Page({
     }).catch(error => {
       console.error('提交新帖出现异常,', error);
     })
+  },
+
+  checkInput: function() {
+    if (this.data.formData.title == '') {
+      wx.showToast({
+        title: '请输入标题',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
   }
 })

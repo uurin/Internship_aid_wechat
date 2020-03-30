@@ -32,10 +32,29 @@ page{
 
 .popularCard {
   background: #fff;
-  padding: 16px;
+  padding: 14px 16px;
 }
 .popularCard .cardHeader {
   margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+.popularCard .cardHeader .left {
+  display: inline-block;
+  flex: 1;
+}
+.popularCard .cardHeader .left .text{
+  margin-left: 4px;
+}
+.popularCard .cardHeader .right {
+  color: #696969;
+  padding: 4px 0 4px 8px;
+  display: flex;
+  align-items: center;
+}
+.popularCard .cardHeader .right .text{
+  color: #7e7e7e;
+  font-size: 14px;
 }
 .popularCard .title{
   font-size: 16px;
