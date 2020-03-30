@@ -3,17 +3,90 @@
 
   <view>
     <van-cell-group title="基本信息">
-      <van-cell value="{{ userInfo.nameString }}" size="large" title="用户名" is-link />
-      <van-cell value="{{ userInfo.sexString }}" size="large" title="性别" is-link />
-      <van-cell value="{{ userInfo.username }}" size="large" title="学号" is-link />
-      <van-cell value="{{ userInfo.majorString }}" size="large" title="所学专业" is-link />
-      <van-cell value="{{ userInfo.gradeString }}" size="large" title="年级" is-link />
-      <van-cell value="{{ userInfo.personality }}" size="large" title="个性签名" is-link />
+      <van-cell title="头像" size="large" custom-class="cell-avatar" clickable >
+        <view class="avatar-right">
+          <image src="{{ userInfo.headPortrait }}" slot="right-icon" class="avatar-icon" is-link></image>
+          <van-icon name="arrow" />
+        </view>
+      </van-cell>
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.nameString }}" 
+                size="large" 
+                data-mark="userName" 
+                data-field="姓名"
+                title="姓名" 
+                is-link />
+      <van-cell 
+                value="{{ userInfo.username }}" 
+                size="large" 
+                data-mark="id" 
+                title="学号" />
+      <van-cell 
+                bind:click="bindclickSexCell" 
+                value="{{ userInfo.sexString }}" 
+                size="large" 
+                data-mark="sex"
+                title="性别" 
+                is-link />
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.ageString }}" 
+                size="large" 
+                data-mark="age" 
+                title="年龄" 
+                is-link />
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.gradeString }}" 
+                size="large" 
+                data-field="年级"
+                data-mark="grade" 
+                title="年级" 
+                is-link />
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.majorString }}" 
+                size="large" 
+                data-field="所学专业"
+                data-mark="major" 
+                title="所学专业" 
+                is-link />
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.classString }}" 
+                size="large" 
+                data-mark="class"
+                data-field="班级" 
+                title="班级" 
+                is-link />
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.personality }}" 
+                size="large" 
+                data-mark="signature" 
+                data-field="个性签名"
+                title="个性签名" 
+                is-link />
     </van-cell-group>
 
     <van-cell-group title="就职信息">
-      <van-cell value="{{ userInfo.company }}" size="large" title="就职公司" is-link />
-      <van-cell value="{{ userInfo.companyPosition }}" size="large" title="公司地址" is-link />
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.company }}" 
+                size="large" 
+                data-mark="company" 
+                data-field="就职公司"
+                title="就职公司" 
+                is-link />
+      <van-cell 
+                bind:click="bindclickGenericCell" 
+                value="{{ userInfo.companyPosition }}" 
+                size="large" 
+                data-mark="companyAddress" 
+                data-field="公司地址"
+                title="公司地址" 
+                is-link />
     </van-cell-group>
 
     <van-cell-group title=" ">
@@ -22,5 +95,63 @@
   </view>
 
   <van-dialog id="van-dialog" />
+
+  <!-- 通用版的修改信息的输入弹框 -->
+  <van-dialog
+    use-slot
+    title="{{ genericDialogOption.title }}"
+    show="{{ genericDialogOption.isShow }}"
+    show-cancel-button
+    show-confirm-button="{{ genericDialogOption.isShowConfirm }}"
+    bind:confirm="onComfirmGenericDialog"
+    bind:cancel="onCancelGenericDialog"
+    bind:close="onCloseGenericDialog"
+    async-close="{{ true }}"
+  >
+    <view class="generic-dialog">
+      <van-field
+        value="{{ genericDialogOption.inputValue }}"
+        placeholder="{{ genericDialogOption.placeholder }}"
+        maxlength="{{ genericDialogOption.maxlength }}"
+        border="{{ true }}"
+        input-class="generic-input"
+        bind:change="onChangeInputGenericDialog"
+      />
+    </view>
+  </van-dialog>
+  
+
+  <!-- 修改性别弹框 -->
+  <van-dialog
+    use-slot
+    title="{{ sexDialogOption.title }}"
+    show="{{ sexDialogOption.isShow }}"
+    show-cancel-button
+    show-confirm-button
+    bind:confirm="onComfirmSexDialog"
+    bind:cancel="onCancelSexDialog"
+    async-close="{{ true }}"
+  >
+    <van-radio-group value="{{ sexDialogOption.radioValue }}" bind:change="onChangeSexRadio">
+      <van-cell-group>
+        <van-cell
+          title="男"
+          clickable
+          data-name="男"
+          bind:click="onClickSexRadio"
+        >
+          <van-radio slot="right-icon" name="男" />
+        </van-cell>
+        <van-cell
+          title="女"
+          clickable
+          data-name="女"
+          bind:click="onClickSexRadio"
+        >
+          <van-radio slot="right-icon" name="女" />
+        </van-cell>
+      </van-cell-group>
+    </van-radio-group>
+  </van-dialog>
 
 </view>
