@@ -1,8 +1,13 @@
 /* pages/mine/weeklyReport/weeklyReport.wxss */
 page{
-    background: #f7f7f7
+    background: #f7f7f7;
 }
 
+.top-card {
+  font-size: 20px;
+  margin: 20px 16px 8px;
+  color: #333333;
+}
 
 .item {
   display: block;

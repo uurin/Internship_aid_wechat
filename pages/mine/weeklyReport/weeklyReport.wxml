@@ -1,5 +1,10 @@
 <!--pages/mine/weeklyReport/weeklyReport.wxml-->
 <view>
+
+  <view class="top-card">我的周记</view>
+  
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
+
   <view wx:for="{{ dataList }}" class="item" bindtap="bindtapCard">
     <view class="date">
       {{ item.date }}

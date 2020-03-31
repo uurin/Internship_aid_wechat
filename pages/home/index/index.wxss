@@ -13,26 +13,31 @@ page{
 
 .gridBtn {
   background: #fff;
-  width: 100%;
-  margin-bottom: 8px;
+  display: block;
+  margin: 12px 8px;
+  border-radius: 4px;
+  box-shadow: 0 8px 12px #ebedf0;
 }
 .grid-icon {
   width: 24px;
   height: 24px;
-  padding: 8px;
-  background-color: #87c38f;
+  padding: 10px;
+  background-color: #999999;
   border-radius: 50px;
 }
 .grid-text {
-  color: #373737;
-  font-size: 14px;
-  margin: 4px 0 0;
+  color: #555555;
+  font-size: 16px;
+  margin: 6px 0 0;
 }
 
 
 .popularCard {
   background: #fff;
-  padding: 14px 16px;
+  padding: 12px 14px 8px;
+  margin: 12px 8px;
+  border-radius: 4px;
+  box-shadow: 0 8px 12px #ebedf0;
 }
 .popularCard .cardHeader {
   margin-bottom: 16px;

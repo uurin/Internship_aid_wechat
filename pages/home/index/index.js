@@ -19,16 +19,22 @@ Page({
         url: "../checkIn/checkIn"
       },
       {
-        text: "周记",
-        backgroundColor: "#8aa4c7",
-        src: "/images/icons/check_in_light.png",
-        url: "/pages/mine/weeklyReport/weeklyReport"
-      },
-      {
         text: "公告",
         backgroundColor: "#c78a8a",
-        src: "/images/icons/check_in_light.png",
-        url: "/pages/discuss/index/index"
+        src: "/images/icons/announcement_light.png",
+        url: "/pages/home/announcement/announcement"
+      },
+      {
+        text: "周记",
+        backgroundColor: "#8aa4c7",
+        src: "/images/icons/weekNode_light.png",
+        url: "/pages/mine/weeklyReport/weeklyReport"
+      }, 
+      {
+        text: "招聘",
+        backgroundColor: "#d1ac84",
+        src: "/images/icons/recruitment_light.png",
+        url: "/pages/home/recruitment/recruitment"
       }
     ],
     //热门帖的查询条件
@@ -38,6 +44,12 @@ Page({
     },
     //热门讨论帖列表
     hotThreadList: [],
+    //最近公告列表
+    announcementList: [
+      { title: '关于2020年校园招聘会于近期举办的通知', content: '我校决定，2020年的校园招聘会将在6月6日举办，招聘内容资料已经上线实习辅助软件，届时希望各位未着落实习工作的学生们踊跃参与。', image: 'http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg' },
+      { title: '关于2020年校园招聘会于近期举办的通知', content: '我校决定，2020年的校园招聘会将在6月6日举办，招聘内容资料已经上线实习辅助软件，届时希望各位未着落实习工作的学生们踊跃参与。', image: 'http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg' },
+      { title: '关于2020年校园招聘会于近期举办的通知', content: '我校决定，2020年的校园招聘会将在6月6日举办，招聘内容资料已经上线实习辅助软件，届时希望各位未着落实习工作的学生们踊跃参与。', image: 'http://a3.att.hudong.com/14/75/01300000164186121366756803686.jpg' }
+    ]
   },
 
   /**

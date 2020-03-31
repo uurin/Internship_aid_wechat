@@ -2,5 +2,7 @@
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark",
   "navigationBarTitleText": " 我的周记",
-  "usingComponents": {}
+  "usingComponents": {
+    "van-divider": "/miniprogram_npm/@vant/weapp/divider/index"
+  }
 }

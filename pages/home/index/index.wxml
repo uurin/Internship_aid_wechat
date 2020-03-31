@@ -7,7 +7,7 @@
   </swiper>
 
   <view class="gridBtn">
-    <van-grid column-num="3" border="{{ false }}" clickable gutter="{{ 20 }}" >
+    <van-grid column-num="4" border="{{ false }}" clickable gutter="{{ 0 }}" >
       <van-grid-item use-slot
                      wx:for="{{ gridBtnList }}"
                      wx:for-item="item"
@@ -20,6 +20,26 @@
         <text class="grid-text">{{item.text}}</text>
       </van-grid-item>
     </van-grid>
+  </view>
+
+  <view class="popularCard">
+    <view class="cardHeader">
+      <view class="left">
+        <van-icon name="fire" color="#ff0055"/>
+        <text class="text">最近公告</text>
+      </view>
+      <view class="right" bindtap="tapMoreAnnouncement">
+        <text class="text">查看全部</text>
+        <van-icon name="arrow" />
+      </view>
+    </view>
+    <view wx:for="{{ announcementList }}" wx:key="id">
+      <view class="item">
+        <text class="title">{{ item.title }}</text>
+        <text class="time">{{ item.date }}</text>
+      </view>
+      <van-divider customStyle="margin: 8px 0" ></van-divider>
+    </view>
   </view>
 
   <view class="popularCard">
@@ -41,4 +61,6 @@
       <van-divider customStyle="margin: 8px 0" ></van-divider>
     </view>
   </view>
+
+
 </view>

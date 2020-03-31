@@ -50,6 +50,9 @@ Page({
         url: "/pages/mine/feedback/feedback"
       }
     ],
+    //消息列表
+    messgeList: [
+    ]
   },
 
   /**

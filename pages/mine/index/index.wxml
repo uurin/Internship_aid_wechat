@@ -25,20 +25,29 @@
       </van-grid-item>
     </van-grid>
   </view>
-  
-  <view>
-    <van-cell-group title=" ">
-      <van-cell size="large" title="我发出的讨论" is-link link-type="navigateTo" url="/pages/mine/myThreadsSent/myThreadsSent"/>
-      <van-cell size="large" title="我的收藏" is-link link-type="navigateTo" url="/pages/mine/threadCollection/threadCollection"/>
-      <van-cell size="large" title="签到记录" is-link link-type="navigateTo" url="/pages/home/checkInRecord/checkInRecord"/>
-      <van-cell size="large" title="我的周记" is-link link-type="navigateTo" url="/pages/mine/weeklyReport/weeklyReport"/>
-    </van-cell-group>
-  </view>
 
-  <view>
-    <van-cell-group title=" ">
-      <van-cell size="large" title="投诉建议" is-link />
-    </van-cell-group>
+  <view class="messageCard">
+    <view class="cardHeader">
+      <view class="left">
+        <!-- <van-icon name="fire" color="#ff0055"/> -->
+        <text class="text">最近的讨论消息</text>
+      </view>
+      <view class="right" bindtap="tapMoreAnnouncement">
+        <!-- <text class="text">查看全部</text> -->
+        <van-icon name="arrow" />
+      </view>
+    </view>
+    <view wx:for="{{ messgeList }}" wx:key="id">
+      <view class="item">
+        <text class="title">{{ item.title }}</text>
+        <text class="time">{{ item.date }}</text>
+      </view>
+      <van-divider customStyle="margin: 8px 0" ></van-divider>
+    </view>
+
+    <view wx:if="{{ messgeList == null || messgeList.length == 0 }}" class="text-without">
+      <text>暂无</text>
+    </view>
   </view>
 
 

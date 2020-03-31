@@ -3,8 +3,9 @@ page{
     background: #f5f5f5
 }
 .my-class {
-    margin: 10px 0;
-    box-shadow: 0 1px 1px #dddddd;
+    margin: 12px 8px;
+    border-radius: 4px;
+    box-shadow: 0 8px 12px #ebedf0;
 }
 
 /* 浮动按钮 */
