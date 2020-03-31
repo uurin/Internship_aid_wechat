@@ -17,7 +17,9 @@
     "pages/mine/addWeeklyReport/addWeeklyReport",
     "pages/mine/weeklyReportView/weeklyReportView",
     "pages/login/register/register",
-    "pages/discuss/hotThreads/hotThreads"
+    "pages/discuss/hotThreads/hotThreads",
+    "pages/home/announcement/announcement",
+    "pages/home/recruitment/recruitment"
   ],
   "permission": {
     "scope.userLocation": {

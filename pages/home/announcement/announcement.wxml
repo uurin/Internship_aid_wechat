@@ -1,0 +1,23 @@
+<!--pages/home/announcement/announcement.wxml-->
+<view>
+  <view class="top-card">近期公告</view>
+  
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
+
+  <view class="item" wx:for="{{ dataList }}">
+    <view class="left">
+      <text class="title">{{ item.title }}</text>
+      <text class="content">{{ item.content }}</text>
+    </view>
+    <view class="right">
+      <image src="{{ item.image }}"></image>
+      <text class="date">2020-03-03</text>
+    </view>
+  </view>
+
+  <!-- 上拉加载更多 -->
+  <view class="loading">
+    <text size="24px">{{ loadingText }}</text>
+  </view>
+
+</view>

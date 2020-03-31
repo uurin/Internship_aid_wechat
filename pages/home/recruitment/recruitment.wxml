@@ -1,0 +1,32 @@
+<!--pages/home/recruitment/recruitment.wxml-->
+<view>
+  <van-dropdown-menu>
+    <van-dropdown-item value="{{ listQuery.industry }}" options="{{ option_industry }}" />
+  </van-dropdown-menu>
+
+  <view class="top-card">校园招聘</view>
+  
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
+
+  <view class="card" wx:for="{{ dataList }}">
+    <view class="item">
+      <view class="left">
+        <text class="title">{{ item.title }}</text>
+        <text class="content">{{ item.content }}</text>
+      </view>
+      <view class="right">
+        <text class="wage">{{ item.wage }}</text>
+        <text class="area">{{ item.area }}</text>
+      </view>
+    </view>
+    <view class="bottom-line">
+      <text class="industry">{{ item.industry }}</text>
+      <text class="company">{{ item.company }}</text>
+    </view>
+  </view>
+  <!-- 上拉加载更多 -->
+  <view class="loading">
+    <text size="24px">{{ loadingText }}</text>
+  </view>
+
+</view>

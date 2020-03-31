@@ -1,0 +1,67 @@
+/* pages/home/announcement/announcement.wxss */
+page{
+  background: #f7f7f7;
+}
+
+.top-card {
+  font-size: 20px;
+  margin: 16px 16px 0;
+  color: #333333;
+}
+
+.item {
+  margin: 12px 8px;
+  padding: 12px 14px 8px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  box-shadow: 0 8px 12px #ebedf0;
+}
+.item .left {
+  flex: 1;
+  padding-right: 8px;
+}
+.item .left .title{
+  color: #333333;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.item .left .content{
+  width: 100%;
+  color: #888888;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.item .right .date{
+  display: block;
+  text-align: center;
+  margin-top: 6px;
+  float: right;
+  font-size: 14px;
+  color: #777777;
+}
+.item .right {
+  display: flex;
+  flex-direction: column;
+}
+.item .right image{
+  width: calc(100vw / 4);
+  height: calc(100vw / 4.5);
+}
+
+/* 上拉加载更多 */
+.loading {
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+  color: rgb(133, 133, 133);
+}
