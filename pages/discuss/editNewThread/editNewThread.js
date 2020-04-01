@@ -155,7 +155,7 @@ Page({
 
   //提交
   submitForm: function (e) {
-    if (! this.checkInput()) {
+    if ( !this.checkInput() ) {
       return;
     }
     //先将图片选择组件里的图片array转换格式，并格式化成字符串形式，再存入表单
@@ -202,6 +202,8 @@ Page({
         duration: 1500
       })
       return false;
+    } else {
+      return true;
     }
   }
 })

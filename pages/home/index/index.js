@@ -170,5 +170,11 @@ Page({
     wx.navigateTo({
       url: '/pages/discuss/hotThreads/hotThreads',
     })
-  }
+  },
+
+  tapMoreAnnouncement: function () {
+    wx.navigateTo({
+      url: '../announcement/announcement',
+    })
+  },
 })

@@ -1,5 +1,9 @@
 <!--pages/discuss/hotThreads/hotThreads.wxml-->
 <view>
+  <view class="top-card">热门讨论</view>
+  
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
+
   <threadCard
           wx:for="{{ threadListData }}"
           wx:for-item="item"

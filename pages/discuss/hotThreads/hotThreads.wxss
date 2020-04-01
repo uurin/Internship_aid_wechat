@@ -1,6 +1,11 @@
 /* pages/discuss/hotThreads/hotThreads.wxss */
 page{
-  background: #f3f3f3
+  background: #f7f7f7
+}
+.top-card {
+  font-size: 20px;
+  margin: 16px 16px 0;
+  color: #333333;
 }
 .my-class {
   margin: 12px 8px;
