@@ -19,7 +19,8 @@
     "pages/login/register/register",
     "pages/discuss/hotThreads/hotThreads",
     "pages/home/announcement/announcement",
-    "pages/home/recruitment/recruitment"
+    "pages/home/recruitment/recruitment",
+    "pages/mine/history/history"
   ],
   "permission": {
     "scope.userLocation": {

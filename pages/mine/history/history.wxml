@@ -1,0 +1,32 @@
+<!--pages/mine/history/history.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
+<view>
+
+  <view class="top-card">浏览历史</view>
+
+  <view class="subtitle">
+    <text>仅提供最近50条浏览记录。</text>
+  </view>
+
+  <view class="threadCard" 
+        wx:for="{{ threadsList }}" 
+        wx:key="id" 
+        data-threadid="{{ item.id }}"
+        bindtap="bindTapCard">
+    <text class="title">{{ item.title }}</text>
+    <text class="content">{{ item.content }}</text>
+    <view class="info">
+      <view class="icon-group">
+        <van-icon custom-class="icon" class="icon" name="good-job-o" />
+        <text>{{ item.likeNum }}</text>
+      </view>
+      <view class="icon-group">
+        <van-icon custom-class="icon" class="icon" name="comment-o" />
+        <text>{{ item.comment }}</text>
+      </view>
+      <text class="time">{{ dateUtil.toNTimeAgo(dateUtil.dateFormat(item.viewDate)) }}</text>
+    </view>
+  </view>
+  
+</view>
