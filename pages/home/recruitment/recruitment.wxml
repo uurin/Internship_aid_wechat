@@ -5,6 +5,10 @@
   </van-dropdown-menu>
 
   <view class="top-card">校园招聘</view>
+
+  <view class="subtitle">
+    <text>注：本软件只提供校园招聘的资料，具体信息和面试方式请通过招聘提供的联系方式详谈。</text>
+  </view>
   
   <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
 

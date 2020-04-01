@@ -8,6 +8,12 @@ page{
   margin: 20px 16px 8px;
   color: #333333;
 }
+.subtitle {
+  color: #777777;
+  display: block;
+  padding: 0 16px;
+  font-size: 14px;
+}
 
 .card {
   margin: 12px 8px;
