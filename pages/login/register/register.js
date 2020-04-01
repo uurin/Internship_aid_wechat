@@ -161,13 +161,25 @@ Page({
     if ( ! this.checkInput()) {
       return;
     }
-    register(this.formData).then(res => {
+    let data= {
+      username: this.data.formData.id,
+      nameString: this.data.formData.name,
+      password: this.data.formData.password
+    }
+    register(data).then(res => {
       if (res.code == 1) {
         //
         wx.showToast({
           title: '注册成功',
           icon: 'success',
-          duration: 1500
+          duration: 1500,
+          success: function () {
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1,
+              })
+            }, 1000);
+          }
         })
       } else {
         wx.showToast({
