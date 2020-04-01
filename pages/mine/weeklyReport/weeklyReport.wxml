@@ -1,4 +1,6 @@
 <!--pages/mine/weeklyReport/weeklyReport.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
 <view>
 
   <view class="top-card">我的周记</view>
@@ -7,7 +9,7 @@
 
   <view wx:for="{{ dataList }}" class="item" bindtap="bindtapCard">
     <view class="date">
-      {{ item.date }}
+      {{ dateUtil.toNTimeAgo(item.date) }}
     </view>
     <view class="title">
       {{ item.title }}

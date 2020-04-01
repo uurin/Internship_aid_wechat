@@ -1,4 +1,6 @@
 <!--pages/discuss/detailThread/detailThread.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
 <view>
     <!-- 帖子主体 -->
     <view class="threadContent">
@@ -7,7 +9,7 @@
             <view>
                 <text class="name">{{ mainData.nameString }}</text>
                 <view style="display: block">
-                    <text class="time">{{ mainData.date }}</text>
+                    <text class="time">{{ dateUtil.toNTimeAgo(mainData.date) }}</text>
                     <view class="other">
                         <van-icon class="icon" size="16px" name="good-job-o"/>
                         <text>{{ mainData.likeNum }}</text>
@@ -58,7 +60,7 @@
                            data-src="{{ item }}" 
                            mode="aspectFill" catchtap="previewCommentImg"/>
                 </view>
-                <text class="time">{{ commentItem.date }}</text>
+                <text class="time">{{ dateUtil.toNTimeAgo(commentItem.date) }}</text>
                 
                 <!--    评论中的回复-->
                 <view wx:if="{{ commentItem.childComments.length > 0 }}"

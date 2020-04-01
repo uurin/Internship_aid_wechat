@@ -1,4 +1,6 @@
 <!--index.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
 <view class="">
 
   <swiper class='swiper-index' indicator-dots='true' autoplay='true' interval='4000'>
@@ -36,7 +38,7 @@
     <view wx:for="{{ announcementList }}" wx:key="id">
       <view class="item">
         <text class="title">{{ item.title }}</text>
-        <text class="time">{{ item.date }}</text>
+        <text class="time">{{ dateUtil.toNTimeAgo(item.date) }}</text>
       </view>
       <van-divider customStyle="margin: 8px 0" ></van-divider>
     </view>
@@ -56,7 +58,7 @@
     <view wx:for="{{ hotThreadList }}" wx:key="id">
       <view class="item">
         <text class="title">{{ item.title }}</text>
-        <text class="time">{{ item.date }}</text>
+        <text class="time">{{ dateUtil.toNTimeAgo(item.date) }}</text>
       </view>
       <van-divider customStyle="margin: 8px 0" ></van-divider>
     </view>

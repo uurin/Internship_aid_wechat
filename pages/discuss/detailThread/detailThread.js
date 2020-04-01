@@ -72,7 +72,8 @@ Page({
     //是否显示弹出式输入框
     isShowInputBox: false,
     //上拉加载更多的文字信息
-    loadingText: '加载中...'
+    loadingText: '加载中...',
+
   },
 
   /**
@@ -84,7 +85,7 @@ Page({
     this.setData({
       'listQuery.id': threadId
     });
-    this.getData();
+    this.getData(false, true);
   },
 
   /**
@@ -146,7 +147,7 @@ Page({
   },
 
   //获取或刷新数据
-  getData: function (isShowToast = false) {
+  getData: function (isShowToast = false, saveHistory = false) {
     threadDetail(this.data.listQuery).then(res => {
       if(res.code == 1) {
         if (res.result.reply.length < 10 || res.result.reply.length === this.data.commentsData.length) {
@@ -171,6 +172,7 @@ Page({
         }
         // 停止下拉动作
         wx.stopPullDownRefresh();
+        this.saveHistory();
       }else{
         console.error('获取帖子详情失败，' + res.describe);
         wx.showToast({
@@ -555,6 +557,25 @@ Page({
         })
         break;
     }
+  },
+
+  //保存浏览记录到本地
+  saveHistory: function() {
+    let historyViewThreads = wx.getStorageSync('historyViewThreads') || [];
+    if (historyViewThreads.length > 50) {
+      historyViewThreads.pop();   //删掉旧的时间最早的第一条
+    }
+    //从数组第一项前插入数据
+    historyViewThreads.unshift(
+      {
+        title: this.data.mainData.title,
+        id: this.data.mainData.id,
+        nameString: this.data.mainData.nameString,
+        id: this.data.mainData.id,
+        viewDate: Date.parse(new Date())
+      }
+    );
+    wx.setStorageSync('historyViewThreads', historyViewThreads)
   }
 
 })

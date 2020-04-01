@@ -1,4 +1,6 @@
 <!--pages/home/announcement/announcement.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
 <view>
   <view class="top-card">近期公告</view>
   
@@ -11,7 +13,7 @@
     </view>
     <view class="right">
       <image src="{{ item.image }}"></image>
-      <text class="date">2020-03-03</text>
+      <text class="date">{{ dateUtil.toNTimeAgo(item.date) }}</text>
     </view>
   </view>
 

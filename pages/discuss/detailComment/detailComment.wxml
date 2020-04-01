@@ -1,4 +1,6 @@
 <!--pages/discuss/detailComment/detailComment.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
 <view>
 
     <!-- 评论的主体 -->
@@ -15,7 +17,7 @@
                        mode="aspectFill" 
                        catchtap="previewCommentImg"/>
             </view>
-            <text class="time">{{ commentData.date }}</text>
+            <text class="time">{{ dateUtil.toNTimeAgo(commentData.date) }}</text>
         </view>
     </view>
 
@@ -49,7 +51,7 @@
                            data-src="{{ item }}" 
                            mode="aspectFill" catchtap="previewReplyImg"/>
                 </view>
-                <text class="time">{{ replyItem.date }}</text>
+                <text class="time">{{ dateUtil.toNTimeAgo(replyItem.date) }}</text>
             </view>
         </view>
         <van-divider customStyle="margin: 0 16px" ></van-divider>

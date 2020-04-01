@@ -1,4 +1,6 @@
 <!--pages/mine/threadCollection/threadCollection.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
 <view>
 
   <van-dropdown-menu>
@@ -25,7 +27,7 @@
         <van-icon custom-class="icon" class="icon" name="comment-o" />
         <text>{{ item.comment }}</text>
       </view> -->
-      <text class="time">{{ item.date }}</text>
+      <text class="time">{{ dateUtil.toNTimeAgo(item.date) }}</text>
     </view>
   </view>
 
