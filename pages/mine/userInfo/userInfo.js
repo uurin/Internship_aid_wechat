@@ -1,5 +1,5 @@
 // pages/mine/userInfo/userInfo.js
-import { userInfo, updateUserInfo } from '../../../api/mine.js';
+import { userInfo, updateUserInfo, uploadImage } from '../../../api/mine.js';
 import Dialog from '/@vant/weapp/dialog/dialog';
 
 Page({
@@ -9,12 +9,14 @@ Page({
    */
   data: {
     userInfo: null,
-    // //是否显示通用的输入弹框
-    // isShowGenericInputDialog: false,
-    // //将要更改的属性字段名
-    // fieldNameToBeChanged: null,
-    // //通用输入弹框的输入内容
-    // inputValue: '',
+    isShowAvatarSheet: false, //是否显示更换头像的菜单
+    //更换头像的菜单
+    avatarSheetActions: [
+      {
+        name: '更换头像',
+        value: 'change'
+      }
+    ],
     //通用版的输入弹框配置
     genericDialogOption: {
       isShow: false,  //是否显示弹框
@@ -30,7 +32,15 @@ Page({
       isShow: false,  //是否显示弹框
       title: '修改性别',
       radioValue: '男'
-    }
+    },
+    //修改年龄的弹框
+    ageDialogOption: {
+      isShow: false,  //是否显示弹框
+      maxlength: 2,  //最大输入长度
+      placeholder: '输入年龄',  //占位文字
+      inputValue: '', //输入的文字
+      isShowConfirm: false
+    },
   },
 
   /**
@@ -123,6 +133,74 @@ Page({
         icon: 'none',
         duration: 1000
       });
+    })
+  },
+
+  //点击头像
+  bindclickAvatar: function() {
+    this.setData({
+      isShowAvatarSheet: true
+    })
+  },
+
+  //头像菜单的选择触发
+  onSelectAvatarSheet(e) {
+    let that = this;
+    switch (e.detail.value) {
+      case 'change':
+        wx.chooseImage({
+          count: 1,
+          sizeType: ['compressed'],
+          sourceType: ['album', 'camera'],
+          success(res) {
+            // tempFilePath可以作为img标签的src属性显示图片
+            let tempFilePaths = res.tempFilePaths;
+            uploadImage(tempFilePaths[0]).then(resStr => {
+              let res = JSON.parse(resStr); //将返回的字符串转换成json对象
+              if (res.code == 1) {
+                console.log(res.result)
+                let url = res.result;
+                //请求
+                updateUserInfo({ headPortrait: url}).then(res => {
+                  if (res.code == 1) {
+                    that.getUserInfo();
+                    that.setData({
+                      isShowAvatarSheet: false
+                    })
+                    wx.showToast({
+                      title: '更换头像成功',
+                      icon: 'none',
+                      duration: 1000
+                    });
+                  } else {
+                    wx.showToast({
+                      title: '更换失败',
+                      icon: 'none',
+                      duration: 1000
+                    });
+                  }
+                }).catch(err => {
+                  console.error(err);
+                  wx.showToast({
+                    title: '更滑失败，服务器异常',
+                    icon: 'none',
+                    duration: 1000
+                  });
+                })
+              }
+            }).catch(error => {
+              console.error('上传图片出现异常,', error);
+            })
+          }
+        })
+        break;
+    }
+  },
+
+  //取消选择头像菜单
+  onCancelAvatarSheet: function() {
+    this.setData({
+      isShowAvatarSheet: false
     })
   },
 
@@ -220,6 +298,78 @@ Page({
     })
   },
 
+  //点击年龄单元格
+  bindclickAgeCell: function (e) {
+    this.setData({
+      'ageDialogOption.isShow': true,
+      'ageDialogOption.inputValue': this.data.userInfo.ageString
+    })
+  },
+
+  //改变年龄弹框的输入内容时
+  onChangeInputAgeDialog: function (e) { 
+    if (e.detail != null && e.detail != '') {
+      this.setData({
+        'ageDialogOption.inputValue': e.detail,
+        'ageDialogOption.isShowConfirm': true
+      })
+    } else {
+      this.setData({
+        'ageDialogOption.inputValue': e.detail,
+        'ageDialogOption.isShowConfirm': false
+      })
+    }
+  },
+
+  //点击年龄弹框的取消按钮
+  onCancelAgeDialog: function (e) {
+    this.setData({
+      'ageDialogOption.isShow': false
+    })
+  },
+
+  //点击年龄弹框的确定按钮
+  onComfirmAgeDialog: function (e) {
+    let data = {
+      // username: this.data.userInfo.username,
+      ageString: this.data.ageDialogOption.inputValue
+    };
+    //请求
+    updateUserInfo(data).then(res => {
+      if (res.code == 1) {
+        this.getUserInfo();
+        this.setData({
+          'ageDialogOption.isShow': false
+        })
+        wx.showToast({
+          title: '修改信息成功',
+          icon: 'none',
+          duration: 1000
+        });
+      } else {
+        wx.showToast({
+          title: '修改失败',
+          icon: 'none',
+          duration: 1000
+        });
+      }
+    }).catch(err => {
+      console.error(err);
+      wx.showToast({
+        title: '修改失败，服务器异常',
+        icon: 'none',
+        duration: 1000
+      });
+    })
+  },
+
+  //年龄输入弹框关闭时调用
+  onCloseGenericDialog: function (e) {
+    this.setData({
+      'ageDialogOption.isShowConfirm': false
+    })
+  },
+
   //点击通用单元格信息(指容易通用更改的信息)
   bindclickGenericCell(e) {
     this.setData({
@@ -288,7 +438,7 @@ Page({
     })
   },
   
-  //改变输入内容时
+  //改变通用弹框的输入内容时
   onChangeInputGenericDialog: function(e) {
     if (e.detail != null && e.detail != '') {
       this.setData({

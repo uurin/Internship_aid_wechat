@@ -3,7 +3,11 @@
 
   <view>
     <van-cell-group title="基本信息">
-      <van-cell title="头像" size="large" custom-class="cell-avatar" clickable >
+      <van-cell title="头像" 
+                size="large" 
+                custom-class="cell-avatar" 
+                bind:click="bindclickAvatar" 
+                clickable >
         <view class="avatar-right">
           <image src="{{ userInfo.headPortrait }}" slot="right-icon" class="avatar-icon" is-link></image>
           <van-icon name="arrow" />
@@ -30,7 +34,7 @@
                 title="性别" 
                 is-link />
       <van-cell 
-                bind:click="bindclickGenericCell" 
+                bind:click="bindclickAgeCell" 
                 value="{{ userInfo.ageString }}" 
                 size="large" 
                 data-mark="age" 
@@ -153,5 +157,39 @@
       </van-cell-group>
     </van-radio-group>
   </van-dialog>
+
+  <!-- 修改年龄的输入弹框 -->
+  <van-dialog
+    use-slot
+    title="修改年龄"
+    show="{{ ageDialogOption.isShow }}"
+    show-cancel-button
+    show-confirm-button="{{ ageDialogOption.isShowConfirm }}"
+    bind:confirm="onComfirmAgeDialog"
+    bind:cancel="onCancelAgeDialog"
+    bind:close="onCloseAgeDialog"
+    async-close="{{ true }}"
+  >
+    <view class="generic-dialog">
+      <van-field
+        value="{{ ageDialogOption.inputValue }}"
+        type="number"
+        placeholder="{{ ageDialogOption.placeholder }}"
+        maxlength="{{ ageDialogOption.maxlength }}"
+        border="{{ true }}"
+        input-class="generic-input"
+        bind:change="onChangeInputAgeDialog"
+      />
+    </view>
+  </van-dialog>
+  
+  <van-action-sheet
+    show="{{ isShowAvatarSheet }}"
+    actions="{{ avatarSheetActions }}"
+    cancel-text="取消"
+    bind:select="onSelectAvatarSheet"
+    bind:cancel="onCancelAvatarSheet"
+    close-on-click-overlay
+  />
 
 </view>

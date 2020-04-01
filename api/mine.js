@@ -24,3 +24,8 @@ export function myThreadsCollection(data) {
   return api._get('/forum/selectCollectPost', data)
   // return api._get('/forum/selectPost', data)
 }
+
+//上传图片
+export function uploadImage(filePatch) {
+  return api.uploadFile(filePatch)
+}
