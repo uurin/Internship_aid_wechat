@@ -116,11 +116,6 @@ Page({
       }
     }).catch(err => {
       console.error(err);
-      wx.showToast({
-        title: '获取信息失败，服务异常',
-        icon: 'none',
-        duration: 1000
-      })
     })
   }
 })

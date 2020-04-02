@@ -4,8 +4,9 @@
 <view class="">
 
   <swiper class='swiper-index' indicator-dots='true' autoplay='true' interval='4000'>
-      <swiper-item><image src='../../../images/a.jpg'></image></swiper-item>
-      <swiper-item><image src='../../../images/b.jpg'></image></swiper-item>
+      <swiper-item wx:for="{{ announcementImages }}" wx:key="this">
+        <image src="{{ item }}"></image>
+      </swiper-item>
   </swiper>
 
   <view class="gridBtn">
@@ -13,6 +14,7 @@
       <van-grid-item use-slot
                      wx:for="{{ gridBtnList }}"
                      wx:for-item="item"
+                     wx:key="text"
                      data-url="{{ item.url }}"
                      bindtap="bindGridBtnTap">
         <image class="grid-icon"

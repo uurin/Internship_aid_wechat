@@ -1,5 +1,5 @@
 //index.js
-import { hotThreads } from '../../../api/home.js';
+import { hotThreads, announcement, announcementImages } from '../../../api/home.js';
 
 //获取应用实例
 const app = getApp()
@@ -42,6 +42,12 @@ Page({
       pageIndex: 1,
       pageSize: 4
     },
+    //公告轮播图的图片列表
+    announcementImages: [
+      'https://recomi.site/bg1.jpg',
+      'https://recomi.site/usr/uploads/2019/08/4047826182.png',
+      'https://recomi.site/bg1.jpg'
+    ],
     //热门讨论帖列表
     hotThreadList: [],
     //最近公告列表
@@ -133,6 +139,7 @@ Page({
 
   //获取各个数据
   getData(isShowToast = false) {
+    //获取热门帖
     hotThreads(this.data.listQueryHotThread).then(res => {
       if (res.code == 1) {
         this.setData({
@@ -163,6 +170,38 @@ Page({
         icon: 'none',
         duration: 1000
       });
+    });
+    //获取公告图片列表
+    announcementImages().then(res => {
+      if (res.code == 1) {
+        this.setData({
+          announcementImages: res.result
+        })
+      } else {
+        wx.showToast({
+          title: '获取信息失败',
+          icon: 'none',
+          duration: 1000
+        });
+      }
+    }).catch(err => {
+      console.error(err)
+    })
+    //获取公告信息列表
+    announcement().then(res => {
+      if (res.code == 1) {
+        this.setData({
+          announcementList: res.result
+        })
+      } else {
+        wx.showToast({
+          title: '获取信息失败',
+          icon: 'none',
+          duration: 1000
+        });
+      }
+    }).catch(err => {
+      console.error(err)
     })
   },
 
