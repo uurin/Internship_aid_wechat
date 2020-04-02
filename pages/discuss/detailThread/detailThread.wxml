@@ -119,7 +119,7 @@
     />
 
     <!-- 上拉加载更多 -->
-    <view class="loading" >
+    <view class="loading" wx:if="{{ commentsData.length != null && commentsData.length != 0 }}">
       <text size="24px">{{ loadingText }}</text>
     </view>
 
