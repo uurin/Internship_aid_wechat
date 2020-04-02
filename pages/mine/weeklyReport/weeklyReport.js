@@ -22,7 +22,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getData();
   },
 
   /**
@@ -36,7 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData(false);
   },
 
   /**
@@ -125,7 +124,7 @@ Page({
 
   //点击卡片
   bindtapCard(e) {
-    let id = e.currentTarget.dataset.XXXid;
+    let id = e.currentTarget.dataset.item_id;
     wx.navigateTo({
       url: '/pages/mine/weeklyReportView/weeklyReportView?id=' + id
     })

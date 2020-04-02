@@ -5,7 +5,7 @@ const api = require("./request.js")
 
 //获取周记列表
 export function weeklyReportList(data) {
-  return api._get('/weeklyReport/select', data)
+  return api._get('/weeklyReport/select', data, false)
 }
 
 //添加周记
@@ -15,7 +15,7 @@ export function addWeeklyReport(data) {
 
 //获取单条周记详情
 export function detailWeeklyReport(data) {
-  return api._get('/weeklyReport/detail', data)
+  return api._get('/weeklyReport/weeklyDetail', data)
 }
 
 //删除周记

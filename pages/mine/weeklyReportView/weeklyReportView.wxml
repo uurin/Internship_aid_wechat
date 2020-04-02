@@ -1,11 +1,32 @@
 <!--pages/mine/weeklyReportView/weeklyReportView.wxml-->
 <view>
 
+  <view class="top-card">
+    <text>周记详情</text>
+    
+    <view class="btn-delete">
+      <van-button custom-class="customBtn-delete" 
+                  icon="delete" 
+                  type="default" 
+                  size="small"
+                  bindtap="tapDelete">
+          删除
+      </van-button>
+      <van-button custom-class="customBtn-delete" 
+                  icon="delete" 
+                  type="default" 
+                  size="small"
+                  bindtap="tapEdit">
+          编辑
+      </van-button>
+    </view>
+  </view>
+  
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
+
   <view class="date">
     <text>{{ detailData.date }}</text>
   </view>
-
-  <van-divider customStyle="margin-left: 12px; margin-right: 12px;"></van-divider>
 
   <view class="title">
     <text>{{ detailData.title }}</text>
@@ -15,4 +36,6 @@
     <text>{{ detailData.content }}</text>
   </view>
 
+  <van-dialog id="van-dialog" />
+  
 </view>

@@ -3,16 +3,33 @@ page{
     background: #fff;
 }
 
+.top-card {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 16px 8px;
+  color: #555555;
+}
+.btn-delete {
+  float: right;
+}
+.customBtn-delete {
+  margin: 0 8px;
+}
+
 .date {
   display: block;
-  padding: 8px;
-  text-align: center;
+  padding: 14px;
+  text-align: left;
 }
 .title {
   display: block;
-  padding: 8px;
+  padding: 14px;
+  color: #454545;
 }
 .content {
   display: block;
-  padding: 8px;
+  padding: 14px;
+  color: #777777;
 }

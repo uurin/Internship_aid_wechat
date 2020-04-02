@@ -1,5 +1,6 @@
 // pages/mine/weeklyReportView/weeklyReportView.js
-import { detailWeeklyReport } from '../../../api/weeklyReport.js';
+import { detailWeeklyReport, deleteWeeklyReport } from '../../../api/weeklyReport.js';
+import Dialog from '/@vant/weapp/dialog/dialog';
 
 Page({
 
@@ -18,8 +19,9 @@ Page({
     let id = options.id;
     this.setData({
       id: id
+    }, function () {
+      this.getData();
     });
-    this.getData();
   },
 
   /**
@@ -73,7 +75,7 @@ Page({
 
   //获取数据
   getData(isShowToast = false) {
-    detailWeeklyReport().then(res => {
+    detailWeeklyReport({ id: this.data.id }).then(res => {
       if (res.code == 1) {
         this.setData({
           detailData: res.result
@@ -104,5 +106,41 @@ Page({
         duration: 1000
       })
     })
+  },
+
+  tapDelete: function(e) {
+    Dialog.confirm({
+      title: '警告',
+      message: '确认删除该周记吗？'
+    }).then(() => {
+      deleteWeeklyReport({ id: this.data.id }).then(res => {
+        if (res.code == 1) {
+          wx.showToast({
+            title: '删除成功',
+            duration: 1000,
+            success: function () {
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }, 1000);
+            }
+          });
+          
+        } else {
+          wx.showToast({
+            title: '删除失败',
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      })
+    }).catch(() => {
+      // on cancel
+    });
+  },
+
+  tapEdit: function(e) {
+    //
   }
 })

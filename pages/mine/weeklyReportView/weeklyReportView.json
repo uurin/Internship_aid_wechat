@@ -3,9 +3,12 @@
   "backgroundTextStyle": "dark",
   "navigationBarTitleText": "周记详情",
   "usingComponents": {
-    "van-field": "/@vant/weapp/field",
-    "van-cell": "/@vant/weapp/cell",
-    "van-cell-group": "/@vant/weapp/cell-group",
-    "van-divider": "/@vant/weapp/divider"
+    "van-field": "/miniprogram_npm/@vant/weapp/field/index",
+    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
+    "van-cell-group": "/miniprogram_npm/@vant/weapp/cell-group/index",
+    "van-divider": "/miniprogram_npm/@vant/weapp/divider/index",
+    "van-icon": "/miniprogram_npm/@vant/weapp/icon/index",
+    "van-button": "/miniprogram_npm/@vant/weapp/button/index",
+    "van-dialog": "/miniprogram_npm/@vant/weapp/dialog/index"
   }
 }

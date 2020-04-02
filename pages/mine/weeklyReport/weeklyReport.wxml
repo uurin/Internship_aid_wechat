@@ -7,7 +7,7 @@
   
   <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
 
-  <view wx:for="{{ dataList }}" class="item" bindtap="bindtapCard">
+  <view wx:for="{{ dataList }}" class="item" data-item_id="{{ item.id }}" bindtap="bindtapCard">
     <view class="date">
       {{ dateUtil.toNTimeAgo(item.date) }}
     </view>
