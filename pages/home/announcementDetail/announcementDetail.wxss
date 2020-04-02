@@ -1,0 +1,43 @@
+/* pages/home/announcementDetail/announcementDetail.wxss */
+.top-card {
+  font-size: 20px;
+  margin: 16px 16px 0;
+  color: #333333;
+}
+
+.title {
+  margin: 14px 14px 2px;
+  display: block;
+}
+.title text {
+  font-size: 20px;
+  color: #111111;
+}
+
+.date {
+  margin: 0 14px;
+  text-align: left;
+}
+.date text{
+  color: #666666;
+  font-size: 14px;
+}
+
+.content {
+  margin: 14px;
+  display: block;
+}
+.content text {
+  font-size: 16px;
+  color: #555555;
+}
+
+.image {
+  margin: 14px;
+  display: flex;
+  justify-content: center;
+}
+.image image {
+  width: 100%;
+  max-height: calc(100vh / 5)
+}

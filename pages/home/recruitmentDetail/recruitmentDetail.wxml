@@ -1,0 +1,39 @@
+<!--pages/home/recruitmentDetail/recruitmentDetail.wxml-->
+<view>
+  <view class="title">
+    <text>{{ recruitmentInfo.title }}</text>
+  </view>
+
+  <view class="info-panel">
+    <view class="wage">
+      <text>{{ recruitmentInfo.wage }}</text>
+    </view>
+    <view class="area">
+      <van-icon name="location-o" />
+      <text>{{ recruitmentInfo.area }}</text>
+    </view>
+    <view class="industry">
+      <text>行业：{{ recruitmentInfo.industry }}</text>
+    </view>
+  </view>
+
+  <van-divider customStyle="padding: 0 14px; margin: 4px 0 16px;" />
+
+  <view class="benefits">
+    <text>{{ recruitmentInfo.benefits }}</text>
+  </view>
+
+  <view class="content">
+    <text wx:for="{{ recruitmentInfo.content }}">{{ item }}</text>
+  </view>
+
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
+
+  <view class="company">
+    <text>公司：{{ recruitmentInfo.company }}</text>
+  </view>
+
+  <view class="contact">
+    <text>联系方式：{{ recruitmentInfo.contact }}</text>
+  </view>
+</view>

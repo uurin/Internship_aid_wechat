@@ -12,7 +12,10 @@
   
   <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
 
-  <view class="card" wx:for="{{ dataList }}">
+  <view class="card" 
+        wx:for="{{ dataList }}" 
+        data-recruitment_id="{{ item.id }}" 
+        bindtap="tapItem">
     <view class="item">
       <view class="left">
         <text class="title">{{ item.title }}</text>
@@ -28,6 +31,7 @@
       <text class="company">{{ item.company }}</text>
     </view>
   </view>
+
   <!-- 上拉加载更多 -->
   <view class="loading">
     <text size="24px">{{ loadingText }}</text>

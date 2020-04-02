@@ -25,9 +25,9 @@ Page({
       { text: '生产制造', value: 7 }
     ],
     dataList: [
-      { title: 'web前端开发', content: '员工旅游，零食下午茶，带薪年假，年终奖，全勤奖。', wage: '2-3K', area: '广东广州', company: '某某公司', industry: '计算机软件' },
-      { title: 'web前端开发', content: '员工旅游，零食下午茶，带薪年假，年终奖，全勤奖。', wage: '2-3K', area: '广东广州', company: '某某公司', industry: '计算机软件' },
-      { title: 'web前端开发', content: '员工旅游，零食下午茶，带薪年假，年终奖，全勤奖。', wage: '2-3K', area: '广东广州', company: '某某公司', industry: '计算机软件' }
+      { id: 1, title: 'web前端开发', content: '员工旅游，零食下午茶，带薪年假，年终奖，全勤奖。', wage: '2-3K', area: '广东广州', company: '某某公司', industry: '计算机软件' },
+      { id: 2, title: 'web前端开发', content: '员工旅游，零食下午茶，带薪年假，年终奖，全勤奖。', wage: '2-3K', area: '广东广州', company: '某某公司', industry: '计算机软件' },
+      { id: 3, title: 'web前端开发', content: '员工旅游，零食下午茶，带薪年假，年终奖，全勤奖。', wage: '2-3K', area: '广东广州', company: '某某公司', industry: '计算机软件' }
     ],
   },
 
@@ -148,6 +148,12 @@ Page({
       }
     }).catch(err => {
       console.error(err);
+    })
+  },
+  tapItem: function(e) {
+    let id = e.currentTarget.dataset.recruitment_id;
+    wx.navigateTo({
+      url: '../recruitmentDetail/recruitmentDetail?id=' + id,
     })
   }
 })

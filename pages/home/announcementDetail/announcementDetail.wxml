@@ -1,0 +1,25 @@
+<!--pages/home/announcementDetail/announcementDetail.wxml-->
+<wxs module="dateUtil" src="../../../utils/util.wxs"></wxs>
+
+<view>
+  <view class="top-card">公告详情：</view>
+  
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 8px;" />
+
+  <view class="title">
+    <text>{{ announcementInfo.title }}</text>
+  </view>
+
+  <view class="date">
+    <text>{{ dateUtil.toNTimeAgo(announcementInfo.date) }}</text>
+  </view>
+
+  <view class="image">
+    <image src="{{ announcementInfo.image }}" 
+           mode="aspectFill" ></image>
+  </view>
+
+  <view class="content">
+    <text>{{ announcementInfo.content }}</text>
+  </view>
+</view>

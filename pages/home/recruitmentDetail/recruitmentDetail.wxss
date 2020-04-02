@@ -1,0 +1,63 @@
+/* pages/home/recruitmentDetail/recruitmentDetail.wxss */
+.title {
+  margin: 14px 14px 8px;
+  font-size: 20px;
+  color: #509fc9;
+}
+
+.info-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 14px;
+}
+
+.wage {
+  margin: 0 8px;
+  font-size: 20px;
+  color: rgb(233, 82, 44);
+}
+
+.area {
+  font-size: 14px;
+  color: #777777;
+  margin: 0 8px;
+}
+
+.industry {
+  display: block;
+  font-size: 14px;
+  color: #777777;
+  margin: 0 8px;
+}
+
+.benefits {
+  display: block;
+  font-size: 14px;
+  color: #555555;
+  margin: 4px 14px;
+}
+
+.content {
+  margin: 14px 14px 8px;
+  font-size: 14px;
+  color: #666666;
+}
+.content text{
+  display: block;
+  margin-top: 2px;
+}
+
+.company {
+  display: block;
+  font-size: 16px;
+  color: #333333;
+  margin: 8px 14px;
+}
+
+.contact {
+  display: block;
+  color: #333333;
+  font-size: 16px;
+  margin: 8px 14px;
+}

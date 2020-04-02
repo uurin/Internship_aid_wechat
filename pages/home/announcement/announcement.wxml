@@ -6,13 +6,17 @@
   
   <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
 
-  <view class="item" wx:for="{{ dataList }}">
+  <view class="item" 
+        wx:for="{{ dataList }}" 
+        wx:key="id"
+        data-announcement_id="{{ item.id }}"
+        bindtap="tapItem">
     <view class="left">
       <text class="title">{{ item.title }}</text>
       <text class="content">{{ item.content }}</text>
     </view>
     <view class="right">
-      <image src="{{ item.image }}"></image>
+      <image src="{{ item.image }}" mode="aspectFill"></image>
       <text class="date">{{ dateUtil.toNTimeAgo(item.date) }}</text>
     </view>
   </view>
