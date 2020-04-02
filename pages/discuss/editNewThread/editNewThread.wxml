@@ -40,7 +40,8 @@
               file-list="{{ fileList }}" 
               max-count="2"
               bind:after-read="afterReadImage" 
-              bind:delete="deleteImage">
+              bind:delete="deleteImage"
+              image-fit="aspectFill">
     </van-uploader>
   </view>
 
