@@ -564,17 +564,21 @@ Page({
     let historyViewThreads = wx.getStorageSync('historyViewThreads') || [];
     if (historyViewThreads.length > 50) {
       historyViewThreads.pop();   //删掉旧的时间最早的第一条
+    } 
+    //判断是否跟上次访问一样
+    if (historyViewThreads.length > 0 && historyViewThreads[0].id == this.data.listQuery.id) {
+      return;
+    } else {
+      //从数组第一项前插入数据
+      historyViewThreads.unshift(
+        {
+          title: this.data.mainData.title,
+          id: this.data.mainData.id,
+          nameString: this.data.mainData.nameString,
+          viewDate: Date.parse(new Date())
+        }
+      )
     }
-    //从数组第一项前插入数据
-    historyViewThreads.unshift(
-      {
-        title: this.data.mainData.title,
-        id: this.data.mainData.id,
-        nameString: this.data.mainData.nameString,
-        id: this.data.mainData.id,
-        viewDate: Date.parse(new Date())
-      }
-    );
     wx.setStorageSync('historyViewThreads', historyViewThreads)
   }
 

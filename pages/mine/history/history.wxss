@@ -5,7 +5,7 @@ page{
 
 .top-card {
   font-size: 20px;
-  margin: 20px 16px 8px;
+  margin: 20px 16px 10px;
   color: #333333;
 }
 .subtitle {
@@ -16,7 +16,7 @@ page{
 }
 
 .threadCard {
-    padding: 14px 14px 10px;
+    padding: 14px 14px 6px;
     background-color: #fff;
     margin: 12px 8px;
     box-shadow: 0 8px 12px #ebedf0;
@@ -29,13 +29,7 @@ page{
     align-items: center;
     font-size: 15px;
     color: #9b9b9b;
-}
-.info .icon-group {
-    margin-right: 8px;
-}
-.icon-group .icon{
-    position: relative;
-    top: 1px;
+    margin-top: 6px;
 }
 .icon-group text{
     margin-left: 2px;
@@ -54,16 +48,10 @@ page{
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
-.content {
+.name {
     display: block;
-    margin: 2px 0 8px;
     font-size: 15px;
     color: #777777;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
 }
 
 /* 上拉加载更多 */

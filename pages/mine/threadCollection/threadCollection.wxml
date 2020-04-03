@@ -17,17 +17,9 @@
     <text class="title">{{ item.title }}</text>
     <text class="content">{{ item.content }}</text>
     <view class="info">
-      <image class="avatar" src="{{ 'https://secure.gravatar.com/avatar/294fc41a0551cb235455b29356002f46?s=500&r=X&d=' }}" />
-      <text class="name">{{ item.nameString }}</text>
-      <!-- <view class="icon-group">
-        <van-icon custom-class="icon" class="icon" name="good-job-o" />
-        <text>{{ item.likeNum }}</text>
-      </view>
-      <view class="icon-group">
-        <van-icon custom-class="icon" class="icon" name="comment-o" />
-        <text>{{ item.comment }}</text>
-      </view> -->
-      <text class="time">{{ dateUtil.toNTimeAgo(item.date) }}</text>
+      <!-- <image class="avatar" src="{{ item.avatar }}" /> -->
+      <text class="name">@{{ item.name }}</text>
+      <text class="time">{{ item.date }}</text>
     </view>
   </view>
 
