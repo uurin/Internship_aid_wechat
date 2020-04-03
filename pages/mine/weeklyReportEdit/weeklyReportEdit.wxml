@@ -1,0 +1,31 @@
+<!--pages/mine/weeklyReportEdit/weeklyReportEdit.wxml-->
+<view>
+
+  <view class="title">
+    <van-field
+            value="{{ detailData.title }}"
+            placeholder="请输入标题"
+            title="标题"
+            maxlength="50"
+            size="large"
+            bind:change="onChangeTitle"
+            required
+    />
+  </view>
+  <view class="content">
+      <textarea
+              value="{{ detailData.content }}"
+              placeholder="请输入周记内容"
+              title="内容"
+              type="textarea"
+              maxlength="1000"
+              bindinput="onChangeContent"
+              required
+      />
+      <text class="markTextSize">{{ markContentSize }}</text>
+  </view>
+
+  <view class="btn-submit">
+    <van-button color="#509fc9" bindtap="submitForm" type="info" block>确认修改</van-button>
+  </view>
+</view>

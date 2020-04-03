@@ -1,18 +1,12 @@
-// pages/mine/addWeeklyReport/addWeeklyReport.js
-import { addWeeklyReport } from '../../../api/weeklyReport.js';
-
+// pages/mine/weeklyReportEdit/weeklyReportEdit.js
+import { editWeeklyReport } from '../../../api/weeklyReport.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //提交的表单
-    formData: {
-      title: '',
-      content: ''
-    },
-    //标记内容长度
+    detailData: null,
     markContentSize: '0/1000'
   },
 
@@ -20,7 +14,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let detailData = JSON.parse(options.detailData);
+    this.setData({
+      detailData: detailData,
+      markContentSize: detailData.content.length + '/1000'
+    })
   },
 
   /**
@@ -75,21 +73,21 @@ Page({
   //监听输入标题
   onChangeTitle: function (e) {
     this.setData({
-      "formData.title": e.detail
-    });
+      "detailData.title": e.detail
+    })
   },
 
   //监听输入内容
   onChangeContent: function (e) {
     this.setData({
-      "formData.content": e.detail.value,
+      "detailData.content": e.detail.value,
       markContentSize: e.detail.value.length + '/1000'
-    });
+    })
   },
 
   //提交
   submitForm: function (e) {
-    if (this.data.formData.title == '' || this.data.formData.content == '') {
+    if (this.data.detailData.title == '' || this.data.detailData.content == '') {
       wx.showToast({
         title: '请输入文字！',
         icon: 'none',
@@ -98,15 +96,19 @@ Page({
       return;
     }
     //提交表单
-    let data = this.data.formData;
-    addWeeklyReport(data).then(res => {
+    let data = {
+      id: this.data.detailData.id,
+      title: this.data.detailData.title,
+      content: this.data.detailData.content
+    };
+    editWeeklyReport(data).then(res => {
       if (res.code == 1) {
         let pages = getCurrentPages();
         if (pages.length > 1) {
           pages[pages.length - 2].getData();
         }
         wx.showToast({
-          title: '添加成功',
+          title: '修改成功',
           duration: 1000,
           success: function () {
             setTimeout(function () {

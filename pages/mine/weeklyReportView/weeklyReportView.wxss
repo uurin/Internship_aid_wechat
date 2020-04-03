@@ -14,22 +14,25 @@ page{
 .btn-delete {
   float: right;
 }
-.customBtn-delete {
+.customBtn {
   margin: 0 8px;
 }
 
 .date {
   display: block;
-  padding: 14px;
+  margin: 0 14px;
+  font-size: 14px;
+  color: #777777;
   text-align: left;
 }
 .title {
   display: block;
-  padding: 14px;
+  font-size: 18px;
+  margin: 14px;
   color: #454545;
 }
 .content {
   display: block;
-  padding: 14px;
+  margin: 14px;
   color: #777777;
 }

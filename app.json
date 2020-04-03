@@ -22,7 +22,8 @@
     "pages/home/recruitment/recruitment",
     "pages/mine/history/history",
     "pages/home/announcementDetail/announcementDetail",
-    "pages/home/recruitmentDetail/recruitmentDetail"
+    "pages/home/recruitmentDetail/recruitmentDetail",
+    "pages/mine/weeklyReportEdit/weeklyReportEdit"
   ],
   "permission": {
     "scope.userLocation": {

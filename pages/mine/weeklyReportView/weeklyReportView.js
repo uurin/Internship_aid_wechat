@@ -115,6 +115,10 @@ Page({
     }).then(() => {
       deleteWeeklyReport({ id: this.data.id }).then(res => {
         if (res.code == 1) {
+          let pages = getCurrentPages();
+          if (pages.length > 1) {
+            pages[pages.length - 2].getData();
+          }
           wx.showToast({
             title: '删除成功',
             duration: 1000,
@@ -141,6 +145,9 @@ Page({
   },
 
   tapEdit: function(e) {
-    //
+    let detailData = JSON.stringify(this.data.detailData);
+    wx.navigateTo({
+      url: '../weeklyReportEdit/weeklyReportEdit?detailData=' + detailData,
+    })
   }
 })

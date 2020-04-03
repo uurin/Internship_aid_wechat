@@ -5,15 +5,15 @@
     <text>周记详情</text>
     
     <view class="btn-delete">
-      <van-button custom-class="customBtn-delete" 
+      <van-button custom-class="customBtn" 
                   icon="delete" 
                   type="default" 
                   size="small"
                   bindtap="tapDelete">
           删除
       </van-button>
-      <van-button custom-class="customBtn-delete" 
-                  icon="delete" 
+      <van-button custom-class="customBtn" 
+                  icon="edit" 
                   type="default" 
                   size="small"
                   bindtap="tapEdit">
@@ -22,18 +22,19 @@
     </view>
   </view>
   
-  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
-
   <view class="date">
     <text>{{ detailData.date }}</text>
   </view>
+
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0;" />
+
 
   <view class="title">
     <text>{{ detailData.title }}</text>
   </view>
 
   <view class="content">
-    <text>{{ detailData.content }}</text>
+    <text space="nbsp">{{ detailData.content }}</text>
   </view>
 
   <van-dialog id="van-dialog" />

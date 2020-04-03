@@ -9,7 +9,7 @@
 
   <view wx:for="{{ dataList }}" class="item" data-item_id="{{ item.id }}" bindtap="bindtapCard">
     <view class="date">
-      {{ dateUtil.toNTimeAgo(item.date) }}
+      {{ item.date }}
     </view>
     <view class="title">
       {{ item.title }}
