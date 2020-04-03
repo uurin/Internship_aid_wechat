@@ -25,6 +25,11 @@ export function myThreadsCollection(data) {
   // return api._get('/forum/selectPost', data)
 }
 
+//提交投诉建议
+export function feedback(data) {
+  return api._get('/tool/complaintAdvice', data)
+}
+
 //上传图片
 export function uploadImage(filePatch) {
   return api.uploadFile(filePatch)

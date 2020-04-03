@@ -23,7 +23,8 @@
     "pages/mine/history/history",
     "pages/home/announcementDetail/announcementDetail",
     "pages/home/recruitmentDetail/recruitmentDetail",
-    "pages/mine/weeklyReportEdit/weeklyReportEdit"
+    "pages/mine/weeklyReportEdit/weeklyReportEdit",
+    "pages/mine/feedback/feedback"
   ],
   "permission": {
     "scope.userLocation": {

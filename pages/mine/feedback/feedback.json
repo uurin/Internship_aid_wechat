@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "反馈与建议",
+  "usingComponents": {
+    "van-field": "/miniprogram_npm/@vant/weapp/field/index",
+    "van-uploader": "/miniprogram_npm/@vant/weapp/uploader/index",
+    "van-cell": "/miniprogram_npm/@vant/weapp/cell/index",
+    "van-cell-group": "/miniprogram_npm/@vant/weapp/cell-group/index",
+    "van-divider": "/miniprogram_npm/@vant/weapp/divider/index"
+  }
+}

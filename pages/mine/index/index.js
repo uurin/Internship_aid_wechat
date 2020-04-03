@@ -44,7 +44,7 @@ Page({
         url: "/pages/home/checkInRecord/checkInRecord"
       },
       {
-        text: "投诉建议",
+        text: "反馈建议",
         backgroundColor: "#c78a8a",
         src: "/images/icons/feedback.png",
         url: "/pages/mine/feedback/feedback"

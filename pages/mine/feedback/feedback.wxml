@@ -1,0 +1,53 @@
+<!--pages/mine/feedback/feedback.wxml-->
+<view>
+
+  <view class="top-card">反馈与建议</view>
+
+  <view class="subtitle">
+    <text>请将您在使用本软件的过程中遇到的问题或者建议反馈给我们。</text>
+  </view>
+  
+  <van-divider customStyle="padding: 0 14px; margin: 8px 0 16px;" />
+
+
+  <view class="title">
+      <van-field
+              value="{{ formData.title }}"
+              placeholder="请输入标题"
+              maxlength="50"
+              size="large"
+              required
+              bind:change="onChangeTitle"
+      />
+      <van-field
+              value="{{ formData.contact }}"
+              placeholder="请输入联系方式"
+              maxlength="50"
+              size="large"
+              bind:change="onChangeContact"
+      />
+  </view>
+  <view class="content">
+      <textarea
+              value="{{ formData.content }}"
+              placeholder="请输入内容"
+              type="textarea"
+              maxlength="400"
+              bindinput="onChangeContent"
+      />
+      <text class="markTextSize">{{ markContentSize }}</text>
+  </view>
+  <view class="imagesUpload">
+    <van-uploader 
+              file-list="{{ fileList }}" 
+              max-count="2"
+              bind:after-read="afterReadImage" 
+              bind:delete="deleteImage"
+              image-fit="aspectFill">
+    </van-uploader>
+  </view>
+
+  <view class="btn-submit">
+    <van-button color="#509fc9" bindtap="submitForm" type="info" block>提交</van-button>
+  </view>
+</view>
