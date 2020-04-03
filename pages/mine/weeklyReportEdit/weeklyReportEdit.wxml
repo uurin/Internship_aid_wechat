@@ -9,7 +9,6 @@
             maxlength="50"
             size="large"
             bind:change="onChangeTitle"
-            required
     />
   </view>
   <view class="content">
