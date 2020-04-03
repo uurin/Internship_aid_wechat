@@ -34,7 +34,7 @@
       </view>
       <view class="right" bindtap="tapMoreAnnouncement">
         <!-- <text class="text">查看全部</text> -->
-        <van-icon name="arrow" />
+        <!-- <van-icon name="arrow" /> -->
       </view>
     </view>
     <view wx:for="{{ messgeList }}" wx:key="id">

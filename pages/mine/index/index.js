@@ -1,5 +1,5 @@
 // pages/mine/index/index.js
-import { userInfo } from '../../../api/mine.js';
+import { userInfo, messageList } from '../../../api/mine.js';
 let util = require('../../../utils/util.js');
 
 Page({
@@ -59,15 +59,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // if (wx.getStorageSync('token') != '') {
-    //   this.setUserFromStorage();  //从缓存读取当前的用户
-    // } else {
-    //   this.setData({
-    //     userName: '未登陆',
-    //     id: '',
-    //     avatar: ''
-    //   })
-    // }
+
   },
 
   /**
@@ -93,6 +85,7 @@ Page({
       //当token本地存在时，界面显示用户信息
       this.setUserFromStorage();  //从缓存读取当前的用户
     }
+    this.getMessageList();
   },
 
   /**
@@ -193,6 +186,18 @@ Page({
   bindGridBtnTap: function (event) {
     wx.navigateTo({
       url: event.currentTarget.dataset.url
+    })
+  },
+
+  getMessageList: function() {
+    messageList().then(res => {
+      if (res.code == 1) {
+        this.setData({
+          messageList: res.result
+        })
+      }
+    }).catch(err => {
+      console.error(err)
     })
   }
 })

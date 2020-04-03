@@ -30,6 +30,11 @@ export function feedback(data) {
   return api._get('/tool/complaintAdvice', data)
 }
 
+//获取消息列表
+export function messageList(data) {
+  return api._get('/forum/messageList', data)
+}
+
 //上传图片
 export function uploadImage(filePatch) {
   return api.uploadFile(filePatch)
