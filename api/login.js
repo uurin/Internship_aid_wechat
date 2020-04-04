@@ -18,6 +18,10 @@ export function register(data) {
 
 //获取验证码图片的链接
 export function getVerifyCodeSrc() {
-    return api.baseUrl + 'defaultKaptcha'
+    return api.baseUrl + '/defaultKaptcha'
 }
 
+//更换密码
+export function changePassword(data) {
+    return api._post('/changePassword', data)
+}

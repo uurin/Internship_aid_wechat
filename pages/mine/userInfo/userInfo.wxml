@@ -94,6 +94,7 @@
     </van-cell-group>
 
     <van-cell-group title=" ">
+      <van-cell size="large" title="更换密码" bind:click="bindtapChangePassword" is-link />
       <van-cell custom-class="btn-logout" size="large" title="退出登录" bind:click="bindTapLogout" is-link />
     </van-cell-group>
   </view>
