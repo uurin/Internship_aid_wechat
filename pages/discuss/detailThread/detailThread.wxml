@@ -11,10 +11,10 @@
                 <view style="display: block">
                     <text class="time">{{ dateUtil.toNTimeAgo(mainData.date) }}</text>
                     <view class="other">
-                        <van-icon class="icon" size="16px" name="good-job-o"/>
+                        <!-- <van-icon class="icon" size="16px" name="good-job-o"/>
                         <text>{{ mainData.likeNum }}</text>
                         <van-icon class="icon" size="16px" name="comment-o"/>
-                        <text>{{ mainData.comment }}</text>
+                        <text>{{ mainData.comment }}</text> -->
                     </view>
                 </view>
             </view>
@@ -46,6 +46,7 @@
           style="background: #fff">
         <view class="commentCard" 
               data-comment_being_used="{{ commentItem }}" 
+              data-comment_index="{{ commentIndex }}"
               data-username="{{ commentItem.nameString }}" 
               data-content="{{ commentItem.content }}" 
               bindtap="bindTapComment" >
@@ -60,7 +61,22 @@
                            data-src="{{ item }}" 
                            mode="aspectFill" catchtap="previewCommentImg"/>
                 </view>
-                <text class="time">{{ dateUtil.toNTimeAgo(commentItem.date) }}</text>
+                <view class="info" >
+                    <text class="time">{{ dateUtil.toNTimeAgo(commentItem.date) }}</text>
+                    <view class="other">
+                      <van-icon color="{{ commentItem.isLike ? '#509fc9' : '#898989' }}" 
+                                custom-class="icon" 
+                                size="16px" 
+                                data-comment_id="{{ commentItem.id }}"
+                                catchtap="onTapLike"
+                                name="{{ commentItem.isLike ? 'good-job' : 'good-job-o' }}"/>
+                      <text data-comment_id="{{ commentItem.id }}" 
+                            catchtap="onTapLike" 
+                            style="color: {{ commentItem.isLike ? '#509fc9' : '#898989' }}">{{ commentItem.likeNum }}</text>
+                      <van-icon custom-class="icon" size="16px" name="comment-o"/>
+                      <text>{{ commentItem.childComments.length }}</text>
+                    </view>
+                </view>
                 
                 <!--    评论中的回复-->
                 <view wx:if="{{ commentItem.childComments.length > 0 }}"

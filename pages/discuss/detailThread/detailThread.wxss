@@ -104,21 +104,35 @@ page{
     border-radius: 50px;
 }
 .commentCard .name {
-  font-size: 16px;
-  display: block;
+    font-size: 16px;
+    display: block;
 }
 .commentCard .content {
-  color: #696969;
-  font-size: 16px;
-  display: block;
-  margin-top: 6px;
+    color: #696969;
+    font-size: 16px;
+    display: block;
+    margin-top: 6px;
+}
+.commentCard .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .commentCard .time {
     color: #9b9b9b;
     font-size: 14px;
-    display: block;
+    display: inline-block;
     margin-top: 2px;
     margin-bottom: 2px;
+}
+.commentCard .other {
+    color: #9b9b9b;
+}
+.commentCard .other .icon {
+    display: inline-block;
+    position: relative;
+    bottom: -2px;
+    margin: 2px 3px 2px 8px;
 }
 .commentCard .images {
     width: 100%;

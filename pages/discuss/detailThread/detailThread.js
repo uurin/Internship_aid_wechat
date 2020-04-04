@@ -198,6 +198,7 @@ Page({
     let item = e.currentTarget.dataset.comment_being_used;
     let name = e.currentTarget.dataset.username;
     let content = e.currentTarget.dataset.content;
+    item.index = e.currentTarget.dataset.comment_index;
     this.setData({
       commentBeingUsed: item,
       showCommentMenu: true,
@@ -230,6 +231,7 @@ Page({
         console.log('点赞');
         likeComment({ id: this.data.commentBeingUsed.id}).then(res => {
           if (res.code == 1) {
+            this.getData();
             wx.showToast({
               title: '点赞成功',
               icon: 'none',
@@ -266,6 +268,14 @@ Page({
     }
     this.setData({
       showCommentMenu: false
+    })
+  },
+
+  onTapLike: function (e) {
+    this.setData({
+      'commentBeingUsed.id': e.currentTarget.dataset.comment_id
+    }, function () {
+      this.onSelectCommentMenu({ detail: { value: 'like'}})
     })
   },
 

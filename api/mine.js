@@ -32,7 +32,7 @@ export function feedback(data) {
 
 //获取消息列表
 export function messageList(data) {
-  return api._get('/forum/messageList', data)
+  return api._get('/forum/messageList', data, false)
 }
 
 //上传图片
