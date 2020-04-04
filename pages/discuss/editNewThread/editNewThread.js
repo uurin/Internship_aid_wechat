@@ -1,5 +1,5 @@
 // pages/discuss/editNewThread/editNewThread.js
-import { uploadImage} from '../../../api/mine.js';
+import { uploadImage, threadTypes, createThread } from '../../../api/discuss.js';
 
 Page({
 
@@ -42,9 +42,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (this.data.menuOption.length == 0) {
-      this.getThreadTypes();
-    }
+    // if (this.data.menuOption.length == 0) {
+    //   this.getThreadTypes();
+    // }
   },
 
   /**
