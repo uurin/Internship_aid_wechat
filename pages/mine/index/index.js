@@ -1,5 +1,5 @@
 // pages/mine/index/index.js
-import { userInfo, messageList } from '../../../api/mine.js';
+import { userInfo, userSimpleInfo, messageList } from '../../../api/mine.js';
 let util = require('../../../utils/util.js');
 
 Page({
@@ -85,6 +85,7 @@ Page({
       //当token本地存在时，界面显示用户信息
       this.setUserFromStorage();  //从缓存读取当前的用户
     }
+    this.setUserFromRequest();
     this.getMessageList();
   },
 
@@ -141,7 +142,7 @@ Page({
 
   //从网络获取用户信息并保存
   setUserFromRequest: function() {
-    userInfo().then(res => {
+    userSimpleInfo().then(res => {
       if (res.code == 1) {
         wx.setStorageSync('userName', res.result.nameString);
         wx.setStorageSync('id', res.result.username);

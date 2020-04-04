@@ -4,7 +4,12 @@
 const api = require("./request.js")
 
 
-//获取用户信息
+//获取用户简单信息
+export function userSimpleInfo(data) {
+  return api._get('/student/datum', data, false)
+}
+
+//获取用户详细信息
 export function userInfo(data) {
   return api._get('/student/datum', data)
 }
