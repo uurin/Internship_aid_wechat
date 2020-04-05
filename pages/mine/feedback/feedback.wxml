@@ -40,7 +40,7 @@
   <view class="imagesUpload">
     <van-uploader 
               file-list="{{ fileList }}" 
-              max-count="2"
+              max-count="3"
               bind:after-read="afterReadImage" 
               bind:delete="deleteImage"
               image-fit="aspectFill">
