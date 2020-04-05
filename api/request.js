@@ -1,6 +1,6 @@
 let util = require('../utils/util.js');
 
-const baseUrl = 'http://118.89.203.30:9090/'
+const baseUrl = 'https://wx.ihui.ink/'
 let apiData = {}
 
 const http = ({ url = '', param = {}, loading=true, ...other } = {}) => {

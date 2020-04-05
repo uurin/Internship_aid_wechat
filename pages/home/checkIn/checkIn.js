@@ -224,6 +224,9 @@ Page({
 
   //按下签到
   tapCheckIn: function(e) {
+    if(this.data.location == '未知') {
+      return;
+    }
     if(this.data.isCheckedIn) {
       return;
     }
