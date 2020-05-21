@@ -204,6 +204,13 @@ Page({
     })
   },
 
+  //更换密码
+  bindtapChangePassword: function() {
+    wx.navigateTo({
+      url: '/pages/login/changePassword/changePassword?isLogin=' + 'true',
+    })
+  },
+
   //退出登录
   bindTapLogout: function() {
     Dialog.confirm({

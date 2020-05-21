@@ -61,15 +61,18 @@ page{
   color: #7e7e7e;
   font-size: 14px;
 }
-.popularCard .title{
-  font-size: 16px;
-  display: block;
-}
-.popularCard .time{
-  color: #9b9b9b;
-  font-size: 14px;
-  display: block;
-}
 .popularCard .item {
   margin: 8px 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.popularCard .item .title{
+  font-size: 16px;
+  padding-right: 8px;
+}
+.popularCard .item .time{
+  color: #9b9b9b;
+  font-size: 14px;
+  white-space: nowrap;
 }

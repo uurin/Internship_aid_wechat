@@ -24,7 +24,8 @@
     "pages/home/announcementDetail/announcementDetail",
     "pages/home/recruitmentDetail/recruitmentDetail",
     "pages/mine/weeklyReportEdit/weeklyReportEdit",
-    "pages/mine/feedback/feedback"
+    "pages/mine/feedback/feedback",
+    "pages/login/changePassword/changePassword"
   ],
   "permission": {
     "scope.userLocation": {
