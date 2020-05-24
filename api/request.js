@@ -195,7 +195,7 @@ const showToast = title => {
 //跳转到登陆页面
 const toLoginPage=()=>{
     wx.navigateTo({
-        url: '/pages/login/login/login',
+        url: '/pages/login/loginPrompt/loginPrompt',
     })
 }
 

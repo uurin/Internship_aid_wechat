@@ -1,0 +1,27 @@
+<!--pages/login/loginPrompt/loginPrompt.wxml-->
+<view class="container">
+  <view class="block text-prompt">
+    <text>为了更好地为您提供服务，请登录帐号</text>
+  </view>
+  <view class="btn-block">
+    <van-button color="#00b26a" custom-class="btn btn-login" type="info" bindtap="checkAuthorize" plain>微信登陆</van-button>
+  </view>
+  <view class="btn-block">
+    <van-button color="#509fc9" custom-class="btn btn-login" type="info" bindtap="toLoginById" plain>学号登录</van-button>
+  </view>
+  <view class="btn-block">
+    <van-button custom-class="btn btn-btn-cencel" type="default" bindtap="cancel" plain>返回</van-button>
+  </view>
+ 
+   <van-dialog
+    use-slot
+    title="提示"
+    show="{{ isShowDialog }}"
+    show-confirm-button="{{ true }}"
+    confirm-button-open-type="openSetting"
+    bind:cancel="onCancelDialog"
+    show-cancel-button
+  >
+    <view style="padding: 4% 8%">登录需要获取用户信息，是否前往设置页面进行授权？</view>
+  </van-dialog>
+</view>

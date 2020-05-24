@@ -84,9 +84,9 @@ Page({
     } else {
       //当token本地存在时，界面显示用户信息
       this.setUserFromStorage();  //从缓存读取当前的用户
+      this.setUserFromRequest();
+      this.getMessageList();
     }
-    this.setUserFromRequest();
-    this.getMessageList();
   },
 
   /**
@@ -173,7 +173,7 @@ Page({
   bindTapUserPanel: function () {
     if (util.getCache('token') == null) {
       wx.navigateTo({
-        url: '/pages/login/login/login'
+        url: '/pages/login/loginPrompt/loginPrompt'
       })
     } else {
       wx.navigateTo({
