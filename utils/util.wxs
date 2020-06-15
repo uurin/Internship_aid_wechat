@@ -48,8 +48,9 @@ var dateFormat = function (timestamp, format) {
   return format;
 }
 
-var toNTimeAgo = function (dateStr) {
-  var beforeTimestamp = Date.parse(getDate(dateStr.replace(ios_reg, '/')));
+var toNTimeAgo = function (dateTimeStr) {
+  var dateTimeCache = dateTimeStr;
+  var beforeTimestamp = Date.parse(getDate(dateTimeStr.replace(ios_reg, '/')));
   var nowTimestamp = Date.parse(getDate());
   var timestampDifference = nowTimestamp - beforeTimestamp;
   if (timestampDifference < 0) {
@@ -63,11 +64,17 @@ var toNTimeAgo = function (dateStr) {
   } else if (timestampDifference < 2592000000) {
     return (timestampDifference / 1000 / 3600 / 24).toFixed() + '天前';
   }else {
-    return dateStr;
+    return toDate(dateTimeCache);
   }
+}
+
+var toDate = function (dateTimeStr) {
+  //从“YYYY-MM-DD HH:MM:SS”的时间格式中分割出“YYYY-MM-DD”
+  return dateTimeStr.split(" ")[0]
 }
 
 module.exports = {
   dateFormat: dateFormat,
-  toNTimeAgo: toNTimeAgo
+  toNTimeAgo: toNTimeAgo,
+  toDate: toDate
 };
