@@ -138,7 +138,7 @@ Page({
           success: function () {
             setTimeout(function () {
               wx.navigateBack({
-                delta: 1,
+                delta: 2,
               })
             }, 1000);
           }

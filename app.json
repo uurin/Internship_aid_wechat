@@ -26,7 +26,8 @@
     "pages/mine/weeklyReportEdit/weeklyReportEdit",
     "pages/mine/feedback/feedback",
     "pages/login/changePassword/changePassword",
-    "pages/login/loginPrompt/loginPrompt"
+    "pages/login/loginPrompt/loginPrompt",
+    "pages/mine/about/about"
   ],
   "permission": {
     "scope.userLocation": {

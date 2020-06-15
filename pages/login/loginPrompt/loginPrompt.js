@@ -1,4 +1,6 @@
 // pages/login/loginPrompt/loginPrompt.js
+import { loginWX } from '../../../api/login.js';
+
 Page({
 
   /**
@@ -93,12 +95,31 @@ Page({
     wx.login({
       success (res) {
         if (res.code) {
-          //发起网络请求
-          wx.request({
-            url: 'https://test.com/onLogin',
-            data: {
-              code: res.code
+          loginWX({code: res.code}).then(res => {
+            if (res.code == 1) {
+              wx.setStorageSync('token', res.result)
+              wx.showToast({
+                title: '登陆成功',
+                icon: 'success',
+                duration: 2000, 
+                success: function () {
+                  setTimeout(function () {
+                    wx.navigateBack({
+                      delta: 2,
+                    })
+                  }, 1000);
+                }
+              })
+            } else {
+              return Promise.reject('登录失败')
             }
+          }).catch(err => {
+            console.error(err)
+            wx.showToast({
+              title: '登录失败',
+              icon: 'none',
+              duration: 1000
+            })
           })
         } else {
           console.log('登录失败！' + res.errMsg)

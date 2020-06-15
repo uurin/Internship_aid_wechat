@@ -3,13 +3,17 @@
  */
 const api = require("./request.js")
 
-//用户登陆接口
+//学号登陆接口
 export function login(data) {
     // return api._post('loginNoVerify', data)
     // return api._post('login', data)
-    return api._post('loginToken', data)
+    return api._post('/loginToken', data)
 }
 
+//微信登陆接口
+export function loginWX(data) {
+    return api._post('/loginWX', data)
+}
 
 //用户注册接口
 export function register(data) {
