@@ -1,0 +1,17 @@
+<!--pages/mine/about/about.wxml-->
+<view class="full-container">
+
+  <view class="content">
+    <image class="icon" src="../../../images/aa.jpg"></image>
+    <view class="title">实习辅助软件</view>
+    <view class="version">version: 1.0</view>
+    <view class="info">
+      <view>本软件是为高职院校学生分散顶岗实习提供的一个信息处理与交流的软件平台。解决高职学生在顶岗实习期间分散各地导致的学生对学校的各项通知和信息接收不及时、处理不方便，同学之间相互交流讨论比较困难的问题。</view>
+    </view>
+  </view>
+
+  <view class="copyright">
+    Copyright©2020 uurin
+  </view>
+
+</view>

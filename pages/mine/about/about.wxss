@@ -1,0 +1,42 @@
+/* pages/mine/about/about.wxss */
+.full-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+.icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 0 auto 1em;
+  border-radius: 40rpx;
+  box-shadow: #bbbbbb 2rpx 2rpx 20rpx 4rpx;
+}
+.title, .version {
+  width: 100%;
+  text-align: center;
+}
+.version {
+  color: #666666;
+}
+.info {
+  color: #888888;
+  padding: 5% 10%;
+  text-indent: 2em;
+}
+
+.copyright {
+  width: 100%;
+  margin: 2em 0;
+  color: #999999;
+  text-align: center;
+}
